@@ -11,6 +11,18 @@ const postFields = groq`
   "author": author->{name, picture},
 `
 
+const perfumeFields = groq`
+  _id,
+  title,
+  date,
+  _updatedAt,
+  excerpt,
+  coverImage,
+  "perfume_id": perfume_id.current,
+  "author": author->{name, picture},
+  price,
+`
+
 export const settingsQuery = groq`*[_type == "settings"][0]`
 
 export const indexQuery = groq`
@@ -30,8 +42,24 @@ export const postAndMoreStoriesQuery = groq`
   }
 }`
 
+export const perfumeAndMorePerfumeQuery = groq`
+{
+  "post": *[_type == "perfume" && perfume_id.current == $slug] | order(_updatedAt desc) [0] {
+    content,
+    ${perfumeFields}
+  },
+  "morePosts": *[_type == "perfume" && perfume_id.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+    content,
+    ${perfumeFields}
+  }
+}`
+
 export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current)][].slug.current
+`
+
+export const perfumeSlugsQuery = groq`
+*[_type == "perfume" && defined(perfume_id.current)][].perfume_id.current
 `
 
 export const postBySlugQuery = groq`
@@ -55,6 +83,19 @@ export interface Post {
   author?: Author
   slug?: string
   content?: any
+}
+
+export interface Perfume {
+  _id: string
+  title?: string
+  coverImage?: any
+  date?: string
+  _updatedAt?: string
+  excerpt?: string
+  author?: Author
+  perfume_id?: string
+  content?: any
+  price?: number
 }
 
 export interface Settings {

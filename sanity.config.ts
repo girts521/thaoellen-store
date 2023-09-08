@@ -19,6 +19,7 @@ import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
 import authorType from 'schemas/author'
 import postType from 'schemas/post'
 import settingsType from 'schemas/settings'
+import perfumeType from 'schemas/perfume'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -30,7 +31,7 @@ export default defineConfig({
   title,
   schema: {
     // If you want more content types, you can add them to this array
-    types: [authorType, postType, settingsType],
+    types: [authorType, postType, settingsType, perfumeType],
   },
   plugins: [
     deskTool({

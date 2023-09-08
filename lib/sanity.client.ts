@@ -1,12 +1,12 @@
 import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
 import {
-  indexQuery,
+  indexQuery, perfumeAndMorePerfumeQuery, perfumeSlugsQuery,
   type Post,
   postAndMoreStoriesQuery,
   postBySlugQuery,
   postSlugsQuery,
   type Settings,
-  settingsQuery,
+  settingsQuery
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
 
@@ -48,6 +48,12 @@ export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
   return slugs.map((slug) => ({ slug }))
 }
 
+export async function getAllPerfumeSlugs(): Promise<Pick<Post, 'slug'>[]> {
+  const client = getClient()
+  const slugs = (await client.fetch<string[]>(perfumeSlugsQuery)) || []
+  return slugs.map((slug) => ({ slug }))
+}
+
 export async function getPostBySlug(
   client: SanityClient,
   slug: string,
@@ -60,4 +66,11 @@ export async function getPostAndMoreStories(
   slug: string,
 ): Promise<{ post: Post; morePosts: Post[] }> {
   return await client.fetch(postAndMoreStoriesQuery, { slug })
+}
+
+export async function getPerfume(
+  client: SanityClient,
+  slug: string,
+): Promise<{ post: Post; morePosts: Post[] }> {
+  return await client.fetch(perfumeAndMorePerfumeQuery, { slug })
 }
