@@ -1,7 +1,7 @@
 import IndexPage from 'components/IndexPage'
 import PreviewIndexPage from 'components/PreviewIndexPage'
 import { readToken } from 'lib/sanity.api'
-import { getAllPosts, getClient, getSettings } from 'lib/sanity.client'
+import { getAllPerfume, getClient, getSettings } from 'lib/sanity.client'
 import { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import type { SharedPageProps } from 'pages/_app'
@@ -19,10 +19,10 @@ export default function Page(props: PageProps) {
   const { posts, settings, draftMode } = props
 
   if (draftMode) {
-    return <PreviewIndexPage posts={posts} settings={settings} />
+    return <PreviewIndexPage perfume={posts} settings={settings} />
   }
 
-  return <IndexPage posts={posts} settings={settings} />
+  return <IndexPage perfume={posts} settings={settings} />
 }
 
 export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 
   const [settings, posts = []] = await Promise.all([
     getSettings(client),
-    getAllPosts(client),
+    getAllPerfume(client)
   ])
 
   return {

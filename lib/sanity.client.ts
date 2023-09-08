@@ -6,7 +6,8 @@ import {
   postBySlugQuery,
   postSlugsQuery,
   type Settings,
-  settingsQuery
+  settingsQuery,
+  perfumeIndexQuery
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
 
@@ -40,6 +41,10 @@ export async function getSettings(client: SanityClient): Promise<Settings> {
 
 export async function getAllPosts(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(indexQuery)) || []
+}
+
+export async function getAllPerfume(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(perfumeIndexQuery)) || []
 }
 
 export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {

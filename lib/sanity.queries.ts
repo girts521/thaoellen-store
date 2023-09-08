@@ -30,6 +30,11 @@ export const indexQuery = groq`
   ${postFields}
 }`
 
+export const perfumeIndexQuery = groq`
+*[_type == "perfume"] | order(date desc, _updatedAt desc) {
+  ${perfumeFields}
+}`
+
 export const postAndMoreStoriesQuery = groq`
 {
   "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
