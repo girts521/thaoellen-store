@@ -4,6 +4,7 @@ import Layout from 'components/BlogLayout'
 import HeroPost from 'components/HeroPost'
 import IndexPageHead from 'components/IndexPageHead'
 import MoreStories from 'components/MoreStories'
+import MorePerfume from 'components/MorePerfume'
 import IntroTemplate from 'intro-template'
 import * as demo from 'lib/demo.data'
 import type { Perfume, Settings } from 'lib/sanity.queries'
@@ -37,7 +38,7 @@ export default function IndexPage(props: IndexPageProps) {
               excerpt={heroPost.excerpt}
             />
           )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+          {morePosts.length > 0 && <MorePerfume perfume={morePosts} />}
         </Container>
         {/*<IntroTemplate />*/}
       </Layout>
