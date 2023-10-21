@@ -1,0 +1,23 @@
+
+.container {
+    display: flex;
+    flex-direction: row ;
+    justify-content: space-between;
+   padding: 10px;
+   background: rgba(133, 130, 202, 0.77); 
+   font-family: 'bonbon-regular'; 
+  
+   img {
+    cursor: pointer;
+   }
+}   
+
+@font-face { 
+    font-family: bonbon-regular; 
+    src: url('/fonts/Bonbon-Regular.ttf') format('truetype');  
+    font-weight: normal;
+    font-style: normal;
+} 
+    
+
+        
