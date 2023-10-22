@@ -12,7 +12,34 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 10px;
+    
 }
+.pad10px
+{
+    padding: 10px;
+    
+}
+
+.burgerMenuContent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ABA9DA;  /* Set the background color you want */
+    z-index: 1000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    
+    text-align: center;
+
+    // Apply transition to the height property for smooth expansion
+    height: 0;
+    transition: height 0.3s ease-in-out;
+}
+
+
 
 
 .h1 {
