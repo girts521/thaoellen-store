@@ -9,6 +9,8 @@ import IntroTemplate from 'intro-template'
 import * as demo from 'lib/demo.data'
 import type { Perfume, Settings } from 'lib/sanity.queries'
 
+import Heading from 'components/Heading'
+
 export interface IndexPageProps {
   preview?: boolean
   loading?: boolean
@@ -27,8 +29,9 @@ export default function IndexPage(props: IndexPageProps) {
 
       <Layout preview={preview} loading={loading}>
         <Container>
-          <BlogHeader title={title} description={description} level={1} />
-          {heroPost && (
+          {/* <BlogHeader title={title} description={description} level={1} /> */}
+          <Heading text={"Thao Ellen Store"} />
+          {/* {heroPost && (
             <HeroPost
               title={heroPost.title}
               coverImage={heroPost.coverImage}
@@ -37,7 +40,7 @@ export default function IndexPage(props: IndexPageProps) {
               slug={heroPost.perfume_id}
               excerpt={heroPost.excerpt}
             />
-          )}
+          )} */}
           {morePosts.length > 0 && <MorePerfume perfume={morePosts} />}
         </Container>
         {/*<IntroTemplate />*/}

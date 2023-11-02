@@ -1,0 +1,74 @@
+.container{
+    min-height: 250px;
+    max-width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .heading {
+        color: #474574;
+        text-align: center;
+        font-family: Bonbon;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        // margin: auto;
+        // margin-top: 55px;
+        // margin-bottom: 45px;
+        max-width: 215px;
+        position: relative;
+        z-index: 10;
+    }
+    
+    .flowerLeft {
+        position: absolute;
+        left: -7px;
+        top: 35px;
+        height: 250px;
+        width: auto;
+        z-index: 1;
+    }
+    
+    .flowerRight {
+        position: absolute;
+        right: 0;
+        top: 35px;
+        height: 250px;
+        width: auto;
+        z-index: 1;
+        // transform: rotate(180deg);
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        min-height: 500px;
+
+        .heading {
+            font-size: 48px;
+            max-width: 300px;
+        }
+
+        .flowerLeft, .flowerRight {
+            height: 500px;
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        min-height: 700px;
+
+        .heading {
+            font-size: 68px;
+            max-width: 400px;
+        }
+
+        .flowerLeft, .flowerRight {
+            height: 700px;
+        }
+    }
+}
+
