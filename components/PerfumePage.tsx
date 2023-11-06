@@ -1,7 +1,7 @@
 import Container from 'components/BlogContainer'
 import BlogHeader from 'components/BlogHeader'
 import Layout from 'components/BlogLayout'
-import MorePerfume from 'components/MorePerfume'
+import MoreProduct from 'components/MoreProduct'
 import PerfumeHeader from 'components/PerfumeHeader'
 import PerfumeBody from 'components/PerfumeBody'
 import PostPageHead from 'components/PostPageHead'
@@ -10,24 +10,24 @@ import SectionSeparator from 'components/SectionSeparator'
 import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
-import { Perfume } from 'lib/sanity.queries'
+import { Product} from 'lib/sanity.queries'
 import styles from './PerfumePage.module.scss'
 
 export interface PostPageProps {
   preview?: boolean
   loading?: boolean
-  perfume: Perfume
-  morePerfume: Perfume[]
+  perfume: Product
+  morePerfume: Product[]
   settings: Settings
 }
 
-const NO_POSTS: Perfume[] = []
+const NO_POSTS: Product[] = []
 
 export default function PostPage(props: PostPageProps) {
   const { preview, loading, morePerfume = NO_POSTS, perfume, settings } = props
   const { title = demo.title } = settings || {}
 
-  const slug = perfume?.perfume_id
+  const slug = perfume?.product_id
   console.log(perfume)
 
   if (!slug && !preview) {
@@ -58,7 +58,7 @@ export default function PostPage(props: PostPageProps) {
                 {/*</div>*/}
               </article>
               <SectionSeparator />
-              {morePerfume?.length > 0 && <MorePerfume perfume={morePerfume} />}
+              {morePerfume?.length > 0 && <MoreProduct product={morePerfume} title='Nước hoa' path='parfume' />}
             </>
           )}
         </Container>

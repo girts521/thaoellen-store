@@ -4,22 +4,28 @@ import Layout from 'components/BlogLayout'
 import HeroPost from 'components/HeroPost'
 import IndexPageHead from 'components/IndexPageHead'
 import MoreStories from 'components/MoreStories'
-import MorePerfume from 'components/MorePerfume'
+import MoreProduct from 'components/MoreProduct'
 import IntroTemplate from 'intro-template'
 import * as demo from 'lib/demo.data'
-import type { Perfume, Settings } from 'lib/sanity.queries'
+import type { Product, Settings } from 'lib/sanity.queries'
 
 import Heading from 'components/Heading'
 
 export interface IndexPageProps {
   preview?: boolean
   loading?: boolean
-  perfume: Perfume[]
+  perfume: Product[]
+  cosmetics: Product[]
+  elderly: Product[]
+  vitamin: Product[]
   settings: Settings
 }
 
 export default function IndexPage(props: IndexPageProps) {
-  const { preview, loading, perfume, settings } = props
+  const { preview, loading, perfume, cosmetics, elderly, vitamin, settings } = props
+  console.log("perfume", perfume)
+  console.log("cosmetics", cosmetics)
+ 
   const [heroPost, ...morePosts] = perfume || []
   const { title = demo.title, description = demo.description } = settings || {}
 
@@ -41,7 +47,11 @@ export default function IndexPage(props: IndexPageProps) {
               excerpt={heroPost.excerpt}
             />
           )} */}
-          {morePosts.length > 0 && <MorePerfume perfume={morePosts} />}
+          {morePosts.length > 0 && <MoreProduct product={perfume} title='Nước hoa' path='perfume' />}
+          {cosmetics.length > 0 && <MoreProduct  product={cosmetics} title='Mỹ phẩm' path='cosmetics' />}
+          {elderly.length > 0 && <MoreProduct  product={elderly} title='Hơi già' path='elderly' />}
+          {vitamin.length > 0 && <MoreProduct  product={vitamin} title='Vitamin' path='vitamin' />}
+
         </Container>
         {/*<IntroTemplate />*/}
       </Layout>

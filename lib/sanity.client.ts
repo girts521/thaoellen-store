@@ -7,7 +7,17 @@ import {
   postSlugsQuery,
   type Settings,
   settingsQuery,
-  perfumeIndexQuery
+  perfumeIndexQuery,
+  cosmeticsIndexQuery,
+  cosmeticsSlugsQuery,
+  cosmeticsAndMoreCosmeticsQuery,
+  elderlyIndexQuery,
+  elderlySlugsQuery,
+  elderlyAndMoreElderlyQuery,
+  vitaminIndexQuery,
+  vitaminSlugsQuery,
+  vitaminAndMoreVitaminQuery,
+
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
 
@@ -43,9 +53,6 @@ export async function getAllPosts(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(indexQuery)) || []
 }
 
-export async function getAllPerfume(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(perfumeIndexQuery)) || []
-}
 
 export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
   const client = getClient()
@@ -53,11 +60,6 @@ export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
   return slugs.map((slug) => ({ slug }))
 }
 
-export async function getAllPerfumeSlugs(): Promise<Pick<Post, 'slug'>[]> {
-  const client = getClient()
-  const slugs = (await client.fetch<string[]>(perfumeSlugsQuery)) || []
-  return slugs.map((slug) => ({ slug }))
-}
 
 export async function getPostBySlug(
   client: SanityClient,
@@ -73,9 +75,84 @@ export async function getPostAndMoreStories(
   return await client.fetch(postAndMoreStoriesQuery, { slug })
 }
 
+// ==================================================================
+// Perfume
+// ==================================================================
+export async function getAllPerfume(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(perfumeIndexQuery)) || []
+}
+
+export async function getAllPerfumeSlugs(): Promise<Pick<Post, 'slug'>[]> {
+  const client = getClient()
+  const slugs = (await client.fetch<string[]>(perfumeSlugsQuery)) || []
+  return slugs.map((slug) => ({ slug }))
+}
+
 export async function getPerfume(
   client: SanityClient,
   slug: string,
 ): Promise<{ post: Post; morePosts: Post[] }> {
   return await client.fetch(perfumeAndMorePerfumeQuery, { slug })
 }
+
+// ==================================================================
+// Cosmetics
+// ==================================================================
+export async function getAllCosmetics(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(cosmeticsIndexQuery)) || []
+}
+
+export async function getAllCosmeticsSlugs(): Promise<Pick<Post, 'slug'>[]> {
+  const client = getClient()
+  const slugs = (await client.fetch<string[]>(cosmeticsSlugsQuery)) || []
+  return slugs.map((slug) => ({ slug }))
+}
+
+export async function getCosmetics(
+  client: SanityClient,
+  slug: string,
+): Promise<{ post: Post; morePosts: Post[] }> {
+  return await client.fetch(cosmeticsAndMoreCosmeticsQuery, { slug })
+}
+
+// ==================================================================
+// Elderly
+// ==================================================================
+export async function getAllElderly(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(elderlyIndexQuery)) || []
+}
+
+export async function getAllElderlySlugs(): Promise<Pick<Post, 'slug'>[]> {
+  const client = getClient()
+  const slugs = (await client.fetch<string[]>(elderlySlugsQuery)) || []
+  return slugs.map((slug) => ({ slug }))
+}
+
+export async function getElderly(
+  client: SanityClient,
+  slug: string,
+): Promise<{ post: Post; morePosts: Post[] }> {
+  return await client.fetch(elderlyAndMoreElderlyQuery, { slug })
+}
+
+// ==================================================================
+// Vitamin
+// ==================================================================
+export async function getAllVitamin(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(vitaminIndexQuery)) || []
+}
+
+export async function getAllVitaminSlugs(): Promise<Pick<Post, 'slug'>[]> {
+  const client = getClient()
+  const slugs = (await client.fetch<string[]>(vitaminSlugsQuery)) || []
+  return slugs.map((slug) => ({ slug }))
+}
+
+export async function getVitamin(
+  client: SanityClient,
+  slug: string,
+): Promise<{ post: Post; morePosts: Post[] }> {
+  return await client.fetch(vitaminAndMoreVitaminQuery, { slug })
+}
+
+

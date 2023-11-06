@@ -20,6 +20,9 @@ import authorType from 'schemas/author'
 import postType from 'schemas/post'
 import settingsType from 'schemas/settings'
 import perfumeType from 'schemas/perfume'
+import cosmeticsType from 'schemas/cosmetics'
+import elderlyType from 'schemas/elderly'
+import vitaminType from 'schemas/vitamin'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -31,7 +34,7 @@ export default defineConfig({
   title,
   schema: {
     // If you want more content types, you can add them to this array
-    types: [authorType, postType, settingsType, perfumeType],
+    types: [authorType, postType, settingsType, perfumeType, cosmeticsType, elderlyType, vitaminType],
   },
   plugins: [
     deskTool({
