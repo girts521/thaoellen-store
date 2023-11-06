@@ -10,7 +10,7 @@ export default function MoreProduct({ product, title, path }: { product: Product
       <h2 className={styles.heading}>
          {title} 
       </h2>
-      <div className="mb-32 grid grid-cols-1 gap-y-20 md:grid-cols-2 md:gap-x-16 md:gap-y-32 lg:gap-x-32">
+      <div className={styles.productsContainer}>
         {product.map((product) => (
           <ProductPreview
             key={product._id}

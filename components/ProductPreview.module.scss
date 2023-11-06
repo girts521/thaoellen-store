@@ -1,0 +1,51 @@
+.container {
+    width: 130px;
+    // height: 190px;
+    border-radius: 10px;
+    background: #D2D5E6;
+    margin-bottom: 15px;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 
+        0 5px 10px rgba(0, 0, 0, 0.12), /* This is your --tw-shadow */
+        0 5px 10px rgba(72, 77, 105, 0.37); 
+        transition-property: box-shadow;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;;
+    }
+
+
+    .productName {
+        color: #474574;
+        font-family: Montserrat;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-transform: uppercase;
+        margin-top: 10px;
+    padding-left: 5px;
+    }
+
+    .excerpt {
+        color: #474574;
+        font-family: Montserrat;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        padding: 5px;
+    }
+
+    .price {
+        color: #474574;
+        font-family: Montserrat;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-transform: uppercase;
+        padding: 5px;
+    }
+}
