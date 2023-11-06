@@ -1,78 +1,5 @@
 import { groq } from 'next-sanity'
 
-const postFields = groq`
-  _id,
-  title,
-  date,
-  _updatedAt,
-  excerpt,
-  coverImage,
-  "slug": slug.current,
-  "author": author->{name, picture},
-`
-
-const perfumeFields = groq`
-  _id,
-  title,
-  date,
-  _updatedAt,
-  excerpt,
-  coverImage,
-  "perfume_id": perfume_id.current,
-  "author": author->{name, picture},
-  price,
-`
-
-export const settingsQuery = groq`*[_type == "settings"][0]`
-
-export const indexQuery = groq`
-*[_type == "post"] | order(date desc, _updatedAt desc) {
-  ${postFields}
-}`
-
-export const perfumeIndexQuery = groq`
-*[_type == "perfume"] | order(date desc, _updatedAt desc) {
-  ${perfumeFields}
-}`
-
-export const postAndMoreStoriesQuery = groq`
-{
-  "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
-    content,
-    ${postFields}
-  },
-  "morePosts": *[_type == "post" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
-    content,
-    ${postFields}
-  }
-}`
-
-export const perfumeAndMorePerfumeQuery = groq`
-{
-  "post": *[_type == "perfume" && perfume_id.current == $slug] | order(_updatedAt desc) [0] {
-    content,
-    ${perfumeFields}
-  },
-  "morePosts": *[_type == "perfume" && perfume_id.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
-    content,
-    ${perfumeFields}
-  }
-}`
-
-export const postSlugsQuery = groq`
-*[_type == "post" && defined(slug.current)][].slug.current
-`
-
-export const perfumeSlugsQuery = groq`
-*[_type == "perfume" && defined(perfume_id.current)][].perfume_id.current
-`
-
-export const postBySlugQuery = groq`
-*[_type == "post" && slug.current == $slug][0] {
-  ${postFields}
-}
-`
-
 export interface Author {
   name?: string
   picture?: any
@@ -90,19 +17,6 @@ export interface Post {
   content?: any
 }
 
-export interface Perfume {
-  _id: string
-  title?: string
-  coverImage?: any
-  date?: string
-  _updatedAt?: string
-  excerpt?: string
-  author?: Author
-  perfume_id?: string
-  content?: any
-  price?: number
-}
-
 export interface Settings {
   title?: string
   description?: any[]
@@ -110,3 +24,252 @@ export interface Settings {
     title?: string
   }
 }
+
+const postFields = groq`
+  _id,
+  title,
+  date,
+  _updatedAt,
+  excerpt,
+  coverImage,
+  "slug": slug.current,
+  "author": author->{name, picture},
+`
+
+export const settingsQuery = groq`*[_type == "settings"][0]`
+
+export const indexQuery = groq`
+*[_type == "post"] | order(date desc, _updatedAt desc) {
+  ${postFields}
+}`
+
+export const postAndMoreStoriesQuery = groq`
+{
+  "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
+    content,
+    ${postFields}
+  },
+  "morePosts": *[_type == "post" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+    content,
+    ${postFields}
+  }
+}`
+
+export const postSlugsQuery = groq`
+*[_type == "post" && defined(slug.current)][].slug.current
+`
+
+export const postBySlugQuery = groq`
+*[_type == "post" && slug.current == $slug][0] {
+  ${postFields}
+}
+`
+
+// ==================================================================
+// Perfume
+// ==================================================================
+
+const perfumeFields = groq`
+  _id,
+  title,
+  date,
+  _updatedAt,
+  excerpt,
+  coverImage,
+  "product_id": product_id.current,
+  "author": author->{name, picture},
+  price,
+  name
+`
+
+export const perfumeIndexQuery = groq`
+*[_type == "perfume"] | order(date desc, _updatedAt desc) {
+  ${perfumeFields}
+}`
+
+export const perfumeAndMorePerfumeQuery = groq`
+{
+  "post": *[_type == "perfume" && product_id.current == $slug] | order(_updatedAt desc) [0] {
+    content,
+    ${perfumeFields}
+  },
+  "morePosts": *[_type == "perfume" && product_id.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+    content,
+    ${perfumeFields}
+  }
+}`
+
+export const perfumeSlugsQuery = groq`
+*[_type == "perfume" && defined(product_id.current)][].product_id.current
+`
+export interface Product {
+  _id: string
+  title?: string
+  coverImage?: any
+  date?: string
+  _updatedAt?: string
+  excerpt?: string
+  author?: Author
+  product_id?: string
+  content?: any
+  price?: number
+  path?: string
+}
+
+// ==================================================================
+// Cosmetics
+// ==================================================================
+
+const cosmeticsFields = groq`
+  _id,
+  title,
+  date,
+  _updatedAt,
+  excerpt,
+  coverImage,
+  "product_id": product_id.current,
+  "author": author->{name, picture},
+  price,
+  name
+`
+
+export const cosmeticsIndexQuery = groq`
+*[_type == "cosmetics"] | order(date desc, _updatedAt desc) {
+  ${cosmeticsFields}
+}`
+
+export const cosmeticsAndMoreCosmeticsQuery = groq`
+{
+  "post": *[_type == "cosmetics" && product_id.current == $slug] | order(_updatedAt desc) [0] {
+    content,
+    ${cosmeticsFields}
+  },
+  "morePosts": *[_type == "cosmetics" && product_id.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+    content,
+    ${cosmeticsFields}
+  }
+}`
+
+export const cosmeticsSlugsQuery = groq`
+*[_type == "cosmetics" && defined(product_id.current)][].product_id.current
+`
+export interface Cosmetics {
+  _id: string
+  title?: string
+  coverImage?: any
+  date?: string
+  _updatedAt?: string
+  excerpt?: string
+  author?: Author
+  product_id?: string
+  content?: any
+  price?: number
+}
+
+// ==================================================================
+// Elderly
+// ==================================================================
+
+const elderlyFields = groq`
+  _id,
+  title,
+  date,
+  _updatedAt,
+  excerpt,
+  coverImage,
+  "product_id": product_id.current,
+  "author": author->{name, picture},
+  price,
+  name
+`
+
+export const elderlyIndexQuery = groq`
+*[_type == "elderly"] | order(date desc, _updatedAt desc) {
+  ${elderlyFields}
+}`
+
+export const elderlyAndMoreElderlyQuery = groq`
+{
+  "post": *[_type == "elderly" && product_id.current == $slug] | order(_updatedAt desc) [0] {
+    content,
+    ${elderlyFields}
+  },
+  "morePosts": *[_type == "elderly" && product_id.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+    content,
+    ${elderlyFields}
+  }
+}`
+
+export const elderlySlugsQuery = groq`
+*[_type == "elderly" && defined(product_id.current)][].product_id.current
+`
+export interface Elderly {
+  _id: string
+  title?: string
+  coverImage?: any
+  date?: string
+  _updatedAt?: string
+  excerpt?: string
+  author?: Author
+  product_id?: string
+  content?: any
+  price?: number
+}
+
+// ==================================================================
+// Vitamin
+// ==================================================================
+
+const vitaminFields = groq`
+  _id,
+  title,
+  date,
+  _updatedAt,
+  excerpt,
+  coverImage,
+  "product_id": product_id.current,
+  "author": author->{name, picture},
+  price,
+  name
+`
+
+export const vitaminIndexQuery = groq`
+*[_type == "vitamin"] | order(date desc, _updatedAt desc) {
+  ${vitaminFields}
+}`
+
+export const vitaminAndMoreVitaminQuery = groq`
+{
+  "post": *[_type == "vitamin" && product_id.current == $slug] | order(_updatedAt desc) [0] {
+    content,
+    ${vitaminFields}
+  },
+  "morePosts": *[_type == "vitamin" && product_id.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+    content,
+    ${vitaminFields}
+  }
+}`
+
+export const vitaminSlugsQuery = groq`
+*[_type == "vitamin" && defined(product_id.current)][].product_id.current
+`
+export interface Vitamin {
+  _id: string
+  title?: string
+  coverImage?: any
+  date?: string
+  _updatedAt?: string
+  excerpt?: string
+  author?: Author
+  product_id?: string
+  content?: any
+  price?: number
+}
+
+
+
+
+
+
+
+

@@ -17,8 +17,8 @@ import authorType from './author'
  */
 
 export default defineType({
-  name: 'perfume',
-  title: 'Perfume',
+  name: 'cosmetics',
+  title: 'Cosmetics',
   icon: BookIcon,
   type: 'document',
   fields: [
@@ -30,7 +30,7 @@ export default defineType({
     }),
     defineField({
       name: 'product_id',
-      title: 'Perfume ID',
+      title: 'Cosmetics ID',
       type: 'slug',
       options: {
         source: 'title',

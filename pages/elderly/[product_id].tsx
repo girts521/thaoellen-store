@@ -3,18 +3,18 @@ import PerfumePage from 'components/PerfumePage'
 import PreviewPostPage from 'components/PreviewPostPage'
 import { readToken } from 'lib/sanity.api'
 import {
-  getAllPerfumeSlugs,
+    getAllElderlySlugs,
   getClient,
   getSettings,
-  getPerfume
+  getElderly,
 } from 'lib/sanity.client'
-import { Perfume, Settings } from 'lib/sanity.queries'
+import { Product, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import type { SharedPageProps } from 'pages/_app'
 
 interface PageProps extends SharedPageProps {
-  post: Perfume
-  morePosts: Perfume[]
+  post: Product
+  morePosts: Product[]
   settings?: Settings
 }
 
@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
   const [settings, { post, morePosts }] = await Promise.all([
     getSettings(client),
-    getPerfume(client, params.perfume_id)
+    getElderly(client, params.product_id)
   ])
 
   if (!post) {
@@ -60,10 +60,10 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 }
 
 export const getStaticPaths = async () => {
-  const slugs = await getAllPerfumeSlugs()
+  const slugs = await getAllElderlySlugs()
 
   return {
-    paths: slugs?.map(({ slug }) => `/perfume/${slug}`) || [],
+    paths: slugs?.map(({ slug }) => `/elderly/${slug}`) || [],
     fallback: 'blocking',
   }
 }
