@@ -1,0 +1,24 @@
+.container {
+    height: 250px;
+    width: 100%;
+    background: linear-gradient(0deg, #B4B2DE 0%, rgba(180, 178, 222, 0.00) 100%);
+    position: relative;
+
+    .imageContainer {
+        width: 155px;
+        height: 250px;
+        position: absolute;
+        top: -35px;
+        right: 0;
+
+        @media (min-width: 768px) {
+            height: 500px;
+            width: 310px;
+        }
+    
+        @media (min-width: 768px) {
+            height: 700px;
+            width: 435px;
+        }
+    }
+}
