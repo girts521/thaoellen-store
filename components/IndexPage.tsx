@@ -8,8 +8,13 @@ import MoreProduct from 'components/MoreProduct'
 import IntroTemplate from 'intro-template'
 import * as demo from 'lib/demo.data'
 import type { Product, Settings } from 'lib/sanity.queries'
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import styles from './IndexPage.module.scss'
+
 
 import Heading from 'components/Heading'
+import { set } from 'date-fns'
 
 export interface IndexPageProps {
   preview?: boolean
@@ -28,6 +33,20 @@ export default function IndexPage(props: IndexPageProps) {
  
   const [heroPost, ...morePosts] = perfume || []
   const { title = demo.title, description = demo.description } = settings || {}
+
+  const [fullHeight, setFullHeight] = useState(0);
+
+
+
+  useEffect(() => {
+    setFullHeight(document.documentElement.scrollHeight);
+
+  
+  }, []);
+
+  const middleImageStyles: React.CSSProperties = {
+    top: (fullHeight) / 2,
+  };
 
   return (
     <>
@@ -51,6 +70,10 @@ export default function IndexPage(props: IndexPageProps) {
           {cosmetics.length > 0 && <MoreProduct  product={cosmetics} title='Mỹ phẩm' path='cosmetics' />}
           {elderly.length > 0 && <MoreProduct  product={elderly} title='Hơi già' path='elderly' />}
           {vitamin.length > 0 && <MoreProduct  product={vitamin} title='Vitamin' path='vitamin' />}
+
+          <div style={middleImageStyles} className={styles.middleImage}>
+          <Image  src="/d-flower-left.png" alt='Flower image background' width={1000} height={1000} />
+          </div>
 
         </Container>
         {/*<IntroTemplate />*/}

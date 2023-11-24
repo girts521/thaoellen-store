@@ -1,19 +1,37 @@
 .container {
     width: 130px;
-    // height: 190px;
     border-radius: 10px;
     background: #D2D5E6;
     margin-bottom: 15px;
     cursor: pointer;
 
     &:hover {
-        box-shadow: 
-        0 5px 10px rgba(0, 0, 0, 0.12), /* This is your --tw-shadow */
-        0 5px 10px rgba(72, 77, 105, 0.37); 
+        box-shadow:
+            0 5px 10px rgba(0, 0, 0, 0.12),
+            /* This is your --tw-shadow */
+            0 5px 10px rgba(72, 77, 105, 0.37);
         transition-property: box-shadow;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;;
+        transition-duration: 150ms;
+        ;
     }
+
+    @media (min-width: 768px) {
+        width: 210px;
+        min-height: 315px;
+    }
+
+
+    @media (min-width: 1024px) {
+        margin-bottom: 25px;
+    }
+
+    @media (min-width: 1440px) {
+        margin-bottom: 50px;
+        margin-right: 50px;
+    }
+
+
 
 
     .productName {
@@ -25,7 +43,11 @@
         line-height: normal;
         text-transform: uppercase;
         margin-top: 10px;
-    padding-left: 5px;
+        padding-left: 5px;
+
+        @media (min-width: 768px) {
+            font-size: 18px;
+        }
     }
 
     .excerpt {
@@ -36,6 +58,10 @@
         font-weight: 400;
         line-height: normal;
         padding: 5px;
+
+        @media (min-width: 768px) {
+            font-size: 14px;
+        }
     }
 
     .price {
@@ -47,5 +73,9 @@
         line-height: normal;
         text-transform: uppercase;
         padding: 5px;
+
+        @media (min-width: 768px) {
+            font-size: 18px;
+        }
     }
 }

@@ -20,22 +20,77 @@
 .portableText a {
   @apply text-blue-500 underline;
 }
+
 .portableText a:hover {
   @apply text-blue-800;
 }
 
-.perfumeBody{
-  margin-left: 50px;
-  width: 50%;
+.perfumeBody {
+  width: 100%;
+  // padding-left: 40px;
+  // padding-right: 40px;
+  margin-bottom: 170px;
+
+  h2,
+  .price {
+    color: #474574;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  p {
+    color: #474574;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
 
   .action {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
     button {
-      border: 1px solid black;
-        border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #474574;
       padding: 10px;
-      margin: 10px;
+      width: 151px;
+      height: 50px;
+      border-radius: 10px;
+      background: #dbdbe7;
+      color: #474574;
+      font-family: Montserrat;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
     }
-    .addToCart{}
-    .contact{}
+
+    .addToCart {
+
+      img {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+      }
+    }
+
+    .contact {
+
+      img {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+      }
+    }
   }
 }

@@ -40,25 +40,22 @@ export default function PostPage(props: PostPageProps) {
 
       <Layout preview={preview} loading={loading}>
         <Container>
-          <BlogHeader title={title} level={2} />
+          {/* <BlogHeader title={title} level={2} /> */}
           {preview && !perfume ? (
             <PostTitle>Loading…</PostTitle>
           ) : (
             <>
-              <article className={styles.perfumeArticle}>
+              <div className={styles.perfumeArticle}>
                 <PerfumeHeader
                   title={perfume.title}
                   coverImage={perfume.coverImage}
                   date={perfume.date}
                   author={perfume.author}
                 />
-                <PerfumeBody content={perfume.content} price={perfume.price}/>
-                {/*<div>*/}
-                {/*  Price: {`${perfume.price}`}*/}
-                {/*</div>*/}
-              </article>
-              <SectionSeparator />
-              {morePerfume?.length > 0 && <MoreProduct product={morePerfume} title='Nước hoa' path='parfume' />}
+                <PerfumeBody title={perfume.title} content={perfume.content} price={perfume.price}/>
+
+              </div>
+              {morePerfume?.length > 0 && <MoreProduct product={morePerfume} title='Nước hoa' path='perfume' />}
             </>
           )}
         </Container>
