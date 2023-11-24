@@ -14,6 +14,7 @@ import {
 
 import styles from './PerfumeBody.module.scss'
 import { SanityImage } from './SanityImage'
+import Image from 'next/image'
 
 const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   types: {
@@ -23,16 +24,33 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   },
 }
 
-export default function PerfumeBody({ content, price }) {
+export default function PerfumeBody({ content, price, title }) {
   return (
     <div className={`${styles.perfumeBody} ${styles.portableText}`}>
+      <h2>{title}</h2>
       <PortableText value={content} components={myPortableTextComponents} />
-      <div>
-        Price: {`${price}`}
-      </div>
+      <div className={styles.price}>Price: {`${price}`}</div>
       <div className={styles.action}>
-        <button className={styles.addToCart}>Add to cart</button>
-        <button className={styles.contact}>Contact to buy</button>
+        <button className={styles.addToCart}>
+          {' '}
+          <Image
+            src={'/bag.png'}
+            width={1000}
+            height={1000}
+            alt="product image"
+          />{' '}
+          Add to cart
+        </button>
+        <button className={styles.contact}>
+          {' '}
+          <Image
+            src={'/contact.png'}
+            width={1000}
+            height={1000}
+            alt="product image"
+          />
+          Contact to buy
+        </button>
       </div>
     </div>
   )

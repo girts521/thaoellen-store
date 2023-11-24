@@ -5,16 +5,27 @@ import PostTitle from 'components/PostTitle'
 import type { Product } from 'lib/sanity.queries'
 import perfume from '../schemas/perfume'
 import styles from './PerfumeHeader.module.scss'
+import Image from 'next/image'
+import { urlForImage } from 'lib/sanity.image'
 
 export default function PerfumeHeader(
-  props: Pick<Product, 'title' | 'coverImage' | 'date' | 'author' | 'product_id'>,
+  props: Pick<
+    Product,
+    'title' | 'coverImage' | 'date' | 'author' | 'product_id'
+  >,
 ) {
   const { title, coverImage, date, author, product_id } = props
+  console.log('image: ', coverImage)
   return (
     <>
-      {/*<PostTitle>{title}</PostTitle>*/}
       <div className={`mb-8 sm:mx-0 md:mb-16 ${styles.imageContainer}`}>
-        <CoverImage title={title} image={coverImage} priority slug={product_id} />
+        {/* <CoverImage title={title} image={coverImage} priority slug={product_id} /> */}
+        <Image
+          src={urlForImage(coverImage).height(1000).width(2000).url()}
+          width={1000}
+          height={1000}
+          alt="product image"
+        />
       </div>
     </>
   )
