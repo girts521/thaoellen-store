@@ -57,6 +57,11 @@
     justify-content: space-around;
     align-items: center;
 
+
+    @media (min-width: 1024px) {
+      justify-content: space-evenly;
+    }
+
     button {
       display: flex;
       justify-content: center;
@@ -73,6 +78,11 @@
       font-style: normal;
       font-weight: 500;
       line-height: normal;
+
+      @media (min-width: 768px) {
+        width: 190px;
+        font-size: 18px;
+      }
     }
 
     .addToCart {
