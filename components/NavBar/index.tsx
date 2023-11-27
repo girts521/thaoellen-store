@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import styles from './index.module.scss'
+import Minicart from 'components/Minicart/Minicart'
 
 const NavBar: React.FC = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
+  const [minicart, setMinicart] = useState(false)
 
   const handleBurgerMenuClick = () => {
     setIsBurgerMenuOpen(!isBurgerMenuOpen)
@@ -45,9 +47,16 @@ const NavBar: React.FC = () => {
             height={25}
           />
 
-          <Image src="/bag.png" alt="shopping menu" width={25} height={25} />
+          <Image
+          onClick={() => {
+            console.log('click', minicart)
+            setMinicart(true)
+          }}
+          src="/bag.png" alt="shopping menu" width={25} height={25} />
         </div>
       </div>
+
+    {minicart && <Minicart close={setMinicart} />}
 
       <div
         className={`${styles.burgerMenuContent}`}
