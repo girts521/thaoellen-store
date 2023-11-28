@@ -7,6 +7,7 @@ import perfume from '../schemas/perfume'
 import styles from './PerfumeHeader.module.scss'
 import Image from 'next/image'
 import { urlForImage } from 'lib/sanity.image'
+import Spline from '@splinetool/react-spline';
 
 export default function PerfumeHeader(
   props: Pick<
@@ -20,12 +21,13 @@ export default function PerfumeHeader(
     <>
       <div className={`mb-8 sm:mx-0 md:mb-16 ${styles.imageContainer}`}>
         {/* <CoverImage title={title} image={coverImage} priority slug={product_id} /> */}
-        <Image
+        {/* <Image
           src={urlForImage(coverImage).height(1000).width(2000).url()}
           width={1000}
           height={1000}
           alt="product image"
-        />
+        /> */}
+         <Spline scene="https://prod.spline.design/p5kU3-WL7CAvd3UA/scene.splinecode" />
       </div>
     </>
   )
