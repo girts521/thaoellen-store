@@ -7,7 +7,10 @@ import perfume from '../schemas/perfume'
 import styles from './PerfumeHeader.module.scss'
 import Image from 'next/image'
 import { urlForImage } from 'lib/sanity.image'
-import Spline from '@splinetool/react-spline';
+import Loading from './Loading/Loading'
+import Spline from '@splinetool/react-spline'
+
+import { Suspense, lazy, useState, useEffect } from 'react'
 
 export default function PerfumeHeader(
   props: Pick<
@@ -16,7 +19,9 @@ export default function PerfumeHeader(
   >,
 ) {
   const { title, coverImage, date, author, product_id } = props
-  console.log('image: ', coverImage)
+
+  const [loading, setLoading] = useState(true)
+
   return (
     <>
       <div className={`mb-8 sm:mx-0 md:mb-16 ${styles.imageContainer}`}>
@@ -27,7 +32,16 @@ export default function PerfumeHeader(
           height={1000}
           alt="product image"
         /> */}
-         <Spline scene="https://prod.spline.design/p5kU3-WL7CAvd3UA/scene.splinecode" />
+        {loading && (
+          <Loading />
+        )}
+
+        <Spline
+          onLoad={() => {
+            setLoading(false)
+          }}
+          scene="https://prod.spline.design/p5kU3-WL7CAvd3UA/scene.splinecode"
+        />
       </div>
     </>
   )

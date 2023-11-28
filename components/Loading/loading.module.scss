@@ -1,11 +1,4 @@
-.imageContainer {
-  // width: 691px;
-  width: auto;
-  height: 825px;
-  // margin: auto;
-  position: relative;
-
-  .loading {
+.loading {
     position: absolute;
     top: 50%;
     right: 50%;
@@ -65,7 +58,5 @@
         }
     }
 
-
-}
 
 }

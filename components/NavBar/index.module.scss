@@ -1,6 +1,10 @@
 .container {
     background: rgba(133, 130, 202, 0.77);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     min-height: 50px;
+    position: sticky;
+    top: 0;
 
     img {
         cursor: pointer;
