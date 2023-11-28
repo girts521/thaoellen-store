@@ -53,7 +53,7 @@ const Minicart = ({ close }) => {
         fetchCartItems(item.product_id)
       })
     }
-  }, [cart])
+  }, [cart, cartDB])
 
   return (
     <div className={styles.minicartContainer}>
