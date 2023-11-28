@@ -28,7 +28,7 @@ export default function PostPage(props: PostPageProps) {
   const { title = demo.title } = settings || {}
 
   const slug = perfume?.product_id
-  console.log(perfume)
+  console.log('perfume: ', perfume)
 
   if (!slug && !preview) {
     notFound()
@@ -52,7 +52,7 @@ export default function PostPage(props: PostPageProps) {
                   date={perfume.date}
                   author={perfume.author}
                 />
-                <PerfumeBody title={perfume.title} content={perfume.content} price={perfume.price}/>
+                <PerfumeBody product_id={perfume.product_id} title={perfume.title} content={perfume.content} price={perfume.price}/>
 
               </div>
               {morePerfume?.length > 0 && <MoreProduct product={morePerfume} title='Nước hoa' path='perfume' />}

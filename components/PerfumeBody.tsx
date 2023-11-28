@@ -24,14 +24,39 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   },
 }
 
-export default function PerfumeBody({ content, price, title }) {
+export default function PerfumeBody({ content, price, title, product_id }) {
+
+  const addToCart = () => {
+    const cart = localStorage.getItem('cart')
+    if (cart) {
+      const cartObj = JSON.parse(cart)
+      const isExist = cartObj.find((item) => item.product_id === product_id)
+      if (isExist) {
+        const newCart = cartObj.map((item) => {
+          if (item.product_id === product_id) {
+            return { ...item, quantity: item.quantity + 1 }
+          }
+          return item
+        })
+        localStorage.setItem('cart', JSON.stringify(newCart))
+      } else {
+        cartObj.push({ product_id, quantity: 1 })
+        localStorage.setItem('cart', JSON.stringify(cartObj))
+      }
+    } else {
+      const cartObj = [{ product_id, quantity: 1 }]
+      localStorage.setItem('cart', JSON.stringify(cartObj))
+    }
+
+  }
+
   return (
     <div className={`${styles.perfumeBody} ${styles.portableText}`}>
       <h2>{title}</h2>
       <PortableText value={content} components={myPortableTextComponents} />
       <div className={styles.price}>Price: {`${price}`}</div>
       <div className={styles.action}>
-        <button className={styles.addToCart}>
+        <button onClick={addToCart} className={styles.addToCart}>
           {' '}
           <Image
             src={'/bag.png'}
