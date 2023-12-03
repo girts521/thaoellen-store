@@ -1,11 +1,29 @@
+import MiniCartProduct from 'components/MiniCartProduct/MiniCartProduct'
 import styles from './Minicart.module.scss'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import Loading from 'components/Loading/Loading'
+import { set } from 'date-fns'
+import { useCallback } from 'react'
+
+
 
 const Minicart = ({ close }) => {
   const [cart, setCart] = useState([])
   const [cartLength, setCartLength] = useState(0)
   const [cartDB, setCartDB] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [discount, setDiscount] = useState(0)
+
+
+
+
+
+  const findQuantity = useCallback((item) => {
+    const quantity = cart.find((cartItem) => cartItem.product_id === item[0].product_id.current);
+    return quantity ? quantity.quantity : 0;
+  }, [cart]);
 
   useEffect(() => {
     const localCart = localStorage.getItem('cart')
@@ -14,14 +32,28 @@ const Minicart = ({ close }) => {
     }
   }, [])
 
+
+
   useEffect(() => {
+
+
+    const calculateTotalPrice = () => {
+      const totalPriceCalc = cartDB.reduce((acc, item) => {
+        console.log('item: ', item)
+        const price = item[0].price * findQuantity(item)
+        return acc + price
+      }, 0)    
+      setTotalPrice(totalPriceCalc)
+    }
+
+    console.log('effect')
     if (cart.length) {
       const length = cart.reduce((acc, item) => {
         return acc + item.quantity
       }, 0)
       setCartLength(length)
 
-      const fetchCartItems = async (productId) => {
+      const fetchCartItems = async (productId) => { 
         try {
           const response = await fetch(`/api/getProductById?id=${productId}`, {
             method: 'GET',
@@ -43,17 +75,34 @@ const Minicart = ({ close }) => {
           } else {
             setCartDB((prev) => [...prev, data])
           }
+          
         } catch (error) {
           console.error('There was a problem with the fetch operation:', error)
         }
+
       }
 
       //loop through cart and fetch each item from DB and add to cartDB state
-      cart.forEach((item) => {
-        fetchCartItems(item.product_id)
+      //await for all fetch to finish in a promise and change loading state to false
+      
+      setLoading(true)
+      Promise.all(cart.map(item => fetchCartItems(item.product_id)))
+      .then(() => {
+        console.log('done', cartDB)
+        //calsulate total price
+        calculateTotalPrice()
+        setLoading(false)
       })
+      .catch(err => {
+        console.log('err: ', err)
+        setLoading(false)
+      })
+
     }
-  }, [cart, cartDB])
+  }, [cart, cartDB, findQuantity])
+
+
+
 
   return (
     <div className={styles.minicartContainer}>
@@ -73,15 +122,15 @@ const Minicart = ({ close }) => {
         <div className={styles.totals}>
           <div className={styles.itemCount}> {cartLength} items in cart</div>
           <div className={styles.subtotal}>
-            <p>Subtotal :</p> 20$
+            <p>Subtotal :</p> {totalPrice}$
           </div>
 
           <div className={styles.dicount}>
-            <p>Discount :</p> 0$
+            <p>Discount :</p> {discount}
           </div>
 
           <div className={styles.total}>
-            <p>Total :</p> 20$
+            <p>Total :</p> {totalPrice - discount}$
           </div>
         </div>
 
@@ -114,36 +163,14 @@ const Minicart = ({ close }) => {
         {/* Items list */}
 
         <div className={styles.itemsContainer}>
+          {loading && <Loading />}
           <ol>
-            <li>
-              <div className={styles.product}>
-                <div className={styles.productImage}>
-                  <Image
-                    src="/gucci.png"
-                    alt="product"
-                    width={150}
-                    height={150}
-                  />
-                </div>
-
-                <div className={styles.productInfo}>
-                  <div className={styles.productName}>
-                    <h3>Product name</h3>
-                  </div>
-
-                  <div className={styles.productPrice}>
-                    Price: <p>20$</p>
-                  </div>
-
-                  <h3>Quantity</h3>
-                  <div className={styles.productQuantity}>
-                    <button className={styles.quantityButton}>-</button>
-                    <input className={styles.quantityInput} type="number" />
-                    <button className={styles.quantityButton}>+</button>
-                  </div>
-                </div>
-              </div>
-            </li>
+            {
+              // cartDB.length &&
+              cartDB.map((item) => {
+                return <MiniCartProduct key={item.product_id} product={item} quantity={findQuantity(item)} setCart={setCart} />
+              })
+            }
           </ol>
         </div>
       </div>

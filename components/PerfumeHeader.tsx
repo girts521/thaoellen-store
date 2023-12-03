@@ -9,8 +9,8 @@ import Image from 'next/image'
 import { urlForImage } from 'lib/sanity.image'
 import Loading from './Loading/Loading'
 import Spline from '@splinetool/react-spline'
-
-import { Suspense, lazy, useState, useEffect } from 'react'
+import { Suspense, lazy, useState, useEffect, use } from 'react'
+import {getSplineDataByProductId} from 'lib/firebase'
 
 export default function PerfumeHeader(
   props: Pick<
@@ -19,6 +19,15 @@ export default function PerfumeHeader(
   >,
 ) {
   const { title, coverImage, date, author, product_id } = props
+  useEffect(() => {
+    //hit db via api call and check using product_id if there is a spline link
+    //if there is spline then render it
+    //if not then render the image
+     const splineData = getSplineDataByProductId(product_id)
+
+  }, [product_id])
+
+
 
   const [loading, setLoading] = useState(true)
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import styles from './index.module.scss'
 import Minicart from 'components/Minicart/Minicart'
+import Rive from '@rive-app/react-canvas'
 
 const NavBar: React.FC = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
@@ -47,16 +48,29 @@ const NavBar: React.FC = () => {
             height={25}
           />
 
-          <Image
+          <div
+            onClick={() => {
+              console.log('click', minicart)
+              setMinicart(true)
+            }}
+          >
+            <Rive
+              src="/animations/cart_animation.riv"
+              stateMachines={['State Machine 1']}
+              style={{ width: '70px', height: '70px', cursor: 'pointer' }}
+            />
+          </div>
+
+          {/* <Image
           onClick={() => {
             console.log('click', minicart)
             setMinicart(true)
           }}
-          src="/bag.png" alt="shopping menu" width={25} height={25} />
+          src="/bag.png" alt="shopping menu" width={25} height={25} /> */}
         </div>
       </div>
 
-    {minicart && <Minicart close={setMinicart} />}
+      {minicart && <Minicart close={setMinicart} />}
 
       <div
         className={`${styles.burgerMenuContent}`}
