@@ -50,6 +50,7 @@ export default function PostPage(props: PostPageProps) {
                   title={perfume.title}
                   coverImage={perfume.coverImage}
                   date={perfume.date}
+                  product_id={perfume.product_id}
                   author={perfume.author}
                 />
                 <PerfumeBody product_id={perfume.product_id} title={perfume.title} content={perfume.content} price={perfume.price}/>

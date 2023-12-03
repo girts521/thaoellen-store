@@ -1,12 +1,14 @@
 .minicartContainer {
-    position: absolute;
+    position: fixed;
     width: 600px;
     max-width: 100%;
     height: 100%;
     overflow-y: auto;
     top: 0;
     right: 0;
-    background-color: #fff;
+    background-color: rgb(206 204 238 / 53%);
+    backdrop-filter: blur(10px); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 9999;
     font-family: Montserrat;
 
@@ -33,7 +35,7 @@
 
     .title {
         height: 95px;
-       background: rgba(133, 130, 202, 0.77);
+        background-color: rgb(183 180 240 / 72%);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -131,76 +133,7 @@
 
             ol {
                 li {
-                    .product {
-                        display: flex;
-                        align-items: center;
-                        margin-bottom: 15px;
 
-                        .productImage {
-                            width: 150px;
-                            height: 150px;
-                            margin-right: 15px;
-                            img {
-                                width: 100%;
-                                height: 100%;
-                                object-fit: cover;
-                            }
-                        }
-
-                        .productInfo {
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-                            flex: 1;
-
-                            .productName {
-                                font-weight: 700;
-                                font-size: 18px;
-                                color: #474574;
-                            }
-
-                            .productPrice {
-                                font-weight: 700;
-                                font-size: 18px;
-                                color: #474574;
-                                display: flex;
-
-                                p {
-                                    margin-left: 5px;
-                                }
-                            }
-
-                            .productQuantity {
-                                display: flex;
-                                align-items: center;
-                                margin-top: 10px;
-
-                                .quantityButton {
-                                    padding: 5px 10px;
-                                    background: #dbdbe7;
-                                    border: 1px solid #474574;
-                                    color: #474574;
-                                    border-radius: 10px;
-                                    height: 30px;
-                                    width: 30px;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    text-transform: uppercase;
-                                    font-size: 18px;
-                                    cursor: pointer;
-                                }
-
-                                .quantityInput {
-                                    height: 30px;
-                                    max-width: 50px;
-                                    border: 1px solid #c2c2c2;
-                                    padding: 5px;
-                                    margin: 3px;
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
