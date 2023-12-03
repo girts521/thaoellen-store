@@ -49,6 +49,7 @@ const NavBar: React.FC = () => {
           />
 
           <div
+          style={{ width: '75px', height: '75px', cursor: 'pointer' }}
             onClick={() => {
               console.log('click', minicart)
               setMinicart(true)
