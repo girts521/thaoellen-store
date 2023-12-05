@@ -45,6 +45,7 @@ const [notificationText, setNotificationText] = useState('')
           return item
         })
         localStorage.setItem('cart', JSON.stringify(newCart))
+        window.dispatchEvent(new Event('localStorageCartChanged'));
         setNotification(true)
         setNotificationText('Product quantity successfully increased')
         setTimeout(() => {
@@ -53,6 +54,7 @@ const [notificationText, setNotificationText] = useState('')
       } else {
         cartObj.push({ product_id, quantity: 1 })
         localStorage.setItem('cart', JSON.stringify(cartObj))
+        window.dispatchEvent(new Event('localStorageCartChanged'));
         setNotification(true)
         setNotificationText('Product successfully added to cart ')
         setTimeout(() => {
@@ -62,6 +64,7 @@ const [notificationText, setNotificationText] = useState('')
     } else {
       const cartObj = [{ product_id, quantity: 1 }]
       localStorage.setItem('cart', JSON.stringify(cartObj))
+      window.dispatchEvent(new Event('localStorageCartChanged'));
       setNotification(true)
       setNotificationText('Product successfully added to cart ')
       setTimeout(() => {

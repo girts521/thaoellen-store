@@ -25,12 +25,36 @@ const Minicart = ({ close }) => {
     return quantity ? quantity.quantity : 0;
   }, [cart]);
 
+  let localCart 
+
   useEffect(() => {
-    const localCart = localStorage.getItem('cart')
+     localCart = localStorage.getItem('cart')
     if (localCart) {
       setCart(JSON.parse(localCart))
     }
-  }, [])
+
+    const handleStorageChange = (e) => {
+      console.log(e.detail)
+      localCart = localStorage.getItem('cart')
+      if (localCart) {
+        setCart(JSON.parse(localCart))
+        //remove item from cartDB if it's not in localCart
+        const newCartDB = cartDB.filter(item => {
+          const isExist = JSON.parse(localCart).find(cartItem => cartItem.product_id === item[0].product_id.current)
+          return isExist
+        })
+        setCartDB(newCartDB)
+
+      }
+      // setCart(JSON.parse(e.detail))
+    }
+
+    window.addEventListener('localStorageCartChanged', handleStorageChange);
+
+  return () => {
+    window.removeEventListener('localStorageCartChanged', handleStorageChange);
+  };
+  }, [localCart])
 
 
 
@@ -39,7 +63,6 @@ const Minicart = ({ close }) => {
 
     const calculateTotalPrice = () => {
       const totalPriceCalc = cartDB.reduce((acc, item) => {
-        console.log('item: ', item)
         const price = item[0].price * findQuantity(item)
         return acc + price
       }, 0)    
@@ -167,7 +190,19 @@ const Minicart = ({ close }) => {
           <ol>
             {
               // cartDB.length &&
-              cartDB.map((item) => {
+              cartDB.sort((a, b) => {
+                //based on the title alphabetically
+                const titleA = a[0].title.toUpperCase()
+                const titleB = b[0].title.toUpperCase()
+                if (titleA < titleB) {
+                  return -1
+                }
+                if (titleA > titleB) {
+                  return 1
+                }
+                return 0
+              })
+              .map((item) => {
                 return <MiniCartProduct key={item[0].product_id.current} product={item} quantity={findQuantity(item)} setCart={setCart} />
               })
             }

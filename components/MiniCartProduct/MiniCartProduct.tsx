@@ -7,31 +7,50 @@ const MiniCartProduct = ({product, quantity, setCart}) => {
 
     const [quantityState, setQuantity] = useState(quantity)
 
+    const deleteItem = () => {
+        const cart = localStorage.getItem('cart')
+        if (cart) {
+            const cartArray = JSON.parse(cart)
+            const newCart = cartArray.filter(item => item.product_id !== product[0].product_id.current)
+            localStorage.setItem('cart', JSON.stringify(newCart))
+            window.dispatchEvent(new Event('localStorageCartChanged'));
+            setCart(newCart)
+        }
+    }
+
     const updateValue = (e) => {
-        console.log('updateValue')
         const cart = localStorage.getItem('cart')
         if (cart) {
             const cartArray = JSON.parse(cart)
             const itemIndex = cartArray.findIndex(item => item.product_id === product[0].product_id.current)
             if (itemIndex !== -1) {
+                if (e.target.value < 1) {
+                    e.target.value = 1
+                }
                 cartArray[itemIndex].quantity = parseInt(e.target.value)
                 setQuantity(cartArray[itemIndex].quantity)
                 localStorage.setItem('cart', JSON.stringify(cartArray))
+                window.dispatchEvent(new Event('localStorageCartChanged'));
                 setCart(cartArray)
             }
         }
     }
 
     const decreaseQuantity = () => {
-        console.log('decreaseQuantity')
         const cart = localStorage.getItem('cart')
         if (cart) {
             const cartArray = JSON.parse(cart)
             const itemIndex = cartArray.findIndex(item => item.product_id === product[0].product_id.current)
             if (itemIndex !== -1) {
+
                 cartArray[itemIndex].quantity = cartArray[itemIndex].quantity - 1
-                setQuantity(cartArray[itemIndex].quantity)
+                if (cartArray[itemIndex].quantity < 1) {
+                    cartArray.splice(itemIndex, 1)
+                } else {
+                  setQuantity(cartArray[itemIndex].quantity)
+                }
                 localStorage.setItem('cart', JSON.stringify(cartArray))
+                window.dispatchEvent(new Event('localStorageCartChanged'));
                 setCart(cartArray)
 
             }
@@ -39,7 +58,6 @@ const MiniCartProduct = ({product, quantity, setCart}) => {
     }
 
     const increaseQuantity = () => {
-        console.log('increaseQuantity')
         const cart = localStorage.getItem('cart')
         if (cart) {
             const cartArray = JSON.parse(cart)
@@ -48,6 +66,7 @@ const MiniCartProduct = ({product, quantity, setCart}) => {
                 cartArray[itemIndex].quantity = cartArray[itemIndex].quantity + 1
                 setQuantity(cartArray[itemIndex].quantity)
                 localStorage.setItem('cart', JSON.stringify(cartArray))
+                window.dispatchEvent(new Event('localStorageCartChanged'));
                 setCart(cartArray)
             }
         }
@@ -78,7 +97,7 @@ const MiniCartProduct = ({product, quantity, setCart}) => {
             <button className={styles.quantityButton} onClick={() => {
                 decreaseQuantity()
             }} >-</button>
-            <input className={styles.quantityInput} onChange={updateValue} value={quantityState} type="number" />
+            <input className={styles.quantityInput} onChange={updateValue} min={0} value={quantityState} type="number" />
             <button className={styles.quantityButton} onClick={() => {
                 increaseQuantity()
             }} >+</button>
