@@ -31,6 +31,7 @@ const MiniCartProduct = ({product, quantity, setCart}) => {
                 setQuantity(cartArray[itemIndex].quantity)
                 localStorage.setItem('cart', JSON.stringify(cartArray))
                 window.dispatchEvent(new Event('localStorageCartChanged'));
+                console.log('dispatched')
                 setCart(cartArray)
             }
         }
@@ -51,6 +52,7 @@ const MiniCartProduct = ({product, quantity, setCart}) => {
                 }
                 localStorage.setItem('cart', JSON.stringify(cartArray))
                 window.dispatchEvent(new Event('localStorageCartChanged'));
+                console.log('dispatched')
                 setCart(cartArray)
 
             }
@@ -67,6 +69,7 @@ const MiniCartProduct = ({product, quantity, setCart}) => {
                 setQuantity(cartArray[itemIndex].quantity)
                 localStorage.setItem('cart', JSON.stringify(cartArray))
                 window.dispatchEvent(new Event('localStorageCartChanged'));
+                console.log('dispatched')
                 setCart(cartArray)
             }
         }

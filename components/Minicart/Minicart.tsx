@@ -1,11 +1,10 @@
 import MiniCartProduct from 'components/MiniCartProduct/MiniCartProduct'
 import styles from './Minicart.module.scss'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Loading from 'components/Loading/Loading'
 import { set } from 'date-fns'
 import { useCallback } from 'react'
-
 
 
 const Minicart = ({ close }) => {
@@ -15,31 +14,32 @@ const Minicart = ({ close }) => {
   const [loading, setLoading] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0)
   const [discount, setDiscount] = useState(0)
+  
 
 
-
-
+const cartDBref = useRef(cartDB)
+  cartDBref.current = cartDB
 
   const findQuantity = useCallback((item) => {
     const quantity = cart.find((cartItem) => cartItem.product_id === item[0].product_id.current);
     return quantity ? quantity.quantity : 0;
   }, [cart]);
 
-  let localCart 
 
   useEffect(() => {
-     localCart = localStorage.getItem('cart')
+    let localCart
+    localCart = localStorage.getItem('cart')
     if (localCart) {
       setCart(JSON.parse(localCart))
     }
 
     const handleStorageChange = (e) => {
-      console.log(e.detail)
       localCart = localStorage.getItem('cart')
       if (localCart) {
         setCart(JSON.parse(localCart))
         //remove item from cartDB if it's not in localCart
-        const newCartDB = cartDB.filter(item => {
+      
+        const newCartDB = cartDBref.current.filter(item => {
           const isExist = JSON.parse(localCart).find(cartItem => cartItem.product_id === item[0].product_id.current)
           return isExist
         })
@@ -54,7 +54,7 @@ const Minicart = ({ close }) => {
   return () => {
     window.removeEventListener('localStorageCartChanged', handleStorageChange);
   };
-  }, [localCart])
+  }, [])
 
 
 
