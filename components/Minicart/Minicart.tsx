@@ -168,7 +168,7 @@ const Minicart = ({ close }) => {
             {
               // cartDB.length &&
               cartDB.map((item) => {
-                return <MiniCartProduct key={item.product_id} product={item} quantity={findQuantity(item)} setCart={setCart} />
+                return <MiniCartProduct key={item[0].product_id.current} product={item} quantity={findQuantity(item)} setCart={setCart} />
               })
             }
           </ol>
