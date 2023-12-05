@@ -15,6 +15,9 @@ import {
 import styles from './PerfumeBody.module.scss'
 import { SanityImage } from './SanityImage'
 import Image from 'next/image'
+import Notification from 'components/Notification'
+import { useState } from 'react'
+import { set } from 'date-fns'
 
 const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   types: {
@@ -25,6 +28,9 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
 }
 
 export default function PerfumeBody({ content, price, title, product_id }) {
+
+const [notification, setNotification] = useState(false)
+const [notificationText, setNotificationText] = useState('')
 
   const addToCart = () => {
     const cart = localStorage.getItem('cart')
@@ -39,13 +45,28 @@ export default function PerfumeBody({ content, price, title, product_id }) {
           return item
         })
         localStorage.setItem('cart', JSON.stringify(newCart))
+        setNotification(true)
+        setNotificationText('Product quantity successfully increased')
+        setTimeout(() => {
+          setNotification(false)
+        }, 3000)
       } else {
         cartObj.push({ product_id, quantity: 1 })
         localStorage.setItem('cart', JSON.stringify(cartObj))
+        setNotification(true)
+        setNotificationText('Product successfully added to cart ')
+        setTimeout(() => {
+          setNotification(false)
+        }, 3000)
       }
     } else {
       const cartObj = [{ product_id, quantity: 1 }]
       localStorage.setItem('cart', JSON.stringify(cartObj))
+      setNotification(true)
+      setNotificationText('Product successfully added to cart ')
+      setTimeout(() => {
+        setNotification(false)
+      }, 3000)
     }
 
   }
@@ -53,6 +74,7 @@ export default function PerfumeBody({ content, price, title, product_id }) {
   return (
     <div className={`${styles.perfumeBody} ${styles.portableText}`}>
       <h2>{title}</h2>
+      {notification && <Notification text={notificationText} />}
       <PortableText value={content} components={myPortableTextComponents} />
       <div className={styles.price}>Price: {`${price}`}</div>
       <div className={styles.action}>
