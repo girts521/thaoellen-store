@@ -44,8 +44,8 @@ const NavBar: React.FC = () => {
             onClick={handleBurgerMenuClick}
             src={isBurgerMenuOpen ? '/Close.png' : '/Burger.png'}
             alt="Burger menu"
-            width={25}
-            height={25}
+            width={35}
+            height={45}
           />
 
           <div
@@ -102,8 +102,8 @@ const NavBar: React.FC = () => {
                 onClick={handleBurgerMenuClick}
                 src={isBurgerMenuOpen ? '/Close.png' : '/Burger.png'}
                 alt="Burger menu"
-                width={25}
-                height={25}
+                width={35}
+                height={45}
               />
             </div>
             <div>
