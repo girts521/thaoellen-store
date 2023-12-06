@@ -15,9 +15,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 
-
-
-
 let db
 let auth
 let app
