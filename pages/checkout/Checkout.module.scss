@@ -41,6 +41,14 @@
                 background: #DBDBE7;
                 color: #474574;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+                @media (min-width: 768px) {
+                    width: 400px;
+                }
+
+                @media (min-width: 1024px) {
+                    width: 500px;
+                }
             }
 
             textarea {

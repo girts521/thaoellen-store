@@ -6,7 +6,6 @@ import Loading from 'components/Loading/Loading'
 import { set } from 'date-fns'
 import { useCallback } from 'react'
 
-
 const Minicart = ({ close }) => {
   const [cart, setCart] = useState([])
   const [cartLength, setCartLength] = useState(0)
@@ -14,17 +13,19 @@ const Minicart = ({ close }) => {
   const [loading, setLoading] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0)
   const [discount, setDiscount] = useState(0)
-  
 
-
-const cartDBref = useRef(cartDB)
+  const cartDBref = useRef(cartDB)
   cartDBref.current = cartDB
 
-  const findQuantity = useCallback((item) => {
-    const quantity = cart.find((cartItem) => cartItem.product_id === item[0].product_id.current);
-    return quantity ? quantity.quantity : 0;
-  }, [cart]);
-
+  const findQuantity = useCallback(
+    (item) => {
+      const quantity = cart.find(
+        (cartItem) => cartItem.product_id === item[0].product_id.current,
+      )
+      return quantity ? quantity.quantity : 0
+    },
+    [cart],
+  )
 
   useEffect(() => {
     let localCart
@@ -38,34 +39,31 @@ const cartDBref = useRef(cartDB)
       if (localCart) {
         setCart(JSON.parse(localCart))
         //remove item from cartDB if it's not in localCart
-      
-        const newCartDB = cartDBref.current.filter(item => {
-          const isExist = JSON.parse(localCart).find(cartItem => cartItem.product_id === item[0].product_id.current)
+
+        const newCartDB = cartDBref.current.filter((item) => {
+          const isExist = JSON.parse(localCart).find(
+            (cartItem) => cartItem.product_id === item[0].product_id.current,
+          )
           return isExist
         })
         setCartDB(newCartDB)
-
       }
       // setCart(JSON.parse(e.detail))
     }
 
-    window.addEventListener('localStorageCartChanged', handleStorageChange);
+    window.addEventListener('localStorageCartChanged', handleStorageChange)
 
-  return () => {
-    window.removeEventListener('localStorageCartChanged', handleStorageChange);
-  };
+    return () => {
+      window.removeEventListener('localStorageCartChanged', handleStorageChange)
+    }
   }, [])
 
-
-
   useEffect(() => {
-
-
     const calculateTotalPrice = () => {
       const totalPriceCalc = cartDB.reduce((acc, item) => {
         const price = item[0].price * findQuantity(item)
         return acc + price
-      }, 0)    
+      }, 0)
       setTotalPrice(totalPriceCalc)
     }
 
@@ -76,7 +74,7 @@ const cartDBref = useRef(cartDB)
       }, 0)
       setCartLength(length)
 
-      const fetchCartItems = async (productId) => { 
+      const fetchCartItems = async (productId) => {
         try {
           const response = await fetch(`/api/getProductById?id=${productId}`, {
             method: 'GET',
@@ -98,34 +96,28 @@ const cartDBref = useRef(cartDB)
           } else {
             setCartDB((prev) => [...prev, data])
           }
-          
         } catch (error) {
           console.error('There was a problem with the fetch operation:', error)
         }
-
       }
 
       //loop through cart and fetch each item from DB and add to cartDB state
       //await for all fetch to finish in a promise and change loading state to false
-      
-      setLoading(true)
-      Promise.all(cart.map(item => fetchCartItems(item.product_id)))
-      .then(() => {
-        console.log('done', cartDB)
-        //calsulate total price
-        calculateTotalPrice()
-        setLoading(false)
-      })
-      .catch(err => {
-        console.log('err: ', err)
-        setLoading(false)
-      })
 
+      setLoading(true)
+      Promise.all(cart.map((item) => fetchCartItems(item.product_id)))
+        .then(() => {
+          console.log('done', cartDB)
+          //calsulate total price
+          calculateTotalPrice()
+          setLoading(false)
+        })
+        .catch((err) => {
+          console.log('err: ', err)
+          setLoading(false)
+        })
     }
   }, [cart, cartDB, findQuantity])
-
-
-
 
   return (
     <div className={styles.minicartContainer}>
@@ -180,6 +172,7 @@ const cartDBref = useRef(cartDB)
             >
               Checkout
             </button>
+
           </div>
         </div>
         <hr />
@@ -190,21 +183,29 @@ const cartDBref = useRef(cartDB)
           <ol>
             {
               // cartDB.length &&
-              cartDB.sort((a, b) => {
-                //based on the title alphabetically
-                const titleA = a[0].title.toUpperCase()
-                const titleB = b[0].title.toUpperCase()
-                if (titleA < titleB) {
-                  return -1
-                }
-                if (titleA > titleB) {
-                  return 1
-                }
-                return 0
-              })
-              .map((item) => {
-                return <MiniCartProduct key={item[0].product_id.current} product={item} quantity={findQuantity(item)} setCart={setCart} />
-              })
+              cartDB
+                .sort((a, b) => {
+                  //based on the title alphabetically
+                  const titleA = a[0].title.toUpperCase()
+                  const titleB = b[0].title.toUpperCase()
+                  if (titleA < titleB) {
+                    return -1
+                  }
+                  if (titleA > titleB) {
+                    return 1
+                  }
+                  return 0
+                })
+                .map((item) => {
+                  return (
+                    <MiniCartProduct
+                      key={item[0].product_id.current}
+                      product={item}
+                      quantity={findQuantity(item)}
+                      setCart={setCart}
+                    />
+                  )
+                })
             }
           </ol>
         </div>
