@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import Notification from 'components/Notification'
 import { useState } from 'react'
 
-const checkout = () => {
+const Checkout = () => {
   const router = useRouter()
   const [notification, setNotification] = useState(false)
   const [notificationText, setNotificationText] = useState('')
@@ -139,4 +139,4 @@ const checkout = () => {
   )
 }
 
-export default checkout
+export default Checkout
