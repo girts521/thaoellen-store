@@ -1,6 +1,7 @@
 import { getApps, initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, collection, getDocs, addDoc, query, where,doc,getDoc } from 'firebase/firestore'
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
 import 'firebase/firestore'
 
 const firebaseConfig = {
@@ -21,10 +22,62 @@ let app
 
 if (!getApps().length) {
  app = initializeApp(firebaseConfig)
+ auth = getAuth(app)
  db = getFirestore(app)
 //  const analytics = getAnalytics(app);
 }
 
+if (auth) {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in.
+      console.log("User is signed in:", user);
+    } else {
+      // User is signed out.
+      console.log("User is signed out");
+    }
+  });
+}
+
+
+export async function signIn(email, password) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    )
+    const user = userCredential.user
+    return {user: user, error: null}
+  } catch (error) {
+    console.log(error)
+    return {user: null, error: error}
+  }
+}
+
+
+export async function signOutUser () {
+
+  try {
+    await signOut(auth);
+    // Sign-out successful
+    await fetch('/api/signOut', {
+      method: 'POST'
+    });
+    window.location.href = '/';
+    return true
+
+
+  } catch (error) {
+    // An error happened.
+    console.error(error);
+  }
+};
+
+export async function getToken() {
+  const token = await auth.currentUser.getIdToken()
+  return token
+}
 
 export async function getSplineDataByProductId(product_id) {
   try {
@@ -44,3 +97,11 @@ export async function getSplineDataByProductId(product_id) {
     return null;
   }
 };
+
+export async function getOrders() {
+  const ordersCol = collection(db, 'orders');
+  const ordersSnapshot = await getDocs(ordersCol);
+  const ordersList = ordersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  return ordersList;
+}
+
