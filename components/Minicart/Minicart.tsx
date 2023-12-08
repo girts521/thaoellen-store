@@ -1,10 +1,11 @@
 import MiniCartProduct from 'components/MiniCartProduct/MiniCartProduct'
 import styles from './Minicart.module.scss'
 import Image from 'next/image'
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, useCallback,  } from 'react'
 import Loading from 'components/Loading/Loading'
 import { set } from 'date-fns'
-import { useCallback } from 'react'
+import { useRouter } from 'next/router'
+
 
 const Minicart = ({ close }) => {
   const [cart, setCart] = useState([])
@@ -16,6 +17,8 @@ const Minicart = ({ close }) => {
 
   const cartDBref = useRef(cartDB)
   cartDBref.current = cartDB
+
+  const router = useRouter()
 
   const findQuantity = useCallback(
     (item) => {
@@ -164,12 +167,9 @@ const Minicart = ({ close }) => {
 
         <div className={styles.checkoutContainer}>
           <div className={styles.checkoutButton}>
-            <button
-              onClick={() => {
-                console.log('click')
-                console.log(cartDB)
-              }}
-            >
+            <button onClick={() => {
+              router.push('/checkout')
+            }} >
               Checkout
             </button>
 

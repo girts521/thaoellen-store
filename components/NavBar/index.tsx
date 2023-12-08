@@ -81,14 +81,14 @@ const NavBar: React.FC = () => {
       >
         <Image
           className={styles.mFlowerRight}
-          src="/m-flower-left.png"
+          src="/d-flower-left.png"
           alt="Background flower image"
           width={200}
           height={250}
         />
         <Image
           className={styles.mFlowerLeft}
-          src="/m-flower-left.png"
+          src="/d-flower-left.png"
           alt="Background flower image"
           width={200}
           height={250}
