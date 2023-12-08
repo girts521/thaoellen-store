@@ -1,6 +1,6 @@
 import { getApps, initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, getDocs, addDoc, query, where, } from 'firebase/firestore'
+import { getFirestore, collection, getDocs, addDoc, query, where,doc,getDoc } from 'firebase/firestore'
 import 'firebase/firestore'
 
 const firebaseConfig = {
@@ -26,29 +26,21 @@ if (!getApps().length) {
 }
 
 
-export async function getSplineDataByProductId (product_id) {
-    try {
-        console.log("productId: ",product_id)
-      const splineCollection = await collection(db, 'spline')
-      console.log("splineCollection: ",splineCollection)
-      const q = query(splineCollection, where('product_id', '==', product_id));
-      const querySnapshot = await getDocs(q);
-        console.log("querySnapshot: ",querySnapshot)
-    //   const querySnapshot = await splineCollection.where('product_id', '==', productId).get();
-      
-      if (querySnapshot.empty) {
-        console.log('No matching documents.');
-        return null;
-      }
-  
-      let splineData = [];
-      querySnapshot.forEach(doc => {
-        splineData.push({ id: doc.id, ...doc.data() });
-      });
-  
-      return splineData; // Returns an array of matching documents
-    } catch (error) {
-      console.error("Error getting documents: ", error);
+export async function getSplineDataByProductId(product_id) {
+  try {
+    console.log("productId: ", product_id);
+    const docRef = doc(db, 'spline', product_id); // Reference to the document
+    const docSnapshot = await getDoc(docRef); // Get the document
+    console.log("docSnapshot: ", docSnapshot);
+
+    if (!docSnapshot.exists()) {
+      console.log('No matching document.');
       return null;
     }
-  };
+
+    return { id: docSnapshot.id, link: docSnapshot.data().link }; // Returns the matching document data
+  } catch (error) {
+    console.error("Error getting document: ", error);
+    return null;
+  }
+};

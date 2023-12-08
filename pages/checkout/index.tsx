@@ -88,10 +88,12 @@ const Checkout = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
-        //erase local storage cart
-        localStorage.setItem('cart', JSON.stringify([]))
-        //redirect to /order/[id] page
-        router.push(`/order/${data.id}`)
+        if (data.id) {
+          //erase local storage cart
+          localStorage.setItem('cart', JSON.stringify([]))
+          //redirect to /order/[id] page
+          router.push(`/order/${data.id}`)
+        }
       })
       .catch((err) => {
         console.log(err)
