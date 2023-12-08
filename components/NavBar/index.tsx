@@ -3,10 +3,13 @@ import Image from 'next/image'
 import styles from './index.module.scss'
 import Minicart from 'components/Minicart/Minicart'
 import Rive from '@rive-app/react-canvas'
+import { useRouter } from 'next/router'
 
 const NavBar: React.FC = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [minicart, setMinicart] = useState(false)
+
+  const router = useRouter()
 
   const handleBurgerMenuClick = () => {
     setIsBurgerMenuOpen(!isBurgerMenuOpen)
@@ -32,7 +35,14 @@ const NavBar: React.FC = () => {
   return (
     <>
       <div className={styles.container}>
-        <h1 className={`${styles.desktop} ${styles.h1}`}>Thao</h1>
+        <h1
+          className={`${styles.desktop} ${styles.h1}`}
+          onClick={() => {
+            router.push('/')
+          }}
+        >
+          Thao
+        </h1>
         <h2 className={`${styles.desktop} ${styles.h2}`}>Nước hoa</h2>
         <h2 className={`${styles.desktop} ${styles.h2}`}>Mỹ phẩm</h2>
         <h2 className={`${styles.desktop} ${styles.h2}`}>Vitamin</h2>
@@ -49,7 +59,7 @@ const NavBar: React.FC = () => {
           />
 
           <div
-          style={{ width: '75px', height: '75px', cursor: 'pointer' }}
+            style={{ width: '75px', height: '75px', cursor: 'pointer' }}
             onClick={() => {
               setMinicart(true)
             }}
@@ -81,14 +91,14 @@ const NavBar: React.FC = () => {
       >
         <Image
           className={styles.mFlowerRight}
-          src="/m-flower-left.png"
+          src="/d-flower-left.png"
           alt="Background flower image"
           width={200}
           height={250}
         />
         <Image
           className={styles.mFlowerLeft}
-          src="/m-flower-left.png"
+          src="/d-flower-left.png"
           alt="Background flower image"
           width={200}
           height={250}
@@ -107,7 +117,14 @@ const NavBar: React.FC = () => {
               />
             </div>
             <div>
-              <h2 className={styles.h1}>Thao Ellen Store</h2>
+              <h2
+                className={styles.h1}
+                onClick={() => {
+                  router.push('/')
+                }}
+              >
+                Thao Ellen Store
+              </h2>
               <h2 className={styles.h2}>Nước hoa</h2>
               <h2 className={styles.h2}>Mỹ phẩm</h2>
               <h2 className={styles.h2}>Vitamin</h2>
