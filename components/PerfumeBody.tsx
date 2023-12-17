@@ -96,8 +96,9 @@ const [notificationText, setNotificationText] = useState('')
           />{' '}
           Add to cart
         </button>
+        <a target='blank' href={`https://m.me/111098168639376/?text=Hey, I am interested in this product: ${title}. Can you please tell me more?`}>
         <button className={styles.contact}>
-          {' '}
+         
           <Image
             src={'/contact.png'}
             width={1000}
@@ -105,7 +106,9 @@ const [notificationText, setNotificationText] = useState('')
             alt="product image"
           />
           Contact to buy
+       
         </button>
+        </a>
       </div>
     </div>
   )

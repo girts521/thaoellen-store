@@ -76,7 +76,6 @@ const Dashboard = ({ token }) => {
         })
         .then((res) => res.json())
         .then((res) => {
-            console.log('res: ', res)
             setDecryptedOrders(res)
         })
         .catch((err) => {
@@ -84,7 +83,7 @@ const Dashboard = ({ token }) => {
         })
 
 
-    }, [orders])
+    }, [orders, token])
 
     const convertDate = (date) => {
         const milliseconds = date.seconds * 1000 + date.nanoseconds / 1000000;

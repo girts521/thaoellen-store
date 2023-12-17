@@ -3,6 +3,7 @@ import styles from './Checkout.module.scss'
 import { useRouter } from 'next/router'
 import Notification from 'components/Notification'
 import { useState } from 'react'
+import { redirect } from 'next/dist/server/api-utils'
 
 const Checkout = () => {
   const router = useRouter()
@@ -100,6 +101,28 @@ const Checkout = () => {
       })
   }
 
+  const contact = (e) => {
+    e.preventDefault()
+    const cart = JSON.parse(localStorage.getItem('cart'))
+    if (!cart || cart.length === 0) {
+      window.open(
+        `https://m.me/111098168639376/?text=Hey, I am interested in some of your products. Can you please tell me more?`,
+        '_blank',
+      )
+      return
+    } else {
+      let message = ''
+      cart.forEach((item) => {
+        message += `${item.quantity} x ${item.product_id}, `
+      })
+     
+      window.open(
+        `https://m.me/111098168639376/?text=Hey, I am interested in ${cart.length > 1 ? 'these products' : 'this product'}: ${message} Can you please tell me more?`,
+        '_blank',
+      )
+    }
+  }
+
   return (
     <Layout preview={false} loading={false}>
       <div className={styles.container}>
@@ -134,7 +157,8 @@ const Checkout = () => {
           <button type="submit" className={styles.submit}>
             Order
           </button>
-          <button>Contact</button>
+
+          <button onClick={contact}>Contact</button>
         </form>
       </div>
     </Layout>

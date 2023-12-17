@@ -13,6 +13,7 @@ import Image from 'next/image'
 import styles from './IndexPage.module.scss'
 
 
+
 import Heading from 'components/Heading'
 import { set } from 'date-fns'
 
@@ -66,10 +67,13 @@ export default function IndexPage(props: IndexPageProps) {
               excerpt={heroPost.excerpt}
             />
           )} */}
-          {morePosts.length > 0 && <MoreProduct product={perfume} title='Nước hoa' path='perfume' />}
-          {cosmetics.length > 0 && <MoreProduct  product={cosmetics} title='Mỹ phẩm' path='cosmetics' />}
-          {elderly.length > 0 && <MoreProduct  product={elderly} title='Hơi già' path='elderly' />}
-          {vitamin.length > 0 && <MoreProduct  product={vitamin} title='Vitamin' path='vitamin' />}
+
+
+
+          {morePosts.length > 0 && <MoreProduct products={perfume} title='Nước hoa' path='perfume' />}
+          {cosmetics.length > 0 && <MoreProduct  products={cosmetics} title='Mỹ phẩm' path='cosmetics' />}
+          {elderly.length > 0 && <MoreProduct  products={elderly} title='Hơi già' path='elderly' />}
+          {vitamin.length > 0 && <MoreProduct  products={vitamin} title='Vitamin' path='vitamin' />}
 
           <div style={middleImageStyles} className={styles.middleImage}>
           <Image  src="/d-flower-left.png" alt='Flower image background' width={1000} height={1000} />

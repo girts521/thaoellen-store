@@ -56,7 +56,7 @@ export default function PostPage(props: PostPageProps) {
                 <PerfumeBody product_id={perfume.product_id} title={perfume.title} content={perfume.content} price={perfume.price}/>
 
               </div>
-              {morePerfume?.length > 0 && <MoreProduct product={morePerfume} title='Nước hoa' path='perfume' />}
+              {morePerfume?.length > 0 && <MoreProduct products={morePerfume} title='Nước hoa' path='perfume' />}
             </>
           )}
         </Container>

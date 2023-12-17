@@ -3,15 +3,15 @@ import type { Product } from 'lib/sanity.queries'
 import styles from './MoreProducts.module.scss'
 
 
-export default function MoreProduct({ product, title, path }: { product: Product[], path: string, title: string }) {
-  console.log("product", product)
+export default function MoreProduct({ products, title, path }: { products: Product[], path: string, title: string }) {
+  console.log("product", products)
   return (
     <section>
       <h2 className={styles.heading}>
          {title} 
       </h2>
       <div className={styles.productsContainer}>
-        {product.map((product) => (
+        {products.map((product) => (
           <ProductPreview
             key={product._id}
             title={product.title}
@@ -30,4 +30,3 @@ export default function MoreProduct({ product, title, path }: { product: Product
     </section>
   )
 }
-//mb-8 text-6xl font-bold leading-tight tracking-tighter md:text-7xl

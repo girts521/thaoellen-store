@@ -1,7 +1,7 @@
 import { getApps, initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, collection, getDocs, addDoc, query, where,doc,getDoc } from 'firebase/firestore'
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth'
 import 'firebase/firestore'
 
 const firebaseConfig = {
@@ -19,10 +19,16 @@ const firebaseConfig = {
 let db
 let auth
 let app
+let provider
+let fbProvider
+
 
 if (!getApps().length) {
  app = initializeApp(firebaseConfig)
  auth = getAuth(app)
+provider = new GoogleAuthProvider();
+fbProvider = new FacebookAuthProvider();
+  // const
  db = getFirestore(app)
 //  const analytics = getAnalytics(app);
 }
@@ -38,6 +44,8 @@ if (auth) {
     }
   });
 }
+
+export { db, auth, provider, fbProvider };
 
 
 export async function signIn(email, password) {
