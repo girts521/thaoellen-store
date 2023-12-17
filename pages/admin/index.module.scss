@@ -11,7 +11,20 @@
 }
 
 .formContainer {
-    margin-bottom: 84px;
+    margin-bottom: 150px;
+
+    @media (min-width: 768px) {
+        margin-bottom: 370px;
+    }
+
+    @media (min-width: 1024px) {
+        margin-bottom: 500px;
+    }
+
+    @media (min-width: 1440px) {
+        margin-bottom: 750px;
+    }
+
     .form {
         display: flex;
         flex-direction: column;
