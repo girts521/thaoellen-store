@@ -1,0 +1,57 @@
+.heading {
+    text-align: center;
+    margin-top: 84px;
+    margin-bottom: 63px;
+    color: #474574;
+    font-family: Montserrat;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.formContainer {
+    margin-bottom: 84px;
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .input {
+            display: flex;
+            flex-direction: column;
+            width: 243px;
+            margin-bottom: 28px;
+
+            input {
+                height: 32px;
+            }
+
+            label {
+                color: #474574;
+                font-family: Montserrat;
+                font-size: 17px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                margin-bottom: 5px;
+            }
+        }
+
+        .button {
+            border-radius: 10px;
+            background: #CBCAE9;
+            width: 200px;
+            height: 50px;
+
+            color: #474574;
+
+            font-family: Montserrat;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+    }
+}
