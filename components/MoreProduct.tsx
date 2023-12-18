@@ -59,7 +59,6 @@ export default function MoreProduct({
 
         {showRestProducts && restProducts.map((product) => (
           <>
-          {loading && <Loading />}
           <ProductPreview
             key={product._id}
             title={product.title}
@@ -76,6 +75,7 @@ export default function MoreProduct({
         
       </div>
       <div className={styles.loadMore}>
+      {loading && <Loading />}
         <button onClick={getRestProducts} className={styles.button}>
           Load more
         </button>
