@@ -29,8 +29,7 @@ export interface IndexPageProps {
 
 export default function IndexPage(props: IndexPageProps) {
   const { preview, loading, perfume, cosmetics, elderly, vitamin, settings } = props
-  console.log("perfume", perfume)
-  console.log("cosmetics", cosmetics)
+
  
   const [heroPost, ...morePosts] = perfume || []
   const { title = demo.title, description = demo.description } = settings || {}
@@ -55,22 +54,9 @@ export default function IndexPage(props: IndexPageProps) {
 
       <Layout preview={preview} loading={loading}>
         <Container>
-          {/* <BlogHeader title={title} description={description} level={1} /> */}
           <Heading text={"Thao Ellen Store"} />
-          {/* {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.perfume_id}
-              excerpt={heroPost.excerpt}
-            />
-          )} */}
 
-
-
-          {morePosts.length > 0 && <MoreProduct products={perfume} title='Nước hoa' path='perfume' />}
+          {perfume.length > 0 && <MoreProduct products={perfume} title='Nước hoa' path='perfume' />}
           {cosmetics.length > 0 && <MoreProduct  products={cosmetics} title='Mỹ phẩm' path='cosmetics' />}
           {elderly.length > 0 && <MoreProduct  products={elderly} title='Hơi già' path='elderly' />}
           {vitamin.length > 0 && <MoreProduct  products={vitamin} title='Vitamin' path='vitamin' />}
@@ -80,7 +66,6 @@ export default function IndexPage(props: IndexPageProps) {
           </div>
 
         </Container>
-        {/*<IntroTemplate />*/}
       </Layout>
     </>
   )

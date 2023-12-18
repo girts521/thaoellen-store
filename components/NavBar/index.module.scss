@@ -6,6 +6,7 @@
     position: sticky;
     top: 0;
     align-items: center;
+    z-index: 999;
 
     img {
         cursor: pointer;
@@ -19,11 +20,12 @@
     padding: 10px;
     height: 80px;
     align-items: center;
-    
+
 }
+
 .pad10px {
     padding: 10px;
-    
+
 }
 
 .burgerMenuContent {
@@ -136,10 +138,7 @@
 
     }
 
-    .imagecontainer {
-
-        
-    }
+    .imagecontainer {}
 
     .mobile {
         display: none;
@@ -156,5 +155,3 @@
         margin: 0;
     }
 }
-
-

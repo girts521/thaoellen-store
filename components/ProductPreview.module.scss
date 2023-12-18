@@ -4,15 +4,22 @@
     background: #D2D5E6;
     margin-bottom: 15px;
     cursor: pointer;
+            box-shadow:
+            3px 3px 0 0 #9796ae71,
+            /* This is your --tw-shadow */
+            3px 3px 0 0 #9796ae71;
 
     &:hover {
-        box-shadow:
-            0 5px 10px rgba(0, 0, 0, 0.12),
-            /* This is your --tw-shadow */
-            0 5px 10px rgba(72, 77, 105, 0.37);
-        transition-property: box-shadow;
+        // box-shadow:
+        //     0 5px 10px rgba(0, 0, 0, 0.12),
+        //     /* This is your --tw-shadow */
+        //     0 5px 10px rgba(72, 77, 105, 0.37);
+        box-shadow: 10px 10px 0 0 #9796ae;
+        transform: scale3d(1.05, 1.05, 1);
+        transform: translateX(-10px) translateY(-10px);
+        transition-property: box-shadow, transform;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
+        transition-duration: 250ms;
         ;
     }
 
@@ -28,7 +35,7 @@
 
     @media (min-width: 1440px) {
         margin-bottom: 50px;
-        margin-right: 50px;
+        // margin-right: 50px;
     }
 
 

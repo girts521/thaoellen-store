@@ -17,6 +17,10 @@ import {
   vitaminIndexQuery,
   vitaminSlugsQuery,
   vitaminAndMoreVitaminQuery,
+  getRestElderly,
+  getRestCosmetics,
+  getRestPerfume,
+  getRestVitamin
 
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
@@ -82,6 +86,10 @@ export async function getAllPerfume(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(perfumeIndexQuery)) || []
 }
 
+export async function getRestPerfumeProd(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(getRestPerfume)) || []
+}
+
 export async function getAllPerfumeSlugs(): Promise<Pick<Post, 'slug'>[]> {
   const client = getClient()
   const slugs = (await client.fetch<string[]>(perfumeSlugsQuery)) || []
@@ -100,6 +108,10 @@ export async function getPerfume(
 // ==================================================================
 export async function getAllCosmetics(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(cosmeticsIndexQuery)) || []
+}
+
+export async function getRestCosmeticsProd(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(getRestCosmetics)) || []
 }
 
 export async function getAllCosmeticsSlugs(): Promise<Pick<Post, 'slug'>[]> {
@@ -122,6 +134,12 @@ export async function getAllElderly(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(elderlyIndexQuery)) || []
 }
 
+export async function getRestElderlyProd(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(getRestElderly)) || []
+}
+
+
+
 export async function getAllElderlySlugs(): Promise<Pick<Post, 'slug'>[]> {
   const client = getClient()
   const slugs = (await client.fetch<string[]>(elderlySlugsQuery)) || []
@@ -140,6 +158,10 @@ export async function getElderly(
 // ==================================================================
 export async function getAllVitamin(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(vitaminIndexQuery)) || []
+}
+
+export async function getRestVitaminProd(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(getRestVitamin)) || []
 }
 
 export async function getAllVitaminSlugs(): Promise<Pick<Post, 'slug'>[]> {

@@ -83,7 +83,12 @@ const perfumeFields = groq`
 `
 
 export const perfumeIndexQuery = groq`
-*[_type == "perfume"] | order(date desc, _updatedAt desc) {
+*[_type == "perfume"] | order(date desc, _updatedAt desc)  [0...8] {
+  ${perfumeFields}
+}`
+
+export const getRestPerfume = groq`
+*[_type == "perfume"] | order(date desc, _updatedAt desc)  [8...-1] {
   ${perfumeFields}
 }`
 
@@ -134,7 +139,12 @@ const cosmeticsFields = groq`
 `
 
 export const cosmeticsIndexQuery = groq`
-*[_type == "cosmetics"] | order(date desc, _updatedAt desc) {
+*[_type == "cosmetics"] | order(date desc, _updatedAt desc) [0...8] {
+  ${cosmeticsFields}
+}`
+
+export const getRestCosmetics = groq`
+*[_type == "cosmetics"] | order(date desc, _updatedAt desc) [8...-1] {
   ${cosmeticsFields}
 }`
 
@@ -184,7 +194,12 @@ const elderlyFields = groq`
 `
 
 export const elderlyIndexQuery = groq`
-*[_type == "elderly"] | order(date desc, _updatedAt desc) {
+*[_type == "elderly"] | order(date desc, _updatedAt desc) [0...8] {
+  ${elderlyFields}
+}`
+
+export const getRestElderly = groq`
+*[_type == "elderly"] | order(date desc, _updatedAt desc) [8...-1] {
   ${elderlyFields}
 }`
 
@@ -234,7 +249,12 @@ const vitaminFields = groq`
 `
 
 export const vitaminIndexQuery = groq`
-*[_type == "vitamin"] | order(date desc, _updatedAt desc) {
+*[_type == "vitamin"] | order(date desc, _updatedAt desc) [0...8] {
+  ${vitaminFields}
+}`
+
+export const getRestVitamin = groq`
+*[_type == "vitamin"] | order(date desc, _updatedAt desc) [8...-1] {
   ${vitaminFields}
 }`
 

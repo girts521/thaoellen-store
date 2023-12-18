@@ -134,17 +134,3 @@ const Dashboard = ({ token }) => {
 }
 
 export default Dashboard
-
-// {decryptedOrders.map((order) => {
-//   return (
-//       <div key={order.id}>
-//           <p>{order.id}</p>
-//           <p>{order.email}</p>
-//           <p>{order.name}</p>
-//           <p>{order.address}</p>
-//           <p>{order.phone}</p>
-//           <p>{order.cart}</p>
-//           <div> Date: {convertDate(order.dateAdded)}  </div>
-//       </div>
-//   )
-// })}
