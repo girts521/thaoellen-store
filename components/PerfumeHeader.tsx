@@ -36,7 +36,7 @@ export default function PerfumeHeader(
 
   return (
     <>
-      <div className={`mb-8 sm:mx-0 md:mb-16 ${styles.imageContainer}`}>
+      <div style={spline ? { height: '825px' } : {height: 'auto'}} className={`${styles.imageContainer}`}>
 
         {loading && <Loading />}
 

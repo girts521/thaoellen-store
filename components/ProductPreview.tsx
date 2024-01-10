@@ -2,6 +2,8 @@ import CoverImage from 'components/CoverImage'
 import type { Product } from 'lib/sanity.queries'
 import Link from 'next/link'
 import styles from './ProductPreview.module.scss'
+import { useRouter } from 'next/router';
+
 
 export default function ProductPreview({
   title,
@@ -13,8 +15,16 @@ export default function ProductPreview({
   price,
   path,
 }: Omit<Product, '_id'>) {
+  const router = useRouter();
+
+
+  const redirect = () => {
+    router.push(`/${path}/${product_id}`);
+
+  }
+
   return (
-    <div className={styles.container}>
+    <div onClick={redirect} className={styles.container}>
       <div className={styles.imageContainer} >
         <CoverImage
           path={path}
@@ -25,9 +35,7 @@ export default function ProductPreview({
         />
       </div>
       <h3 className={styles.productName}>
-        <Link href={`/${path}/${product_id}`}>
-          {title}
-        </Link>
+      {title}
       </h3>
       {excerpt && <p className={styles.excerpt} >{excerpt}</p>}
       <div className={styles.price}>Price: {`${price}`}</div>

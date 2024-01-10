@@ -12,6 +12,7 @@ import type { Post, Settings } from 'lib/sanity.queries'
 import { notFound } from 'next/navigation'
 import { Product} from 'lib/sanity.queries'
 import styles from './PerfumePage.module.scss'
+import { useRouter } from 'next/router';
 
 export interface PostPageProps {
   preview?: boolean
@@ -28,10 +29,13 @@ export default function PostPage(props: PostPageProps) {
   const { title = demo.title } = settings || {}
 
   const slug = perfume?.product_id
-  console.log('perfume: ', perfume)
+
+
+  const router = useRouter();
+  const currentPath = router.pathname.split('/')[1]
 
   if (!slug && !preview) {
-    notFound()
+    notFound()  
   }
 
   return (
@@ -56,7 +60,7 @@ export default function PostPage(props: PostPageProps) {
                 <PerfumeBody product_id={perfume.product_id} title={perfume.title} content={perfume.content} price={perfume.price}/>
 
               </div>
-              {morePerfume?.length > 0 && <MoreProduct products={morePerfume} title='Nước hoa' path='perfume' />}
+              {morePerfume?.length > 0 && <MoreProduct products={morePerfume} title='Similar Products' path={currentPath} />}
             </>
           )}
         </Container>

@@ -8,6 +8,25 @@
     justify-content: space-evenly;
     gap: 50px;
     position: relative;
+
+    // padding-left: 122px;
+    // padding-right: 122px;
+
+    @media (min-width: 768px) {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    @media (min-width: 1024px) {
+        padding-left: 122px;
+        padding-right: 122px;
+    }
+
+    @media (min-width: 1024px) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
 }
 
 .heading {
@@ -29,7 +48,7 @@
         font-size: 35px;
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1440px) {
         margin-bottom: 40px;
     }
 
@@ -53,10 +72,14 @@
         line-height: normal;
         margin-bottom: 75px;
         margin-top: 25px;
+        box-shadow:
+        2px 2px 0 0 #9796ae3a,
+        /* This is your --tw-shadow */
+        2px 2px 0 0 #9796ae3f;
 
 
         &:hover {
-            box-shadow: 4px 4px 0 0 #9796ae;
+            box-shadow: 6px 6px 0 0 #9796ae;
             transform: scale3d(1.05, 1.05, 1);
             transform: translateX(-4px) translateY(-4px);
         }

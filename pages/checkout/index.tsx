@@ -154,11 +154,15 @@ const Checkout = () => {
             <textarea id="address" />
           </div>
 
+          <div className={styles.action}>
           <button type="submit" className={styles.submit}>
             Order
           </button>
 
           <button onClick={contact}>Contact</button>
+          </div>
+
+
         </form>
       </div>
     </Layout>

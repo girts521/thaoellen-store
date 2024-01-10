@@ -11,7 +11,7 @@
         color: #474574;
         text-align: center;
         font-family: Bonbon;
-        font-size: 32px;
+        font-size: 58px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
@@ -20,22 +20,24 @@
     form {
         display: flex;
         flex-direction: column;
+
         .input {
             display: flex;
             flex-direction: column;
             margin-bottom: 28px;
-           
+
 
             label {
                 color: #474574;
                 font-family: Montserrat;
-                font-size: 17px;
+                font-size: 20px;
                 font-style: normal;
                 font-weight: 500;
                 line-height: normal;
             }
 
-            input[type="text"], input[type="email"] {
+            input[type="text"],
+            input[type="email"] {
                 height: 45px;
                 width: 243px;
                 background: #DBDBE7;
@@ -55,42 +57,47 @@
                 background: #DBDBE7;
                 height: 100px;
                 color: #474574;
-                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
         }
 
-        .submit, button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #474574;
-            padding: 10px;
-            width: 100%;
-            height: 45px;
-            border-radius: 10px;
-            background: #dbdbe79f;
-            color: #474574;
-            font-family: Montserrat;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: normal;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    
-            margin: auto;
-            margin-top: 28px;
+        .action {
 
-            //hover
-            &:hover {
-                box-shadow: 0 4px 6px #474574;
-                transform: scale(1.05);
-            }
-      
-            @media (min-width: 768px) {
-              width: 190px;
-              font-size: 18px;
+            .submit,
+            button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #474574;
+                padding: 10px;
+                width: 200px;
+                height: 50px;
+                border-radius: 10px;
+                background: #CBCAE9;
+                color: #474574;
+                font-family: Montserrat;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                box-shadow:
+                    2px 2px 0 0 #9796ae3a,
+                    /* This is your --tw-shadow */
+                    2px 2px 0 0 #9796ae3f;
+                margin: auto;
+                margin-top: 28px;
+
+                //hover
+                &:hover {
+                    box-shadow: 6px 6px 0 0 #9796ae;
+                    transform: scale3d(1.05, 1.05, 1);
+                    transform: translateX(-4px) translateY(-4px);
+                }
+
             }
         }
+
+
 
     }
 

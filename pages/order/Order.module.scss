@@ -12,7 +12,7 @@
         color: #474574;
         text-align: center;
         font-family: Bonbon;
-        font-size: 32px;
+        font-size: 52px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
@@ -35,7 +35,7 @@
         color: #474574;
         text-align: center;
         font-family: Montserrat;
-        font-size: 18px;
+        font-size: 20px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
@@ -48,25 +48,28 @@
         align-items: center;
         border: 1px solid #474574;
         padding: 10px;
-        width: 243px;
-        height: 45px;
+        width: 200px;
+        height: 50px;
         border-radius: 10px;
-        background: #dbdbe79f;
+        background: #CBCAE9;
         color: #474574;
         font-family: Montserrat;
         font-size: 20px;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
+        box-shadow:
+        2px 2px 0 0 #9796ae3a,
+        /* This is your --tw-shadow */
+        2px 2px 0 0 #9796ae3f;
         margin: auto;
         margin-bottom: 200px;
 
         //hover
         &:hover {
-            box-shadow: 0 4px 6px #474574;
-            transform: scale(1.05);
+            box-shadow: 6px 6px 0 0 #9796ae;
+            transform: scale3d(1.05, 1.05, 1);
+            transform: translateX(-4px) translateY(-4px);
         }
     }
 }

@@ -1,9 +1,14 @@
 .imageContainer {
   // width: 691px;
   width: auto;
-  height: 825px;
+  // height: 825px;
+  // height: auto;
   // margin: auto;
   position: relative;
+
+  img {
+    width: 100%;
+  }
 
 
 
