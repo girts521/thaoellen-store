@@ -18,7 +18,9 @@ const Order = () => {
           <br /> <br /> You can speed up this process by contacting us directly right
           now!
         </p>
+        <a target='blank' href={`https://m.me/111098168639376/?text=Hey, I have some questions about my order with id: ${order_id}.`}>
         <button className={styles.contact}>Contact</button>
+        </a>
       </div>
     </Layout>
   )
