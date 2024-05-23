@@ -286,7 +286,115 @@ export interface Vitamin {
   price?: number
 }
 
+// ==================================================================
+// Children
+// ==================================================================
 
+const childrenFields = groq`
+  _id,
+  title,
+  date,
+  _updatedAt,
+  excerpt,
+  coverImage,
+  "product_id": product_id.current,
+  "author": author->{name, picture},
+  price,
+  name
+`
+
+export const childrenIndexQuery = groq`
+*[_type == "children"] | order(date desc, _updatedAt desc) [0...8] {
+  ${childrenFields}
+}`
+
+export const getRestChildren = groq`
+*[_type == "children"] | order(date desc, _updatedAt desc) [8...-1] {
+  ${childrenFields}
+}`
+
+export const childrenAndMoreChildrenQuery = groq`
+{
+  "post": *[_type == "children" && product_id.current == $slug] | order(_updatedAt desc) [0] {
+    content,
+    ${childrenFields}
+  },
+  "morePosts": *[_type == "children" && product_id.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+    content,
+    ${childrenFields}
+  }
+}`
+
+export const childrenSlugsQuery = groq`
+*[_type == "children" && defined(product_id.current)][].product_id.current
+`
+export interface Children {
+  _id: string
+  title?: string
+  coverImage?: any
+  date?: string
+  _updatedAt?: string
+  excerpt?: string
+  author?: Author
+  product_id?: string
+  content?: any
+  price?: number
+}
+
+// ==================================================================
+// Pregnancy
+// ==================================================================
+
+const pregnancyFields = groq`
+  _id,
+  title,
+  date,
+  _updatedAt,
+  excerpt,
+  coverImage,
+  "product_id": product_id.current,
+  "author": author->{name, picture},
+  price,
+  name
+`
+
+export const pregnancyIndexQuery = groq`
+*[_type == "pregnancy"] | order(date desc, _updatedAt desc) [0...8] {
+  ${pregnancyFields}
+}`
+
+export const getRestPregnancy = groq`
+*[_type == "pregnancy"] | order(date desc, _updatedAt desc) [8...-1] {
+  ${pregnancyFields}
+}`
+
+export const pregnancyAndMorePregnancyQuery = groq`
+{
+  "post": *[_type == "pregnancy" && product_id.current == $slug] | order(_updatedAt desc) [0] {
+    content,
+    ${pregnancyFields}
+  },
+  "morePosts": *[_type == "pregnancy" && product_id.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+    content,
+    ${pregnancyFields}
+  }
+}`
+
+export const pregnancySlugsQuery = groq`
+*[_type == "pregnancy" && defined(product_id.current)][].product_id.current
+`
+export interface Pregnancy {
+  _id: string
+  title?: string
+  coverImage?: any
+  date?: string
+  _updatedAt?: string
+  excerpt?: string
+  author?: Author
+  product_id?: string
+  content?: any
+  price?: number
+}
 
 
 

@@ -20,7 +20,16 @@ import {
   getRestElderly,
   getRestCosmetics,
   getRestPerfume,
-  getRestVitamin
+  getRestVitamin,
+  childrenIndexQuery,
+  getRestChildren,
+  childrenSlugsQuery,
+  childrenAndMoreChildrenQuery,
+  pregnancyIndexQuery,
+  getRestPregnancy,
+  pregnancySlugsQuery,
+  pregnancyAndMorePregnancyQuery
+
 
 } from 'lib/sanity.queries'
 import { createClient, type SanityClient } from 'next-sanity'
@@ -175,6 +184,55 @@ export async function getVitamin(
   slug: string,
 ): Promise<{ post: Post; morePosts: Post[] }> {
   return await client.fetch(vitaminAndMoreVitaminQuery, { slug })
+}
+
+// ==================================================================
+// Children
+// ==================================================================
+export async function getAllChildren(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(childrenIndexQuery)) || []
+}
+
+export async function getRestChildrenProd(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(getRestChildren)) || []
+}
+
+export async function getAllChildrenSlugs(): Promise<Pick<Post, 'slug'>[]> {
+  const client = getClient()
+  const slugs = (await client.fetch<string[]>(childrenSlugsQuery)) || []
+  return slugs.map((slug) => ({ slug }))
+}
+
+export async function getChildren(
+  client: SanityClient,
+  slug: string,
+): Promise<{ post: Post; morePosts: Post[] }> {
+  return await client.fetch(childrenAndMoreChildrenQuery, { slug })
+}
+
+
+// ==================================================================
+// Pregnancy
+// ==================================================================
+export async function getAllPregnancy(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(pregnancyIndexQuery)) || []
+}
+
+export async function getRestPregnancyProd(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(getRestPregnancy)) || []
+}
+
+export async function getAllPregnancySlugs(): Promise<Pick<Post, 'slug'>[]> {
+  const client = getClient()
+  const slugs = (await client.fetch<string[]>(pregnancySlugsQuery)) || []
+  return slugs.map((slug) => ({ slug }))
+}
+
+export async function getPregnancy(
+  client: SanityClient,
+  slug: string,
+): Promise<{ post: Post; morePosts: Post[] }> {
+  return await client.fetch(pregnancyAndMorePregnancyQuery, { slug })
 }
 
 
