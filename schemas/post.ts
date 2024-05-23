@@ -75,7 +75,10 @@ export default defineType({
     defineField({
       name: 'coverImage',
       title: 'Cover Image',
-      type: 'image',
+      type: 'array',
+      of: [
+        { type: 'image' }
+      ],
       options: {
         hotspot: true,
       },

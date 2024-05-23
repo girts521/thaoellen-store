@@ -42,7 +42,7 @@ export default function PerfumeHeader(
 
         {!loading && !spline && (
           <Image
-            src={urlForImage(coverImage).height(1000).width(2000).url()}
+            src={urlForImage(coverImage[0]).height(1000).width(2000).url()}
             width={1000}
             height={1000}
             alt="product image"
