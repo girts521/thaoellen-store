@@ -23,8 +23,8 @@ import perfumeType from 'schemas/perfume'
 import cosmeticsType from 'schemas/cosmetics'
 import elderlyType from 'schemas/elderly'
 import vitaminType from 'schemas/vitamin'
-import childrenType from 'schemas/vitamin'
-import pregnancyType from 'schemas/vitamin'
+import childrenType from 'schemas/children'
+import pregnancyType from 'schemas/pregnancy'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
