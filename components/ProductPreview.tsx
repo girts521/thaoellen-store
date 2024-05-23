@@ -30,7 +30,7 @@ export default function ProductPreview({
           path={path}
           slug={product_id}
           title={title}
-          image={coverImage}
+          image={coverImage[0]}
           priority={false}
         />
       </div>
