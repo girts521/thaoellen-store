@@ -161,8 +161,6 @@ const Checkout = () => {
 
           <button onClick={contact}>Contact</button>
           </div>
-
-
         </form>
       </div>
     </Layout>
