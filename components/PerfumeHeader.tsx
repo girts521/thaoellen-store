@@ -76,9 +76,10 @@ export default function PerfumeHeader(
               coverImage.map((image) => {
                 console.log("image: ", image)
                 return (
-                  <SwiperSlide>
+                  <SwiperSlide style={{height: "auto"}}>
                     {' '}
-                    <Image
+                  <div style={{display: "flex", alignItems: "center", height: "100%"}}>
+                  <Image
                       src={urlForImage(image)
                         .maxHeight(500)
                         .fit("fill")
@@ -89,6 +90,7 @@ export default function PerfumeHeader(
                       height={500}
                       alt="product image"
                     />
+                  </div>
                   </SwiperSlide>
                 )
               })}
