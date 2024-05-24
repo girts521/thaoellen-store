@@ -4,8 +4,17 @@ import Image from 'next/image'
 import { urlForImage } from 'lib/sanity.image'
 import Loading from './Loading/Loading'
 import Spline from '@splinetool/react-spline'
-import {  useState, useEffect  } from 'react'
+import { useState, useEffect } from 'react'
 import { getSplineDataByProductId } from 'lib/firebase'
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules'
+
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
 
 export default function PerfumeHeader(
   props: Pick<
@@ -36,17 +45,50 @@ export default function PerfumeHeader(
 
   return (
     <>
-      <div style={spline ? { height: '825px' } : {height: 'auto'}} className={`${styles.imageContainer}`}>
-
+      <div
+        style={spline ? { height: '825px' } : { height: 'auto', maxHeight: '500px' }}
+        className={`${styles.imageContainer}`}
+      >
         {loading && <Loading />}
 
-        {!loading && !spline && (
+        {/* {!loading && !spline && (
           <Image
             src={urlForImage(coverImage[0]).height(1000).width(2000).url()}
             width={1000}
             height={1000}
             alt="product image"
           />
+        )} */}
+
+        {!loading && !spline && (
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={50}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
+            // scrollbar={{ draggable: true }}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            {coverImage &&
+              coverImage.map((image) => {
+                return (
+                  <SwiperSlide>
+                    {' '}
+                    <Image
+                      src={urlForImage(image)
+                        .height(1000)
+                        .width(2000)
+                        .url()}
+                      width={1000}
+                      height={1000}
+                      alt="product image"
+                    />
+                  </SwiperSlide>
+                )
+              })}
+          </Swiper>
         )}
 
         {spline && (
