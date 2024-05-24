@@ -74,16 +74,19 @@ export default function PerfumeHeader(
           >
             {coverImage &&
               coverImage.map((image) => {
+                console.log("image: ", image)
                 return (
                   <SwiperSlide>
                     {' '}
                     <Image
                       src={urlForImage(image)
-                        .height(1000)
-                        .width(2000)
+                        .maxHeight(500)
+                        .fit("fill")
+                        // .height(1000)
+                        // .width(1000)
                         .url()}
                       width={1000}
-                      height={1000}
+                      height={500}
                       alt="product image"
                     />
                   </SwiperSlide>
