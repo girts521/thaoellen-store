@@ -64,6 +64,7 @@ export default function PerfumeHeader(
           <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             spaceBetween={50}
+            style={{maxHeight: '500px'}}
             slidesPerView={1}
             navigation
             pagination={{ clickable: true }}
