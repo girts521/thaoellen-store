@@ -16,6 +16,14 @@ const NavBar: React.FC = () => {
   }
 
   useEffect(() => {
+    if (isBurgerMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isBurgerMenuOpen])
+
+  useEffect(() => {
     // Close the burger menu when the screen width is less than a certain threshold (e.g., 768px)
     const handleResize = () => {
       if (window.innerWidth > 1024) {
