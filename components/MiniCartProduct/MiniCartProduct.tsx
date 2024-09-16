@@ -75,14 +75,12 @@ const MiniCartProduct = ({product, quantity, setCart}) => {
         }
     }
 
-
-
   return (
     <li>
       <div className={styles.product}>
         <div className={styles.productImage}>
           {/* <Image src="/gucci.png" alt="product" width={150} height={150} /> */}
-            <Image src={urlForImage(product[0].coverImage).url()} alt="product" width={150} height={150} />
+            <Image src={urlForImage(product[0].coverImage[0]).url()} alt="product" width={150} height={150} />
           
         </div>
 
