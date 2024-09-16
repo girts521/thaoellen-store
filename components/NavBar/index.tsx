@@ -8,6 +8,10 @@ import { useRouter } from 'next/router'
 const NavBar: React.FC = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [minicart, setMinicart] = useState(false)
+  const [vitaminTitle, setVitaminTitle] = useState(null);
+  const [nuocTitle, setNuocTitle] = useState(null);
+  const [phamTitle, setPhamTitle] = useState(null);
+  const [hoiTitle, setHoiTitle] = useState(null);
 
   const router = useRouter()
 
@@ -30,6 +34,11 @@ const NavBar: React.FC = () => {
         setIsBurgerMenuOpen(false)
       }
     }
+    setVitaminTitle(document.querySelector("#__next > div > main > div > section:nth-child(5) > h2"));
+    setNuocTitle(document.querySelector("#__next > div > main > div > section:nth-child(2) > h2"));
+    setPhamTitle(document.querySelector("#__next > div > main > div > section:nth-child(3) > h2"));
+    setHoiTitle(document.querySelector("#__next > div > main > div > section:nth-child(4) > h2"));
+
 
     // Attach the event listener to the window's resize event
     window.addEventListener('resize', handleResize)
@@ -39,6 +48,7 @@ const NavBar: React.FC = () => {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
+
 
   return (
     <>
@@ -51,10 +61,18 @@ const NavBar: React.FC = () => {
         >
           Thao
         </h1>
-        <h2 className={`${styles.desktop} ${styles.h2}`}>Nước hoa</h2>
-        <h2 className={`${styles.desktop} ${styles.h2}`}>Mỹ phẩm</h2>
-        <h2 className={`${styles.desktop} ${styles.h2}`}>Vitamin</h2>
-        <h2 className={`${styles.desktop} ${styles.h2}`}>hơi già</h2>
+        <h2 onClick={() => {
+          nuocTitle.scrollIntoView({ behavior: 'smooth' });
+        }} className={`${styles.desktop} ${styles.h2}`}>Nước hoa</h2>
+        <h2 onClick={() => {
+          phamTitle.scrollIntoView({ behavior: 'smooth' });
+        }} className={`${styles.desktop} ${styles.h2}`}>Mỹ phẩm</h2>
+        <h2 onClick={() => {
+          vitaminTitle.scrollIntoView({ behavior: 'smooth' });
+        }} className={`${styles.desktop} ${styles.h2}`}>Vitamin</h2>
+        <h2 onClick={() => {
+          hoiTitle.scrollIntoView({ behavior: 'smooth' });
+        }} className={`${styles.desktop} ${styles.h2}`}>hơi già</h2>
 
         <div className={styles.imagecontainer}>
           <Image
