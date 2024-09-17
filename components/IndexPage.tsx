@@ -54,7 +54,7 @@ export default function IndexPage(props: IndexPageProps) {
 
       <Layout preview={preview} loading={loading}>
         <Container>
-          <Heading text={"Thao Ellen Store"} />
+          <Heading text={"Thach Thao Shop"} />
 
           {perfume.length > 0 && <MoreProduct products={perfume} title='Nước hoa' path='perfume' />}
           {cosmetics.length > 0 && <MoreProduct  products={cosmetics} title='Mỹ phẩm' path='cosmetics' />}
