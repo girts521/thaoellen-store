@@ -69,13 +69,14 @@ export default defineType({
     }),
     defineField({
       name: 'excerpt',
-      title: 'Excerpt',
+      title: 'Excerpt (Short text, on product card.)',
       type: 'text',
     }),
     defineField({
       name: 'price',
       title: 'Price',
       type: 'number',
+      validation: rule => rule.precision(3).min(10)
     }),
     defineField({
       name: 'coverImage',

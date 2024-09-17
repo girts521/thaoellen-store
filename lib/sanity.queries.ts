@@ -254,7 +254,7 @@ export const vitaminIndexQuery = groq`
 }`
 
 export const getRestVitamin = groq`
-*[_type == "vitamin"] | order(date desc, _updatedAt desc) [8...-1] {
+*[_type == "vitamin"] | order(date desc, _updatedAt desc) [9...-1] {
   ${vitaminFields}
 }`
 
