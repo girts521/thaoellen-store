@@ -88,7 +88,7 @@ export const perfumeIndexQuery = groq`
 }`
 
 export const getRestPerfume = groq`
-*[_type == "perfume"] | order(date desc, _updatedAt desc)  [8...-1] {
+*[_type == "perfume"] | order(date desc, _updatedAt desc)  [9...9999] {
   ${perfumeFields}
 }`
 
@@ -144,7 +144,7 @@ export const cosmeticsIndexQuery = groq`
 }`
 
 export const getRestCosmetics = groq`
-*[_type == "cosmetics"] | order(date desc, _updatedAt desc) [8...-1] {
+*[_type == "cosmetics"] | order(date desc, _updatedAt desc) [9...9999] {
   ${cosmeticsFields}
 }`
 
@@ -199,7 +199,7 @@ export const elderlyIndexQuery = groq`
 }`
 
 export const getRestElderly = groq`
-*[_type == "elderly"] | order(date desc, _updatedAt desc) [8...-1] {
+*[_type == "elderly"] | order(date desc, _updatedAt desc) [9...9999] {
   ${elderlyFields}
 }`
 
@@ -254,7 +254,7 @@ export const vitaminIndexQuery = groq`
 }`
 
 export const getRestVitamin = groq`
-*[_type == "vitamin"] | order(date desc, _updatedAt desc) [9...-1] {
+*[_type == "vitamin"] | order(date desc, _updatedAt desc) [9...9999] {
   ${vitaminFields}
 }`
 
@@ -309,7 +309,7 @@ export const childrenIndexQuery = groq`
 }`
 
 export const getRestChildren = groq`
-*[_type == "children"] | order(date desc, _updatedAt desc) [8...-1] {
+*[_type == "children"] | order(date desc, _updatedAt desc) [9...9999] {
   ${childrenFields}
 }`
 
@@ -364,7 +364,7 @@ export const pregnancyIndexQuery = groq`
 }`
 
 export const getRestPregnancy = groq`
-*[_type == "pregnancy"] | order(date desc, _updatedAt desc) [8...-1] {
+*[_type == "pregnancy"] | order(date desc, _updatedAt desc) [9...9999] {
   ${pregnancyFields}
 }`
 
