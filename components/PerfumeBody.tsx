@@ -48,7 +48,7 @@ const [notificationText, setNotificationText] = useState('')
         window.dispatchEvent(new Event('localStorageCartChanged'));
         console.log('dispatched')
         setNotification(true)
-        setNotificationText('Product quantity successfully increased')
+        setNotificationText('Số lượng sản phẩm đã được tăng thành công.')
         setTimeout(() => {
           setNotification(false)
         }, 3000)
@@ -59,7 +59,7 @@ const [notificationText, setNotificationText] = useState('')
         console.log('dispatched')
 
         setNotification(true)
-        setNotificationText('Product successfully added to cart ')
+        setNotificationText('Sản phẩm đã được thêm vào giỏ hàng thành công!')
         setTimeout(() => {
           setNotification(false)
         }, 3000)
@@ -71,7 +71,7 @@ const [notificationText, setNotificationText] = useState('')
       console.log('dispatched')
 
       setNotification(true)
-      setNotificationText('Product successfully added to cart ')
+      setNotificationText('Sản phẩm đã được thêm vào giỏ hàng thành công!')
       setTimeout(() => {
         setNotification(false)
       }, 3000)
@@ -94,7 +94,8 @@ const [notificationText, setNotificationText] = useState('')
             height={1000}
             alt="product image"
           />{' '}
-          Add to cart
+          {/* Add to cart */}
+          Thêm vào giỏ hàng
         </button>
         <a target='blank' href={`https://m.me/111098168639376/?text=Hey, I am interested in this product: ${title}. Can you please tell me more?`}>
         <button className={styles.contact}>
@@ -105,8 +106,7 @@ const [notificationText, setNotificationText] = useState('')
             height={1000}
             alt="product image"
           />
-          Contact to buy
-       
+          Liên hệ để mua
         </button>
         </a>
       </div>

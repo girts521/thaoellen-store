@@ -90,10 +90,10 @@ const MiniCartProduct = ({product, quantity, setCart}) => {
           </div>
 
           <div className={styles.productPrice}>
-            Price: <p>{product[0].price}</p>
+          Giá: <p>{product[0].price}</p>
           </div>
 
-          <h3>Quantity</h3>
+          <h3>Số lượng</h3>
           <div className={styles.productQuantity}>
             <button className={styles.quantityButton} onClick={() => {
                 decreaseQuantity()

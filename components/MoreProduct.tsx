@@ -77,7 +77,7 @@ export default function MoreProduct({
       <div className={styles.loadMore}>
       {loading && <Loading />}
         <button onClick={getRestProducts} className={styles.button}>
-        {showRestProducts ? 'Show less'  : 'Load more'}
+        {showRestProducts ? 'Hiển thị ít hơn'  : 'Tải thêm'}
         </button>
       </div>
     </section>

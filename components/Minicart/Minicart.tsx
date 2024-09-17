@@ -132,34 +132,34 @@ const Minicart = ({ close }) => {
       </div>
 
       <div className={styles.title}>
-        <h2>Your Cart</h2>
+        <h2>Cart</h2>
       </div>
 
       <div className={styles.contentContainer}>
         <div className={styles.totals}>
-          <div className={styles.itemCount}> {cartLength} items in cart</div>
+          <div className={styles.itemCount}> {cartLength} sản phẩm trong giỏ hàng</div>
           <div className={styles.subtotal}>
-            <p>Subtotal :</p> {totalPrice}$
+            <p>Tạm tính :</p> {totalPrice}$
           </div>
 
           <div className={styles.dicount}>
-            <p>Discount :</p> {discount}
+            <p>Giảm giá :</p> {discount}
           </div>
 
           <div className={styles.total}>
-            <p>Total :</p> {totalPrice - discount}$
+            <p>Tổng cộng :</p> {totalPrice - discount}$
           </div>
         </div>
 
         <div className={styles.discountContainer}>
           <div className={styles.discountTitle}>
-            <h2>Discount Code</h2>
+            <h2>Mã giảm giá</h2>
           </div>
 
           <div className={styles.discountInput}>
-            <input type="text" placeholder="Enter your code here" />
+            <input type="text" placeholder="Nhập mã của bạn ở đây" />
             <div className={styles.discountButton}>
-              <button>Apply</button>
+              <button>Áp dụng</button>
             </div>
           </div>
         </div>
