@@ -43,13 +43,23 @@
     text-transform: uppercase;
   }
 
-  p {
+  h3 {
+    color: #474574;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  p, ul, ol, li {
     color: #474574;
     font-family: Montserrat;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    line-height: normal;
+    line-height: 2;
   }
 
   .action {
