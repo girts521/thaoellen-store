@@ -85,19 +85,20 @@
 
                 input {
                     height: 36px;
+                    width: 65%;
                     border: 1px solid #c2c2c2;
                     padding: 5px;
                 }
 
                 .discountButton {
                     margin-left: 10px;
-                    padding: 7px 29px;
+                    padding: 7px 12px;
                     text-align: center;
                     background: #dbdbe7;
                     border: 1px solid #474574;
                     color: #474574;
                     border-radius: 10px;
-                    
+                    width: 35%;
                     height: 36px;
                     cursor: pointer;
                 }

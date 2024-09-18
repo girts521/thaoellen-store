@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import styles from './index.module.scss'
 import Minicart from 'components/Minicart/Minicart'
-import Rive from '@rive-app/react-canvas'
 import { useRouter } from 'next/router'
 
 const NavBar: React.FC = () => {
@@ -85,7 +84,7 @@ const NavBar: React.FC = () => {
           />
 
           <div
-            style={{ width: '75px', height: '75px', cursor: 'pointer' }}
+            style={{ padding: '12px', cursor: 'pointer' }}
             onClick={() => {
               setMinicart(true)
             }}
@@ -93,11 +92,16 @@ const NavBar: React.FC = () => {
               setMinicart(true)
             }}
           >
-            <Rive
-              src="/animations/cart_animation.riv"
-              stateMachines={['State Machine 1']}
-              style={{ width: '70px', height: '70px', cursor: 'pointer' }}
-            />
+            <Image
+            // className={styles.mobile}
+            // onClick={handleBurgerMenuClick}
+            src={'/cart.png'}
+            alt="Open mini-cart"
+            width={35}
+            height={45}
+          />
+
+            {/* <a href="https://www.flaticon.com/free-icons/shopping-bag" title="shopping bag icons">Shopping bag icons created by Abiyoga Pratama - Flaticon</a> */}
           </div>
 
           {/* <Image
