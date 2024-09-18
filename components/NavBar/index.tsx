@@ -7,10 +7,10 @@ import { useRouter } from 'next/router'
 const NavBar: React.FC = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [minicart, setMinicart] = useState(false)
-  const [vitaminTitle, setVitaminTitle] = useState(null);
-  const [nuocTitle, setNuocTitle] = useState(null);
-  const [phamTitle, setPhamTitle] = useState(null);
-  const [hoiTitle, setHoiTitle] = useState(null);
+  const [vitaminTitle, setVitaminTitle] = useState(null)
+  const [nuocTitle, setNuocTitle] = useState(null)
+  const [phamTitle, setPhamTitle] = useState(null)
+  const [hoiTitle, setHoiTitle] = useState(null)
 
   const router = useRouter()
 
@@ -20,9 +20,9 @@ const NavBar: React.FC = () => {
 
   useEffect(() => {
     if (isBurgerMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = 'auto'
     }
   }, [isBurgerMenuOpen])
 
@@ -33,11 +33,26 @@ const NavBar: React.FC = () => {
         setIsBurgerMenuOpen(false)
       }
     }
-    setVitaminTitle(document.querySelector("#__next > div > main > div > section:nth-child(5) > h2"));
-    setNuocTitle(document.querySelector("#__next > div > main > div > section:nth-child(2) > h2"));
-    setPhamTitle(document.querySelector("#__next > div > main > div > section:nth-child(3) > h2"));
-    setHoiTitle(document.querySelector("#__next > div > main > div > section:nth-child(4) > h2"));
-
+    setVitaminTitle(
+      document.querySelector(
+        '#__next > div > main > div > section:nth-child(5) > h2',
+      ),
+    )
+    setNuocTitle(
+      document.querySelector(
+        '#__next > div > main > div > section:nth-child(2) > h2',
+      ),
+    )
+    setPhamTitle(
+      document.querySelector(
+        '#__next > div > main > div > section:nth-child(3) > h2',
+      ),
+    )
+    setHoiTitle(
+      document.querySelector(
+        '#__next > div > main > div > section:nth-child(4) > h2',
+      ),
+    )
 
     // Attach the event listener to the window's resize event
     window.addEventListener('resize', handleResize)
@@ -47,7 +62,6 @@ const NavBar: React.FC = () => {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-
 
   return (
     <>
@@ -60,18 +74,73 @@ const NavBar: React.FC = () => {
         >
           Thao
         </h1>
-        <h2 onClick={() => {
-          nuocTitle.scrollIntoView({ behavior: 'smooth' });
-        }} className={`${styles.desktop} ${styles.h2}`}>Nước hoa</h2>
-        <h2 onClick={() => {
-          phamTitle.scrollIntoView({ behavior: 'smooth' });
-        }} className={`${styles.desktop} ${styles.h2}`}>Mỹ phẩm</h2>
-        <h2 onClick={() => {
-          vitaminTitle.scrollIntoView({ behavior: 'smooth' });
-        }} className={`${styles.desktop} ${styles.h2}`}>Vitamin</h2>
-        <h2 onClick={() => {
-          hoiTitle.scrollIntoView({ behavior: 'smooth' });
-        }} className={`${styles.desktop} ${styles.h2}`}>hơi già</h2>
+        <h2
+          onClick={() => {
+            if (router.pathname != '/') {
+              router.push('/')
+              setTimeout(() => {
+                document.querySelector(
+                  '#__next > div > main > div > section:nth-child(2) > h2',
+                ).scrollIntoView({ behavior: 'smooth' })
+              }, 500)
+            } else {
+              nuocTitle.scrollIntoView({ behavior: 'smooth' })
+            }          
+          }}
+          className={`${styles.desktop} ${styles.h2}`}
+        >
+          Nước hoa
+        </h2>
+        <h2
+          onClick={() => {
+            if (router.pathname != '/') {
+              router.push('/')
+              setTimeout(() => {
+                document.querySelector(
+                  '#__next > div > main > div > section:nth-child(3) > h2',
+                ).scrollIntoView({ behavior: 'smooth' })
+              }, 500)
+            } else {
+              phamTitle.scrollIntoView({ behavior: 'smooth' })
+            }  
+          }}
+          className={`${styles.desktop} ${styles.h2}`}
+        >
+          Mỹ phẩm
+        </h2>
+        <h2
+          onClick={() => {
+            if (router.pathname != '/') {
+              router.push('/')
+              setTimeout(() => {
+                document.querySelector(
+                  '#__next > div > main > div > section:nth-child(5) > h2',
+                ).scrollIntoView({ behavior: 'smooth' })
+              }, 500)
+            } else {
+              vitaminTitle.scrollIntoView({ behavior: 'smooth' })
+            }           }}
+          className={`${styles.desktop} ${styles.h2}`}
+        >
+          Vitamin
+        </h2>
+        <h2
+          onClick={() => {
+            if (router.pathname != '/') {
+              router.push('/')
+              setTimeout(() => {
+                document.querySelector(
+                  '#__next > div > main > div > section:nth-child(4) > h2',
+                ).scrollIntoView({ behavior: 'smooth' })
+              }, 500)
+            } else {
+              hoiTitle.scrollIntoView({ behavior: 'smooth' })
+            }
+          }}
+          className={`${styles.desktop} ${styles.h2}`}
+        >
+          hơi già
+        </h2>
 
         <div className={styles.imagecontainer}>
           <Image
@@ -93,13 +162,13 @@ const NavBar: React.FC = () => {
             }}
           >
             <Image
-            // className={styles.mobile}
-            // onClick={handleBurgerMenuClick}
-            src={'/cart.png'}
-            alt="Open mini-cart"
-            width={35}
-            height={45}
-          />
+              // className={styles.mobile}
+              // onClick={handleBurgerMenuClick}
+              src={'/cart.png'}
+              alt="Open mini-cart"
+              width={35}
+              height={45}
+            />
 
             {/* <a href="https://www.flaticon.com/free-icons/shopping-bag" title="shopping bag icons">Shopping bag icons created by Abiyoga Pratama - Flaticon</a> */}
           </div>
