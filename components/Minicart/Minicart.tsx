@@ -13,6 +13,7 @@ const Minicart = ({ close }) => {
   const [loading, setLoading] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0)
   const [discount, setDiscount] = useState(0)
+  const [timeout, setMyTimeout] = useState(false);
 
   const cartDBref = useRef(cartDB)
   cartDBref.current = cartDB
@@ -30,6 +31,10 @@ const Minicart = ({ close }) => {
   )
 
   useEffect(() => {
+    setTimeout(() => {
+      setMyTimeout(true);
+    },100);
+
     let localCart
     localCart = localStorage.getItem('cart')
     if (localCart) {
@@ -123,13 +128,15 @@ const Minicart = ({ close }) => {
 
   return (
     <div className={styles.minicartContainer}>
-      <div
-        onClick={() => {
-          close(false)
-        }}
-      >
-        <button className={styles.closeButton}>X</button>
-      </div>
+      {timeout && (
+              <div
+              onClick={() => {
+                close(false)
+              }}
+            >
+              <button className={styles.closeButton}>X</button>
+            </div>
+      )}
 
       <div className={styles.title}>
         <h2>Cart</h2>
@@ -137,7 +144,10 @@ const Minicart = ({ close }) => {
 
       <div className={styles.contentContainer}>
         <div className={styles.totals}>
-          <div className={styles.itemCount}> {cartLength} sản phẩm trong giỏ hàng</div>
+          <div className={styles.itemCount}>
+            {' '}
+            {cartLength} sản phẩm trong giỏ hàng
+          </div>
           <div className={styles.subtotal}>
             <p>Tạm tính :</p> {totalPrice}$
           </div>
@@ -165,17 +175,19 @@ const Minicart = ({ close }) => {
         </div>
 
         <div className={styles.checkoutContainer}>
-        {cart.length > 0 ? (
-          <div className={styles.checkoutButton}>
-            <button
-              onClick={() => {
-                router.push('/checkout')
-              }}
-            >
-              Checkout
-            </button>
-          </div>
-        ): ''}
+          {cart.length > 0 ? (
+            <div className={styles.checkoutButton}>
+              <button
+                onClick={() => {
+                  router.push('/checkout')
+                }}
+              >
+                Checkout
+              </button>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
         <hr />
         {/* Items list */}
