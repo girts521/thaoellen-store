@@ -15,7 +15,14 @@ const NavBar: React.FC = () => {
   const router = useRouter()
 
   const handleBurgerMenuClick = () => {
+   
     setIsBurgerMenuOpen(!isBurgerMenuOpen)
+  }
+
+  const closeMinicart = () => {
+  document.querySelector("body").style.overflow = "auto"
+    setIsBurgerMenuOpen(false);
+    setMinicart(false);
   }
 
   useEffect(() => {
@@ -155,9 +162,15 @@ const NavBar: React.FC = () => {
           <div
             style={{ padding: '12px', cursor: 'pointer' }}
             onClick={() => {
+              if (window.screen.width < 600){
+                document.querySelector("body").style.overflow = "hidden"
+              }
               setMinicart(true)
             }}
             onTouchStart={() => {
+              if (window.screen.width < 600){
+                document.querySelector("body").style.overflow = "hidden"
+              }
               setMinicart(true)
             }}
           >
@@ -182,7 +195,7 @@ const NavBar: React.FC = () => {
         </div>
       </div>
 
-      {minicart && <Minicart close={setMinicart} />}
+      {minicart && <Minicart close={closeMinicart} />}
 
       <div
         className={`${styles.burgerMenuContent}`}
@@ -219,15 +232,83 @@ const NavBar: React.FC = () => {
               <h2
                 className={styles.h1}
                 onClick={() => {
+                  handleBurgerMenuClick();
                   router.push('/')
                 }}
               >
                 Thao Ellen Store
               </h2>
-              <h2 className={styles.h2}>Nước hoa</h2>
-              <h2 className={styles.h2}>Mỹ phẩm</h2>
-              <h2 className={styles.h2}>Vitamin</h2>
-              <h2 className={styles.h2}>hơi già</h2>
+              <h2
+          onClick={() => {
+            handleBurgerMenuClick();
+            if (router.pathname != '/') {
+              router.push('/')
+              setTimeout(() => {
+                document.querySelector(
+                  '#__next > div > main > div > section:nth-child(2) > h2',
+                ).scrollIntoView({ behavior: 'smooth' })
+              }, 500)
+            } else {
+              nuocTitle.scrollIntoView({ behavior: 'smooth' })
+            }          
+          }}
+          className={`${styles.h2}`}
+        >
+          Nước hoa
+        </h2>
+        <h2
+          onClick={() => {
+            handleBurgerMenuClick();
+            if (router.pathname != '/') {
+              router.push('/')
+              setTimeout(() => {
+                document.querySelector(
+                  '#__next > div > main > div > section:nth-child(3) > h2',
+                ).scrollIntoView({ behavior: 'smooth' })
+              }, 500)
+            } else {
+              phamTitle.scrollIntoView({ behavior: 'smooth' })
+            }  
+          }}
+          className={`${styles.h2}`}
+        >
+          Mỹ phẩm
+        </h2>
+        <h2
+          onClick={() => {
+            handleBurgerMenuClick();
+            if (router.pathname != '/') {
+              router.push('/')
+              setTimeout(() => {
+                document.querySelector(
+                  '#__next > div > main > div > section:nth-child(5) > h2',
+                ).scrollIntoView({ behavior: 'smooth' })
+              }, 500)
+            } else {
+              vitaminTitle.scrollIntoView({ behavior: 'smooth' })
+            }           }}
+          className={`${styles.h2}`}
+        >
+          Vitamin
+        </h2>
+        <h2
+          onClick={() => {
+            handleBurgerMenuClick();
+            if (router.pathname != '/') {
+              router.push('/')
+              setTimeout(() => {
+                document.querySelector(
+                  '#__next > div > main > div > section:nth-child(4) > h2',
+                ).scrollIntoView({ behavior: 'smooth' })
+              }, 500)
+            } else {
+              hoiTitle.scrollIntoView({ behavior: 'smooth' })
+            }
+          }}
+          className={`${styles.h2}`}
+        >
+          hơi già
+        </h2>
             </div>
           </div>
         )}
