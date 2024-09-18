@@ -89,7 +89,7 @@ const [notificationText, setNotificationText] = useState('')
         <button onClick={addToCart} className={styles.addToCart}>
           {' '}
           <Image
-            src={'/bag.png'}
+            src={'/cart.png'}
             width={1000}
             height={1000}
             alt="product image"
