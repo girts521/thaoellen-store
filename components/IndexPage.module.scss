@@ -15,3 +15,20 @@
         width: 435px;
     }
 }
+
+.cardContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.custom_slider {
+    // background-color: red;
+    // position: relative;
+    // width: 100vw;
+    // margin-left: 127px;
+    // margin: 50px;
+    // padding-right: 127px;
+    width: 80%;  // Adjust as needed to fit your design
+    margin: 50px auto 80px auto;
+    padding-top: 25px;
+}

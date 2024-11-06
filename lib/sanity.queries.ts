@@ -122,6 +122,25 @@ export interface Product {
 }
 
 // ==================================================================
+// On Sale
+// ==================================================================
+
+export const onSaleQuery = groq`
+*[_type in ["perfume", "otherType1", "otherType2"] && sale == true] | order(date desc, _updatedAt desc) {
+  _id,
+  title,
+  date,
+  _updatedAt,
+  excerpt,
+  coverImage,
+  "product_id": product_id.current,
+  "author": author->{name, picture},
+  price,
+  name,
+  sale
+}`
+
+// ==================================================================
 // Cosmetics
 // ==================================================================
 

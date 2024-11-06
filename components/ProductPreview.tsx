@@ -30,7 +30,7 @@ export default function ProductPreview({
           path={path}
           slug={product_id}
           title={title}
-          image={coverImage[0]}
+          image={coverImage && coverImage[0]}
           priority={false}
         />
       </div>
@@ -38,7 +38,7 @@ export default function ProductPreview({
       {title}
       </h3>
       {excerpt && <p className={styles.excerpt} >{excerpt}</p>}
-      <div className={styles.price}>Price: {`${price}`}</div>
+      <div className={styles.price}>Giá: {`${price}`} VND</div>
     </div>
   )
 }

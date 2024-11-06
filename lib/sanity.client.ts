@@ -8,6 +8,7 @@ import {
   type Settings,
   settingsQuery,
   perfumeIndexQuery,
+  onSaleQuery,
   cosmeticsIndexQuery,
   cosmeticsSlugsQuery,
   cosmeticsAndMoreCosmeticsQuery,
@@ -112,6 +113,13 @@ export async function getPerfume(
   return await client.fetch(perfumeAndMorePerfumeQuery, { slug })
 }
 
+// ==================================================================
+// On Sale
+// ==================================================================
+
+export async function getAllProductsOnSale(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(onSaleQuery)) || []
+}
 // ==================================================================
 // Cosmetics
 // ==================================================================

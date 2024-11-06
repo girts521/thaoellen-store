@@ -7,7 +7,8 @@
     justify-content: center;
     align-items: center;
     .heading {
-        color: #474574;
+        // color: #474574;
+        color: black;
         text-align: center;
         font-family: Bonbon;
         font-size: 32px;
@@ -62,7 +63,7 @@
         min-height: 700px;
 
         .heading {
-            font-size: 95px;
+            font-size: 65px;
             max-width: 516px;
         }
 
@@ -72,3 +73,11 @@
     }
 }
 
+@media (min-width: 1440px) {
+    .container {
+        .heading {
+            font-size: 95px;
+            max-width: 640px;
+        }
+    }
+}
