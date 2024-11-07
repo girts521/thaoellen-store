@@ -1,6 +1,6 @@
 import { readToken } from 'lib/sanity.api'
 import { getClient } from 'lib/sanity.client'
-import {getRestPerfumeProd, getRestCosmeticsProd, getRestElderlyProd, getRestVitaminProd} from 'lib/sanity.client'
+import {getRestPerfumeProd, getRestCosmeticsProd, getRestElderlyProd, getRestVitaminProd, getRestChildrenProd} from 'lib/sanity.client'
 
 export default async function getRestProd(req, res) {
   if (req.method === 'GET') {
@@ -32,6 +32,11 @@ export default async function getRestProd(req, res) {
           if(title === 'vitamin'){
             const vitamin = await getRestVitaminProd(client)
             return res.status(200).json(vitamin)
+          }
+          if(title === 'children'){
+            const children = await getRestChildrenProd(client)
+            console.log(children)
+            return res.status(200).json(children)
           }
     }
     catch(err){

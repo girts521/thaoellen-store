@@ -139,7 +139,7 @@ const Minicart = ({ close }) => {
       )}
 
       <div className={styles.title}>
-        <h2>Cart</h2>
+        <h2>Giỏ hàng</h2>
       </div>
 
       <div className={styles.contentContainer}>
@@ -182,7 +182,7 @@ const Minicart = ({ close }) => {
                   router.push('/checkout')
                 }}
               >
-                Checkout
+                Thanh toán
               </button>
             </div>
           ) : (

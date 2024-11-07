@@ -226,7 +226,7 @@ const NavBar: React.FC = () => {
                   router.push('/')
                 }}
               >
-                Thao Ellen Store
+                Thach Thao German Store
               </h2>
               <h3
           onClick={() => {

@@ -127,7 +127,7 @@ const Checkout = () => {
     <Layout preview={false} loading={false}>
       <div className={styles.container}>
         {notification && <Notification text={notificationText} />}
-        <h1 className={styles.heading}>Checkout</h1>
+        <h1 className={styles.heading}>Thanh toán</h1>
         <form onSubmit={onSubmit} action="">
           <div className={styles.input}>
             <label htmlFor="name">Tên</label>

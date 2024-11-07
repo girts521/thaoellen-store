@@ -11,7 +11,7 @@ const Order = () => {
     <Layout preview={false} loading={false}>
       {' '}
       <div className={styles.order}>
-        <h1 className={styles.heading}>Cảm ơn!!!</h1>
+        <h1 className={styles.heading}>Thank you for your order!!!</h1>
         <h2 className={styles.orderID}>Số đơn hàng của bạn là: {order_id}</h2>
         <p className={styles.text}>
           Chúng tôi sẽ sớm liên hệ với bạn về thông tin chi tiết đơn hàng và phương thức thanh toán.{' '}
