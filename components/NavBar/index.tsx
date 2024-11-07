@@ -84,15 +84,14 @@ const NavBar: React.FC = () => {
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
-            }          
-          }}
+              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
+            }           }}
           className={`${styles.desktop} ${styles.h2}`}
         >
-          Nước hoa
+          Vitamin & More
         </h3>
         <h3
           onClick={() => {
@@ -114,20 +113,6 @@ const NavBar: React.FC = () => {
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
-              }, 500)
-            } else {
-              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
-            }           }}
-          className={`${styles.desktop} ${styles.h2}`}
-        >
-          Vitamin & More
-        </h3>
-        <h3
-          onClick={() => {
-            if (router.pathname != '/') {
-              router.push('/')
-              setTimeout(() => {
                 Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Trẻ em')).scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
@@ -137,6 +122,21 @@ const NavBar: React.FC = () => {
           className={`${styles.desktop} ${styles.h2}`}
         >
           Trẻ em
+        </h3>
+        <h3
+          onClick={() => {
+            if (router.pathname != '/') {
+              router.push('/')
+              setTimeout(() => {
+                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
+              }, 500)
+            } else {
+              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
+            }          
+          }}
+          className={`${styles.desktop} ${styles.h2}`}
+        >
+          Nước hoa
         </h3>
 
         <div className={styles.imagecontainer}>
@@ -234,16 +234,16 @@ const NavBar: React.FC = () => {
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
-            }          
-          }}
+              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
+            }           }}
           className={`${styles.h2}`}
         >
-          Nước hoa
+          Vitamin & More
         </h3>
+
         <h3
           onClick={() => {
             handleBurgerMenuClick();
@@ -260,21 +260,7 @@ const NavBar: React.FC = () => {
         >
           Phụ nữ
         </h3>
-        <h3
-          onClick={() => {
-            handleBurgerMenuClick();
-            if (router.pathname != '/') {
-              router.push('/')
-              setTimeout(() => {
-                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
-              }, 500)
-            } else {
-              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
-            }           }}
-          className={`${styles.h2}`}
-        >
-          Vitamin & More
-        </h3>
+
         <h3
           onClick={() => {
             handleBurgerMenuClick();
@@ -291,6 +277,26 @@ const NavBar: React.FC = () => {
         >
           Trẻ em
         </h3>
+
+              <h3
+          onClick={() => {
+            handleBurgerMenuClick();
+            if (router.pathname != '/') {
+              router.push('/')
+              setTimeout(() => {
+                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
+              }, 500)
+            } else {
+              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
+            }          
+          }}
+          className={`${styles.h2}`}
+        >
+          Nước hoa
+        </h3>
+
+
+
             </div>
           </div>
         )}

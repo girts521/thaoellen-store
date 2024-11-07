@@ -113,13 +113,12 @@ export default function IndexPage(props: IndexPageProps) {
         ))}
         </Slider>
           </div>
-          {perfume.length > 0 && <MoreProduct products={perfume} title='Nước hoa' path='perfume' />}
           {onSale.length > 0 && <MoreProduct  products={onSale} title='Sale' path='sale' />}
-          {cosmetics.length > 0 && <MoreProduct  products={cosmetics} title='Nước hoa & Mỹ phẩm' path='cosmetics' />}
-          {elderly.length > 0 && <MoreProduct  products={elderly} title='Phụ nữ' path='elderly' />}
           {vitamin.length > 0 && <MoreProduct  products={vitamin} title='Vitamin & More' path='vitamin' />}
+          {elderly.length > 0 && <MoreProduct  products={elderly} title='Phụ nữ' path='elderly' />}
           {children.length > 0 && <MoreProduct  products={children} title='Trẻ em' path='children' />}
-
+          {cosmetics.length > 0 && <MoreProduct  products={cosmetics} title='Nước hoa & Mỹ phẩm' path='cosmetics' />}
+          {perfume.length > 0 && <MoreProduct products={perfume} title='Nước hoa' path='perfume' />}
           <div style={middleImageStyles} className={styles.middleImage}>
           <Image  src="/d-flower-left.png" alt='Flower image background' width={1000} height={1000} />
           </div>
