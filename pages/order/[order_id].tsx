@@ -11,15 +11,15 @@ const Order = () => {
     <Layout preview={false} loading={false}>
       {' '}
       <div className={styles.order}>
-        <h1 className={styles.heading}>Thank you!!!</h1>
-        <h2 className={styles.orderID}>Your order number is: {order_id}</h2>
+        <h1 className={styles.heading}>Cảm ơn!!!</h1>
+        <h2 className={styles.orderID}>Số đơn hàng của bạn là: {order_id}</h2>
         <p className={styles.text}>
-          We will contact you soon about your order details and the payment.{' '}
-          <br /> <br /> You can speed up this process by contacting us directly right
-          now!
+          Chúng tôi sẽ sớm liên hệ với bạn về thông tin chi tiết đơn hàng và phương thức thanh toán.{' '}
+          <br /> <br /> Bạn có thể đẩy nhanh quá trình này bằng cách liên hệ trực tiếp với chúng tôi ngay
+          bây giờ!
         </p>
         <a target='blank' href={`https://m.me/111098168639376/?text=Hey, I have some questions about my order with id: ${order_id}.`}>
-        <button className={styles.contact}>Contact</button>
+        <button className={styles.contact}>Liên hệ để mua</button>
         </a>
       </div>
     </Layout>

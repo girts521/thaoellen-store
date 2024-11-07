@@ -32,3 +32,28 @@
     margin: 50px auto 80px auto;
     padding-top: 25px;
 }
+
+.sales_heading {
+// color: #474574;
+color: black;
+text-align: center;
+font-family: Montserrat;
+font-size: 17px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+text-transform: uppercase;
+margin-bottom: 30px;
+
+@media (min-width: 768px) {
+    font-size: 25px;
+}
+
+@media (min-width: 1024px) {
+    font-size: 35px;
+}
+
+@media (min-width: 1440px) {
+    margin-bottom: 40px;
+}
+}

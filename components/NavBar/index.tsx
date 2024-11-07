@@ -56,9 +56,7 @@ const NavBar: React.FC = () => {
       ),
     )
     setHoiTitle(
-      document.querySelector(
-        '#__next > div > main > div > section:nth-child(4) > h2',
-      ),
+      Array.from(document.querySelectorAll('h2')).find(el => el.innerText.includes('Trẻ em'))
     )
 
     // Attach the event listener to the window's resize event
@@ -81,73 +79,65 @@ const NavBar: React.FC = () => {
         >
           Thao
         </h1>
-        <h2
+        <h3
           onClick={() => {
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                document.querySelector(
-                  '#__next > div > main > div > section:nth-child(2) > h2',
-                ).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              nuocTitle.scrollIntoView({ behavior: 'smooth' })
+              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
             }          
           }}
           className={`${styles.desktop} ${styles.h2}`}
         >
           Nước hoa
-        </h2>
-        <h2
+        </h3>
+        <h3
           onClick={() => {
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                document.querySelector(
-                  '#__next > div > main > div > section:nth-child(3) > h2',
-                ).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Phụ nữ')).scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              phamTitle.scrollIntoView({ behavior: 'smooth' })
+              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Phụ nữ')).scrollIntoView({ behavior: 'smooth' })
             }  
           }}
           className={`${styles.desktop} ${styles.h2}`}
         >
-          Mỹ phẩm
-        </h2>
-        <h2
+          Phụ nữ
+        </h3>
+        <h3
           onClick={() => {
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                document.querySelector(
-                  '#__next > div > main > div > section:nth-child(5) > h2',
-                ).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              vitaminTitle.scrollIntoView({ behavior: 'smooth' })
+              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
             }           }}
           className={`${styles.desktop} ${styles.h2}`}
         >
-          Vitamin
-        </h2>
-        <h2
+          Vitamin & More
+        </h3>
+        <h3
           onClick={() => {
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                document.querySelector(
-                  '#__next > div > main > div > section:nth-child(4) > h2',
-                ).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Trẻ em')).scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              hoiTitle.scrollIntoView({ behavior: 'smooth' })
+              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Trẻ em')).scrollIntoView({ behavior: 'smooth' })
             }
           }}
           className={`${styles.desktop} ${styles.h2}`}
         >
-          hơi già
-        </h2>
+          Trẻ em
+        </h3>
 
         <div className={styles.imagecontainer}>
           <Image
@@ -238,77 +228,69 @@ const NavBar: React.FC = () => {
               >
                 Thao Ellen Store
               </h2>
-              <h2
+              <h3
           onClick={() => {
             handleBurgerMenuClick();
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                document.querySelector(
-                  '#__next > div > main > div > section:nth-child(2) > h2',
-                ).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              nuocTitle.scrollIntoView({ behavior: 'smooth' })
+              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
             }          
           }}
           className={`${styles.h2}`}
         >
           Nước hoa
-        </h2>
-        <h2
+        </h3>
+        <h3
           onClick={() => {
             handleBurgerMenuClick();
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                document.querySelector(
-                  '#__next > div > main > div > section:nth-child(3) > h2',
-                ).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Phụ nữ')).scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              phamTitle.scrollIntoView({ behavior: 'smooth' })
+              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Phụ nữ')).scrollIntoView({ behavior: 'smooth' })
             }  
           }}
           className={`${styles.h2}`}
         >
-          Mỹ phẩm
-        </h2>
-        <h2
+          Phụ nữ
+        </h3>
+        <h3
           onClick={() => {
             handleBurgerMenuClick();
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                document.querySelector(
-                  '#__next > div > main > div > section:nth-child(5) > h2',
-                ).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              vitaminTitle.scrollIntoView({ behavior: 'smooth' })
+              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
             }           }}
           className={`${styles.h2}`}
         >
-          Vitamin
-        </h2>
-        <h2
+          Vitamin & More
+        </h3>
+        <h3
           onClick={() => {
             handleBurgerMenuClick();
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                document.querySelector(
-                  '#__next > div > main > div > section:nth-child(4) > h2',
-                ).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Trẻ em")).scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              hoiTitle.scrollIntoView({ behavior: 'smooth' })
+              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Trẻ em")).scrollIntoView({ behavior: 'smooth' })
             }
           }}
           className={`${styles.h2}`}
         >
-          hơi già
-        </h2>
+          Trẻ em
+        </h3>
             </div>
           </div>
         )}

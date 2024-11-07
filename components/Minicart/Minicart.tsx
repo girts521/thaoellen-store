@@ -149,15 +149,15 @@ const Minicart = ({ close }) => {
             {cartLength} sản phẩm trong giỏ hàng
           </div>
           <div className={styles.subtotal}>
-            <p>Tạm tính :</p> {totalPrice}$
+            <p>Tạm tính :</p> {totalPrice} VND
           </div>
 
           <div className={styles.dicount}>
-            <p>Giảm giá :</p> {discount}
+            <p>Giảm giá :</p> {discount} %
           </div>
 
           <div className={styles.total}>
-            <p>Tổng cộng :</p> {totalPrice - discount}$
+            <p>Tổng cộng :</p> {totalPrice - discount} VND
           </div>
         </div>
 

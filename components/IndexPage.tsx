@@ -43,12 +43,36 @@ export default function IndexPage(props: IndexPageProps) {
 
   const [fullHeight, setFullHeight] = useState(0);
 
+  // const sliderSettings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 3,
+  //   slidesToScroll: 3,
+  // };
+
   const sliderSettings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1280, // Tablet view
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 768, // Mobile view
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   useEffect(() => {
@@ -70,6 +94,7 @@ export default function IndexPage(props: IndexPageProps) {
           <Heading text={"Thach Thao German Store"} />
 
           <div className={styles.custom_slider}>
+          <h1 className={styles.sales_heading}>Sale!</h1>
           <Slider {...sliderSettings}>
           {elderly.map((product) => (
             <div className={styles.cardContainer}>

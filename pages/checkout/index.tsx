@@ -38,7 +38,7 @@ const Checkout = () => {
       !phone.value ||
       !address.value
     ) {
-      setNotificationText('Please fill all fields!')
+      setNotificationText('Vui lòng điền đầy đủ thông tin!')
       setNotification(true)
       setTimeout(() => {
         setNotification(false)
@@ -47,7 +47,7 @@ const Checkout = () => {
     }
 
     if (!validatePhoneNumber(phone.value)) {
-      setNotificationText('Invalid phone number!')
+      setNotificationText('Số điện thoại không hợp lệ!')
       setNotification(true)
       setTimeout(() => {
         setNotification(false)
@@ -56,7 +56,7 @@ const Checkout = () => {
     }
 
     if (!validateEmail(email.value)) {
-      setNotificationText('Invalid email!')
+      setNotificationText('Email không hợp lệ!')
       setNotification(true)
       setTimeout(() => {
         setNotification(false)
@@ -66,7 +66,7 @@ const Checkout = () => {
 
     const cart = JSON.parse(localStorage.getItem('cart'))
     if (!cart || cart.length === 0) {
-      setNotificationText('Your cart is empty!')
+      setNotificationText('Giỏ hàng của bạn đang trống!')
       setNotification(true)
       setTimeout(() => {
         setNotification(false)
@@ -145,21 +145,21 @@ const Checkout = () => {
           </div>
 
           <div className={styles.input}>
-            <label htmlFor="phone">Phone</label>
+            <label htmlFor="phone">Điện thoại</label>
             <input id="phone" type="text" />
           </div>
 
           <div className={styles.input}>
-            <label htmlFor="address">Address</label>
+            <label htmlFor="address">Địa chỉ</label>
             <textarea id="address" />
           </div>
 
           <div className={styles.action}>
           <button type="submit" className={styles.submit}>
-            Order
+          Đặt hàng
           </button>
 
-          <button onClick={contact}>Contact</button>
+          <button onClick={contact}>Liên hệ để mua</button>
           </div>
         </form>
       </div>
