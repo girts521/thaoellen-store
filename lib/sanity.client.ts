@@ -1,3 +1,4 @@
+import { firestore } from 'firebase-admin'
 import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
 import {
   indexQuery, perfumeAndMorePerfumeQuery, perfumeSlugsQuery,
@@ -10,6 +11,7 @@ import {
   perfumeIndexQuery,
   onSaleQuery,
   bestsellersQuery,
+  getRestBestseller,
   cosmeticsIndexQuery,
   cosmeticsSlugsQuery,
   cosmeticsAndMoreCosmeticsQuery,
@@ -97,8 +99,8 @@ export async function getAllPerfume(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(perfumeIndexQuery)) || []
 }
 
-export async function getRestPerfumeProd(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(getRestPerfume)) || []
+export async function getRestPerfumeProd(client: SanityClient, firstIds: string[]): Promise<Post[]> {
+  return (await client.fetch(getRestPerfume, {firstIds})) || []
 }
 
 export async function getAllPerfumeSlugs(): Promise<Pick<Post, 'slug'>[]> {
@@ -130,6 +132,12 @@ export async function getAllBestsellers(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(bestsellersQuery)) || []
 }
 
+// export async function getRestBestsellerProd(client: SanityClient): Promise<Post[]> {
+//   return (await client.fetch(getRestBestseller)) || []
+// }
+export async function getRestBestsellerProd(client: SanityClient, firstIds: string[]): Promise<Post[]> {
+  return (await client.fetch(getRestBestseller, { firstIds })) || [];
+}
 // ==================================================================
 // Cosmetics
 // ==================================================================
@@ -137,8 +145,8 @@ export async function getAllCosmetics(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(cosmeticsIndexQuery)) || []
 }
 
-export async function getRestCosmeticsProd(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(getRestCosmetics)) || []
+export async function getRestCosmeticsProd(client: SanityClient, firstIds: string[]): Promise<Post[]> {
+  return (await client.fetch(getRestCosmetics, {firstIds})) || []
 }
 
 export async function getAllCosmeticsSlugs(): Promise<Pick<Post, 'slug'>[]> {
@@ -161,11 +169,9 @@ export async function getAllElderly(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(elderlyIndexQuery)) || []
 }
 
-export async function getRestElderlyProd(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(getRestElderly)) || []
+export async function getRestElderlyProd(client: SanityClient, firstIds: string[]): Promise<Post[]> {
+  return (await client.fetch(getRestElderly, {firstIds})) || []
 }
-
-
 
 export async function getAllElderlySlugs(): Promise<Pick<Post, 'slug'>[]> {
   const client = getClient()
@@ -187,8 +193,8 @@ export async function getAllVitamin(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(vitaminIndexQuery)) || []
 }
 
-export async function getRestVitaminProd(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(getRestVitamin)) || []
+export async function getRestVitaminProd(client: SanityClient, firstIds: string[]): Promise<Post[]> {
+  return (await client.fetch(getRestVitamin, {firstIds})) || []
 }
 
 export async function getAllVitaminSlugs(): Promise<Pick<Post, 'slug'>[]> {
@@ -208,11 +214,13 @@ export async function getVitamin(
 // Children
 // ==================================================================
 export async function getAllChildren(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(childrenIndexQuery)) || []
+  const products = await client.fetch(childrenIndexQuery)
+  console.log("products: ", products.length)
+  return (products) || []
 }
 
-export async function getRestChildrenProd(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(getRestChildren)) || []
+export async function getRestChildrenProd(client: SanityClient, firstIds: string[]): Promise<Post[]> {
+  return (await client.fetch(getRestChildren,{ firstIds })) || []
 }
 
 export async function getAllChildrenSlugs(): Promise<Pick<Post, 'slug'>[]> {
@@ -236,8 +244,8 @@ export async function getAllPregnancy(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(pregnancyIndexQuery)) || []
 }
 
-export async function getRestPregnancyProd(client: SanityClient): Promise<Post[]> {
-  return (await client.fetch(getRestPregnancy)) || []
+export async function getRestPregnancyProd(client: SanityClient, firstIds: string[]): Promise<Post[]> {
+  return (await client.fetch(getRestPregnancy, {firstIds})) || []
 }
 
 export async function getAllPregnancySlugs(): Promise<Pick<Post, 'slug'>[]> {

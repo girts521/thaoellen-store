@@ -23,8 +23,9 @@ export default function MoreProduct({
       return
     } else {
       try {
+      const firstIds = products.map(item => item._id);
       setLoading(true)
-      const res = await fetch(`/api/getRestProd?title=${path}`)
+      const res = await fetch(`/api/getRestProd?title=${path}&firstIds=${JSON.stringify(firstIds)}`);
       console.log('res', res)
       const data = await res.json()
       console.log('data', data)

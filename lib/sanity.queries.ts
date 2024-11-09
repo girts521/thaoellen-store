@@ -83,12 +83,12 @@ const perfumeFields = groq`
 `
 
 export const perfumeIndexQuery = groq`
-*[_type == "perfume"] | order(date desc, _updatedAt desc)  [0...8] {
+*[_type == "perfume"] [0...8] {
   ${perfumeFields}
 }`
 
 export const getRestPerfume = groq`
-*[_type == "perfume"] | order(date desc, _updatedAt desc)  [8...9999] {
+*[_type == "perfume"  && !(_id in $firstIds)] {
   ${perfumeFields}
 }`
 
@@ -145,8 +145,23 @@ export const onSaleQuery = groq`
 // Bestselletrs
 // ==================================================================
 // _type in ["perfume", "otherType1", "otherType2"] &&
+// export const bestsellersQuery = groq`
+// *[bestseller == true] | order(date desc, _updatedAt desc) {
+//   _id,
+//   title,
+//   date,
+//   _updatedAt,
+//   excerpt,
+//   coverImage,
+//   "product_id": product_id.current,
+//   "author": author->{name, picture},
+//   price,
+//   name,
+//   sale
+// }`
+
 export const bestsellersQuery = groq`
-*[bestseller == true] | order(date desc, _updatedAt desc) {
+*[bestseller == true] [0...8] {
   _id,
   title,
   date,
@@ -159,6 +174,22 @@ export const bestsellersQuery = groq`
   name,
   sale
 }`
+
+export const getRestBestseller = groq`
+*[bestseller == true  && !(_id in $firstIds)] {
+  _id,
+  title,
+  date,
+  _updatedAt,
+  excerpt,
+  coverImage,
+  "product_id": product_id.current,
+  "author": author->{name, picture},
+  price,
+  name,
+  sale
+}`
+
 
 // ==================================================================
 // Cosmetics
@@ -178,12 +209,12 @@ const cosmeticsFields = groq`
 `
 
 export const cosmeticsIndexQuery = groq`
-*[_type == "cosmetics"] | order(date desc, _updatedAt desc) [0...8] {
+*[_type == "cosmetics"] [0...8] {
   ${cosmeticsFields}
 }`
 
 export const getRestCosmetics = groq`
-*[_type == "cosmetics"] | order(date desc, _updatedAt desc) [8...9999] {
+*[_type == "cosmetics"  && !(_id in $firstIds)] {
   ${cosmeticsFields}
 }`
 
@@ -233,12 +264,12 @@ const elderlyFields = groq`
 `
 
 export const elderlyIndexQuery = groq`
-*[_type == "elderly"] | order(date desc, _updatedAt desc) [0...8] {
+*[_type == "elderly"] [0...8] {
   ${elderlyFields}
 }`
 
 export const getRestElderly = groq`
-*[_type == "elderly"] | order(date desc, _updatedAt desc) [8...9999] {
+*[_type == "elderly"  && !(_id in $firstIds)] {
   ${elderlyFields}
 }`
 
@@ -288,12 +319,12 @@ const vitaminFields = groq`
 `
 
 export const vitaminIndexQuery = groq`
-*[_type == "vitamin"] | order(date desc, _updatedAt desc) [0...8] {
+*[_type == "vitamin"] [0...8] {
   ${vitaminFields}
 }`
 
 export const getRestVitamin = groq`
-*[_type == "vitamin"] | order(date desc, _updatedAt desc) [8...9999] {
+*[_type == "vitamin"  && !(_id in $firstIds)] {
   ${vitaminFields}
 }`
 
@@ -343,12 +374,12 @@ const childrenFields = groq`
 `
 
 export const childrenIndexQuery = groq`
-*[_type == "children"] | order(date desc, _updatedAt desc) [0...8] {
+*[_type == "children"] [0...8] {
   ${childrenFields}
 }`
 
 export const getRestChildren = groq`
-*[_type == "children"] | order(date desc, _updatedAt desc) [8...9999] {
+*[_type == "children" && !(_id in $firstIds)] {
   ${childrenFields}
 }`
 
@@ -398,12 +429,12 @@ const pregnancyFields = groq`
 `
 
 export const pregnancyIndexQuery = groq`
-*[_type == "pregnancy"] | order(date desc, _updatedAt desc) [0...8] {
+*[_type == "pregnancy"] [0...8] {
   ${pregnancyFields}
 }`
 
 export const getRestPregnancy = groq`
-*[_type == "pregnancy"] | order(date desc, _updatedAt desc) [8...9999] {
+*[_type == "pregnancy"  && !(_id in $firstIds)] {
   ${pregnancyFields}
 }`
 
