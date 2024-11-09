@@ -84,6 +84,11 @@ export default defineType({
       type: 'boolean',
     }),
     defineField({
+      name: 'salePrice',
+      title: 'On Sale Price',
+      type: 'number',
+    }),
+    defineField({
       title: 'Bestsellers',
       name: 'bestseller',
       type: 'boolean',

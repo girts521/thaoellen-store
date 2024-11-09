@@ -79,6 +79,8 @@ const perfumeFields = groq`
   "product_id": product_id.current,
   "author": author->{name, picture},
   price,
+  sale,
+  salePrice,
   name
 `
 
@@ -118,6 +120,8 @@ export interface Product {
   product_id?: string
   content?: any
   price?: number
+  sale?: boolean
+  salePrice?: number
   path?: string
 }
 
@@ -135,6 +139,8 @@ const onSaleFields = groq`
   "product_id": product_id.current,
   "author": author->{name, picture},
   price,
+  sale,
+  salePrice,
   name,
   sale
 `
@@ -173,6 +179,8 @@ const bestsellersFields = groq`
   "product_id": product_id.current,
   "author": author->{name, picture},
   price,
+  sale,
+  salePrice,
   name,
   sale
 `
@@ -217,6 +225,8 @@ const cosmeticsFields = groq`
   "product_id": product_id.current,
   "author": author->{name, picture},
   price,
+  sale,
+  salePrice,
   name
 `
 
@@ -272,6 +282,8 @@ const elderlyFields = groq`
   "product_id": product_id.current,
   "author": author->{name, picture},
   price,
+  sale,
+  salePrice,
   name
 `
 
@@ -327,6 +339,8 @@ const vitaminFields = groq`
   "product_id": product_id.current,
   "author": author->{name, picture},
   price,
+  sale,
+  salePrice,
   name
 `
 
@@ -382,6 +396,8 @@ const childrenFields = groq`
   "product_id": product_id.current,
   "author": author->{name, picture},
   price,
+  sale,
+  salePrice,
   name
 `
 
@@ -437,6 +453,8 @@ const pregnancyFields = groq`
   "product_id": product_id.current,
   "author": author->{name, picture},
   price,
+  sale,
+  salePrice,
   name
 `
 

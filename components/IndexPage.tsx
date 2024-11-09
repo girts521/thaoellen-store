@@ -108,6 +108,8 @@ export default function IndexPage(props: IndexPageProps) {
                 product_id={product.product_id}
                 excerpt={product.excerpt}
                 price={product.price}
+                sale={product.sale}
+                salePrice={product.salePrice}
                 path={'sale'}
               />
             </div>

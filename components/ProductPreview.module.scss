@@ -5,6 +5,7 @@
     margin-bottom: 15px;
     padding: 12px;
     cursor: pointer;
+    position: relative;
     box-shadow:
         5px 5px 0 0 #9796ae3a,
         /* This is your --tw-shadow */
@@ -85,5 +86,19 @@
         @media (min-width: 768px) {
             font-size: 18px;
         }
+    }
+
+    .oldSalesPrice{
+        font-size: 11px;
+        text-decoration: line-through;
+    }
+
+    .salesPrice{
+        color: red;
+    }
+    .saleIcon{
+        position: absolute;
+        height: 70px;
+        width: auto;
     }
 }

@@ -13,6 +13,8 @@ export default function ProductPreview({
   author,
   product_id,
   price,
+  sale,
+  salePrice,
   path,
 }: Omit<Product, '_id'>) {
   const router = useRouter();
@@ -22,9 +24,9 @@ export default function ProductPreview({
     router.push(`/${path}/${product_id}`);
 
   }
-
   return (
     <div onClick={redirect} className={styles.container}>
+      {sale && <img className={styles.saleIcon} src='/sale.svg'></img>}
       <div className={styles.imageContainer} >
         <CoverImage
           path={path}
@@ -38,7 +40,8 @@ export default function ProductPreview({
       {title}
       </h3>
       {excerpt && <p className={styles.excerpt} >{excerpt}</p>}
-      <div className={styles.price}>Giá: {`${price}`} VND</div>
+      <div  className={`${styles.price} ${sale ? styles.oldSalesPrice : ''}`}>Giá: {`${price}`} VND</div>
+      {sale && salePrice && <div  className={`${styles.price} ${sale ? styles.salesPrice : ''}`}>Giá: {`${salePrice}`} VND</div>}
     </div>
   )
 }
