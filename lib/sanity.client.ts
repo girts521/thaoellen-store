@@ -10,8 +10,12 @@ import {
   settingsQuery,
   perfumeIndexQuery,
   onSaleQuery,
+  onSaleSlugsQuery,
+  onSaleAndMoreOnSaleQuery,
   bestsellersQuery,
   getRestBestseller,
+  bestsellersAndMoreBestsellersQuery,
+  bestsellersSlugsQuery,
   cosmeticsIndexQuery,
   cosmeticsSlugsQuery,
   cosmeticsAndMoreCosmeticsQuery,
@@ -124,6 +128,19 @@ export async function getAllProductsOnSale(client: SanityClient): Promise<Post[]
   return (await client.fetch(onSaleQuery)) || []
 }
 
+export async function getAllSaleSlugs(): Promise<Pick<Post, 'slug'>[]> {
+  const client = getClient()
+  const slugs = (await client.fetch<string[]>(onSaleSlugsQuery)) || []
+  return slugs.map((slug) => ({ slug }))
+}
+
+export async function getSale(
+  client: SanityClient,
+  slug: string,
+): Promise<{ post: Post; morePosts: Post[] }> {
+  return await client.fetch(onSaleAndMoreOnSaleQuery, { slug })
+}
+
 // ==================================================================
 // Bestsellers
 // ==================================================================
@@ -132,11 +149,21 @@ export async function getAllBestsellers(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(bestsellersQuery)) || []
 }
 
-// export async function getRestBestsellerProd(client: SanityClient): Promise<Post[]> {
-//   return (await client.fetch(getRestBestseller)) || []
-// }
 export async function getRestBestsellerProd(client: SanityClient, firstIds: string[]): Promise<Post[]> {
   return (await client.fetch(getRestBestseller, { firstIds })) || [];
+}
+
+export async function getAllBestellersSlugs(): Promise<Pick<Post, 'slug'>[]> {
+  const client = getClient()
+  const slugs = (await client.fetch<string[]>(bestsellersSlugsQuery)) || []
+  return slugs.map((slug) => ({ slug }))
+}
+
+export async function getBestsellers(
+  client: SanityClient,
+  slug: string,
+): Promise<{ post: Post; morePosts: Post[] }> {
+  return await client.fetch(bestsellersAndMoreBestsellersQuery, { slug })
 }
 // ==================================================================
 // Cosmetics

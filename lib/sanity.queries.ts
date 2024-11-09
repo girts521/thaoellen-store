@@ -125,8 +125,7 @@ export interface Product {
 // On Sale
 // ==================================================================
 // _type in ["perfume", "otherType1", "otherType2"] &&
-export const onSaleQuery = groq`
-*[sale == true] | order(date desc, _updatedAt desc) {
+const onSaleFields = groq`
   _id,
   title,
   date,
@@ -138,30 +137,33 @@ export const onSaleQuery = groq`
   price,
   name,
   sale
+`
+
+export const onSaleQuery = groq`
+*[sale == true] {
+  ${onSaleFields}
 }`
 
+export const onSaleSlugsQuery = groq`
+*[_type == "sale" && defined(product_id.current)][].product_id.current
+`
+export const onSaleAndMoreOnSaleQuery = groq`
+{
+  "post": *[sale == true  && product_id.current == $slug] | order(_updatedAt desc) [0] {
+    content,
+    ${onSaleFields}
+  },
+  "morePosts": *[sale == true  && product_id.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+    content,
+    ${onSaleFields}
+  }
+}`
 
 // ==================================================================
 // Bestselletrs
 // ==================================================================
-// _type in ["perfume", "otherType1", "otherType2"] &&
-// export const bestsellersQuery = groq`
-// *[bestseller == true] | order(date desc, _updatedAt desc) {
-//   _id,
-//   title,
-//   date,
-//   _updatedAt,
-//   excerpt,
-//   coverImage,
-//   "product_id": product_id.current,
-//   "author": author->{name, picture},
-//   price,
-//   name,
-//   sale
-// }`
 
-export const bestsellersQuery = groq`
-*[bestseller == true] [0...8] {
+const bestsellersFields = groq`
   _id,
   title,
   date,
@@ -173,23 +175,33 @@ export const bestsellersQuery = groq`
   price,
   name,
   sale
+`
+
+export const bestsellersQuery = groq`
+*[bestseller == true] [0...8] {
+  ${bestsellersFields}
 }`
 
 export const getRestBestseller = groq`
 *[bestseller == true  && !(_id in $firstIds)] {
-  _id,
-  title,
-  date,
-  _updatedAt,
-  excerpt,
-  coverImage,
-  "product_id": product_id.current,
-  "author": author->{name, picture},
-  price,
-  name,
-  sale
+  ${bestsellersFields}
 }`
 
+export const bestsellersSlugsQuery = groq`
+*[_type == "bestsellers" && defined(product_id.current)][].product_id.current
+`
+
+export const bestsellersAndMoreBestsellersQuery = groq`
+{
+  "post": *[bestseller == true  && product_id.current == $slug] | order(_updatedAt desc) [0] {
+    content,
+    ${bestsellersFields}
+  },
+  "morePosts": *[bestseller == true  && product_id.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+    content,
+    ${bestsellersFields}
+  }
+}`
 
 // ==================================================================
 // Cosmetics
