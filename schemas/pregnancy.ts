@@ -78,6 +78,12 @@ export default defineType({
       type: 'number',
     }),
     defineField({
+      title: 'On Sale',
+      name: 'sale',
+      type: 'boolean',
+      // validation: rule => rule.precision(3).min(10)
+    }),
+    defineField({
       name: 'coverImage',
       title: 'Cover Image',
       type: 'array',

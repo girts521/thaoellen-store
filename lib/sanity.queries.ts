@@ -124,9 +124,9 @@ export interface Product {
 // ==================================================================
 // On Sale
 // ==================================================================
-
+// _type in ["perfume", "otherType1", "otherType2"] &&
 export const onSaleQuery = groq`
-*[_type in ["perfume", "otherType1", "otherType2"] && sale == true] | order(date desc, _updatedAt desc) {
+*[sale == true] | order(date desc, _updatedAt desc) {
   _id,
   title,
   date,
