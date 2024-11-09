@@ -31,11 +31,12 @@ export interface IndexPageProps {
   vitamin: Product[]
   children: Product[]
   onSale: Product[]
+  bestsellers: Product[]
   settings: Settings
 }
 
 export default function IndexPage(props: IndexPageProps) {
-  const { preview, loading, perfume, cosmetics, elderly, vitamin, children, onSale, settings } = props
+  const { preview, loading, perfume, cosmetics, elderly, vitamin, children, onSale, bestsellers, settings } = props
 
  
   const [heroPost, ...morePosts] = perfume || []
@@ -96,7 +97,7 @@ export default function IndexPage(props: IndexPageProps) {
           <div className={styles.custom_slider}>
           <h1 className={styles.sales_heading}>Sale!</h1>
           <Slider {...sliderSettings}>
-          {elderly.map((product) => (
+          {onSale.map((product) => (
             <div className={styles.cardContainer}>
               <ProductPreview
                 key={product._id}
@@ -113,7 +114,7 @@ export default function IndexPage(props: IndexPageProps) {
         ))}
         </Slider>
           </div>
-          {onSale.length > 0 && <MoreProduct  products={onSale} title='Sale' path='sale' />}
+          {bestsellers.length > 0 && <MoreProduct  products={bestsellers} title='Bestsellers' path='bestseller' />}
           {vitamin.length > 0 && <MoreProduct  products={vitamin} title='Vitamin & More' path='vitamin' />}
           {elderly.length > 0 && <MoreProduct  products={elderly} title='Phụ nữ' path='elderly' />}
           {children.length > 0 && <MoreProduct  products={children} title='Trẻ em' path='children' />}

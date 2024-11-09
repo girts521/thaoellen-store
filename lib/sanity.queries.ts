@@ -140,6 +140,26 @@ export const onSaleQuery = groq`
   sale
 }`
 
+
+// ==================================================================
+// Bestselletrs
+// ==================================================================
+// _type in ["perfume", "otherType1", "otherType2"] &&
+export const bestsellersQuery = groq`
+*[bestseller == true] | order(date desc, _updatedAt desc) {
+  _id,
+  title,
+  date,
+  _updatedAt,
+  excerpt,
+  coverImage,
+  "product_id": product_id.current,
+  "author": author->{name, picture},
+  price,
+  name,
+  sale
+}`
+
 // ==================================================================
 // Cosmetics
 // ==================================================================

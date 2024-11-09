@@ -9,7 +9,8 @@ import {
   getAllElderly,
   getAllVitamin,
   getAllChildren,
-  getAllProductsOnSale
+  getAllProductsOnSale,
+  getAllBestsellers
 } from 'lib/sanity.client'
 import { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
@@ -22,6 +23,7 @@ interface PageProps extends SharedPageProps {
   vitamin: Post[]
   children: Post[]
   onSale: Post[]
+  bestseller: Post[]
   settings: Settings
 }
 
@@ -30,7 +32,7 @@ interface Query {
 }
 
 export default function Page(props: PageProps) {
-  const { perfume, cosmetics, elderly, vitamin, children, onSale, settings, draftMode } = props
+  const { perfume, cosmetics, elderly, vitamin, children, onSale, bestseller, settings, draftMode } = props
 
   if (draftMode) {
     return (
@@ -41,6 +43,7 @@ export default function Page(props: PageProps) {
         vitamin={vitamin}
         children={children}
         onSale={onSale}
+        bestsellers={bestseller}
         settings={settings}
       />
     )
@@ -54,6 +57,7 @@ export default function Page(props: PageProps) {
       vitamin={vitamin}
       children={children}
       onSale={onSale}
+      bestsellers={bestseller}
       settings={settings}
     />
   )
@@ -63,7 +67,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   const { draftMode = false } = ctx
   const client = getClient(draftMode ? { token: readToken } : undefined)
 
-  const [settings, perfume = [], cosmetics = [], elderly = [], vitamin = [], children = [], onSale = []] =
+  const [settings, perfume = [], cosmetics = [], elderly = [], vitamin = [], children = [], onSale = [], bestseller = []] =
     await Promise.all([
       getSettings(client),
       getAllPerfume(client),
@@ -71,7 +75,8 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
       getAllElderly(client),
       getAllVitamin(client),
       getAllChildren(client),
-      getAllProductsOnSale(client)
+      getAllProductsOnSale(client),
+      getAllBestsellers(client)
     ])
 
   return {
@@ -82,6 +87,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
       vitamin,
       children,
       onSale,
+      bestseller,
       settings,
       draftMode,
       token: draftMode ? readToken : '',

@@ -84,6 +84,11 @@ export default defineType({
       // validation: rule => rule.precision(3).min(10)
     }),
     defineField({
+      title: 'Bestsellers',
+      name: 'bestseller',
+      type: 'boolean',
+    }),
+    defineField({
       name: 'coverImage',
       title: 'Cover Image',
       type: 'array',

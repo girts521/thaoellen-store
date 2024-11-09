@@ -82,7 +82,11 @@ export default defineType({
       title: 'On Sale',
       name: 'sale',
       type: 'boolean',
-      // validation: rule => rule.precision(3).min(10)
+    }),
+    defineField({
+      title: 'Bestsellers',
+      name: 'bestseller',
+      type: 'boolean',
     }),
     defineField({
       name: 'coverImage',

@@ -9,6 +9,7 @@ import {
   settingsQuery,
   perfumeIndexQuery,
   onSaleQuery,
+  bestsellersQuery,
   cosmeticsIndexQuery,
   cosmeticsSlugsQuery,
   cosmeticsAndMoreCosmeticsQuery,
@@ -120,6 +121,15 @@ export async function getPerfume(
 export async function getAllProductsOnSale(client: SanityClient): Promise<Post[]> {
   return (await client.fetch(onSaleQuery)) || []
 }
+
+// ==================================================================
+// Bestsellers
+// ==================================================================
+
+export async function getAllBestsellers(client: SanityClient): Promise<Post[]> {
+  return (await client.fetch(bestsellersQuery)) || []
+}
+
 // ==================================================================
 // Cosmetics
 // ==================================================================
