@@ -28,8 +28,20 @@
       
       .marquee p {
         display: inline-block;
-        padding-right: 50vw; /* Space between the messages */
+        padding-right: 5vw; /* Space between the messages */
         animation: scroll 8s linear infinite;
+
+        @media (min-width: 1024px) {
+            padding-right: 5vw; /* Space between the messages */
+            padding-left: 25vw;
+            animation: scroll 10s linear infinite;
+        }
+        
+        @media (min-width: 1440px) {
+            padding-right: 5vw; /* Space between the messages */
+            padding-left: 35vw;
+            animation: scroll 13s linear infinite;
+        }
       }
       
       @keyframes scroll {
