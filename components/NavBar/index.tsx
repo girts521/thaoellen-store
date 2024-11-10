@@ -183,6 +183,10 @@ const NavBar: React.FC = () => {
           }}
           src="/bag.png" alt="shopping menu" width={25} height={25} /> */}
         </div>
+        <div className={styles.marquee}>
+          <p>🔥 Big Sale: Up to 50% off on selected items! Don't miss out! 🔥</p>
+          {/* <p>🔥 Big Sale: Up to 50% off on selected items! Don't miss out! 🔥</p> */}
+        </div>
       </div>
 
       {minicart && <Minicart close={closeMinicart} />}

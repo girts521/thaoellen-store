@@ -15,12 +15,14 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProductPreview from 'components/ProductPreview'
+import dynamic from 'next/dynamic';
 
-
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+import sale_lottie from "../public/sale_lottie.json"
+import buy_lottie from "../public/buy_lottie.json"
 
 
 import Heading from 'components/Heading'
-import { set } from 'date-fns'
 
 export interface IndexPageProps {
   preview?: boolean
@@ -95,7 +97,9 @@ export default function IndexPage(props: IndexPageProps) {
           <Heading text={"Thach Thao German Store"} />
 
           <div className={styles.custom_slider}>
-          <h1 className={styles.sales_heading}>Sale!</h1>
+          {/* <h1 className={styles.sales_heading}>Sale!</h1> */}
+          {/* <img className={styles.sales_title} src="/sale_title.png" alt="" /> */}
+          <Lottie animationData={sale_lottie} loop={true} />
           <Slider {...sliderSettings}>
           {onSale.map((product) => (
             <div className={styles.cardContainer}>
@@ -115,6 +119,7 @@ export default function IndexPage(props: IndexPageProps) {
             </div>
         ))}
         </Slider>
+        <Lottie style={{height: "400px"}} animationData={buy_lottie} loop={true} />
           </div>
           {bestsellers.length > 0 && <MoreProduct  products={bestsellers} title='Bestsellers' path='bestseller' />}
           {vitamin.length > 0 && <MoreProduct  products={vitamin} title='Vitamin & More' path='vitamin' />}

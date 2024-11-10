@@ -11,6 +11,35 @@
     img {
         cursor: pointer;
     }
+
+    .marquee {
+        display: flex;
+        position: absolute;
+        bottom: -40px;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        background: #f1c40f;
+        padding: 10px 0;
+        color: #000;
+        font-weight: bold;
+        white-space: nowrap;
+      }
+      
+      .marquee p {
+        display: inline-block;
+        padding-right: 50vw; /* Space between the messages */
+        animation: scroll 8s linear infinite;
+      }
+      
+      @keyframes scroll {
+        from {
+          transform: translateX(100%);
+        }
+        to {
+          transform: translateX(-100%);
+        }
+      }
 }
 
 .imagecontainer {
