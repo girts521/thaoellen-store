@@ -16,6 +16,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProductPreview from 'components/ProductPreview'
 import dynamic from 'next/dynamic';
+import CookieConsent from "react-cookie-consent";
+
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 import sale_lottie from "../public/sale_lottie.json"
@@ -119,7 +121,6 @@ export default function IndexPage(props: IndexPageProps) {
             </div>
         ))}
         </Slider>
-        <Lottie style={{height: "400px"}} animationData={buy_lottie} loop={true} />
           </div>
           {bestsellers.length > 0 && <MoreProduct  products={bestsellers} title='Bestsellers' path='bestseller' />}
           {vitamin.length > 0 && <MoreProduct  products={vitamin} title='Vitamin & More' path='vitamin' />}
@@ -130,7 +131,10 @@ export default function IndexPage(props: IndexPageProps) {
           <div style={middleImageStyles} className={styles.middleImage}>
           <Image  src="/d-flower-left.png" alt='Flower image background' width={1000} height={1000} />
           </div>
-
+		<CookieConsent
+		buttonText="Tôi hiểu"
+		 style={{ background: "#6a66df" }}
+		>Trang web này sử dụng cookie để nâng cao trải nghiệm của người dùng.</CookieConsent>
         </Container>
       </Layout>
     </>
