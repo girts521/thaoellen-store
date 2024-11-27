@@ -121,7 +121,7 @@ export default function IndexPage(props: IndexPageProps) {
             </div>
         ))}
         </Slider>
-          </div>
+		</div>
           {bestsellers.length > 0 && <MoreProduct  products={bestsellers} title='Bestsellers' path='bestseller' />}
           {vitamin.length > 0 && <MoreProduct  products={vitamin} title='Vitamin & More' path='vitamin' />}
           {elderly.length > 0 && <MoreProduct  products={elderly} title='Phụ nữ' path='elderly' />}

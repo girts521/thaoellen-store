@@ -18,7 +18,7 @@ import {
   } from '@react-email/components';
 
 interface EmailTemplateProps {
-  firstName: string;
+  orderId: string;
 }
 
 const container: React.CSSProperties = {
@@ -57,13 +57,13 @@ const title: React.CSSProperties = {
 
 
  const SendEmail: React.FC<Readonly<EmailTemplateProps>> = ({
-  firstName,
+  orderId
 }) => (
     <Html lang="en">
   <Body >
-    <Heading >Welcome, {firstName}!</Heading>
-    <Text>Thank you for registering!</Text>
-    <Link href="https://gkarcevskis.com">Visit our page!</Link>
+    <Heading >Cảm ơn!</Heading>
+    <Text>Cảm ơn bạn đã đặt hàng!</Text>
+	<Text>Số đơn hàng: {orderId}</Text>
   </Body>
   </Html>
 );

@@ -44,6 +44,16 @@
     text-transform: uppercase;
   }
 
+  .oldPrice{
+      font-size: 20px;
+      text-decoration: line-through;
+  }
+
+  .newPrice{
+      color: red;
+      font-size: 24px;
+  }
+
   h3 {
     // color: #474574;
     color: black;

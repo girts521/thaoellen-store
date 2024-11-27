@@ -27,7 +27,7 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   },
 }
 
-export default function PerfumeBody({ content, price, title, product_id }) {
+export default function PerfumeBody({ content, price, salePrice, title, product_id }) {
 
 const [notification, setNotification] = useState(false)
 const [notificationText, setNotificationText] = useState('')
@@ -84,7 +84,14 @@ const [notificationText, setNotificationText] = useState('')
       <h2>{title}</h2>
       {notification && <Notification text={notificationText} />}
       <PortableText value={content} components={myPortableTextComponents} />
-      <div className={styles.price}>Price: {`${price}`}</div>
+      {salePrice ? 
+        <>
+          <div className={styles.oldPrice}>Price: {`${price}`}</div>
+          <div className={styles.newPrice}>Price: {`${salePrice}`}</div>
+        </>
+       :
+       <div className={styles.price}>Price: {`${price}`}</div>
+      }
       <div className={styles.action}>
         <button onClick={addToCart} className={styles.addToCart}>
           {' '}

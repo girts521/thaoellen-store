@@ -68,7 +68,9 @@ const Minicart = ({ close }) => {
   useEffect(() => {
     const calculateTotalPrice = () => {
       const totalPriceCalc = cartDB.reduce((acc, item) => {
-        const price = item[0].price * findQuantity(item)
+        console.log("item inside here: ", item)
+        const productPrice = item[0].salePrice ? item[0].salePrice : item[0].price
+        const price = productPrice * findQuantity(item)
         return acc + price
       }, 0)
       setTotalPrice(totalPriceCalc)

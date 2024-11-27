@@ -10,6 +10,7 @@ const productByIdQuery = groq`
   excerpt,
   product_id,
   price,
+  salePrice
 }
 `;
 

@@ -75,6 +75,8 @@ const MiniCartProduct = ({product, quantity, setCart}) => {
         }
     }
 
+    console.log("product in cart: ", product)
+
   return (
     <li>
       <div className={styles.product}>
@@ -90,7 +92,11 @@ const MiniCartProduct = ({product, quantity, setCart}) => {
           </div>
 
           <div className={styles.productPrice}>
-          Giá: <p>{product[0].price} VND</p>
+          {product[0].salePrice ?
+            <>Giá: <p>{product[0].salePrice} VND</p></>
+          :
+           <> Giá: <p>{product[0].price} VND</p></>
+          }
           </div>
 
           <h3>Số lượng</h3>

@@ -29,8 +29,6 @@ export default function PostPage(props: PostPageProps) {
   const { title = demo.title } = settings || {}
 
   const slug = perfume?.product_id
-
-
   const router = useRouter();
   const currentPath = router.pathname.split('/')[1]
 
@@ -57,7 +55,7 @@ export default function PostPage(props: PostPageProps) {
                   product_id={perfume.product_id}
                   author={perfume.author}
                 />
-                <PerfumeBody product_id={perfume.product_id} title={perfume.title} content={perfume.content} price={perfume.price}/>
+                <PerfumeBody product_id={perfume.product_id} title={perfume.title} content={perfume.content} price={perfume.price} salePrice={perfume.salePrice ? perfume.salePrice : null}/>
 
               </div>
               {morePerfume?.length > 0 && <MoreProduct products={morePerfume} title='Sản phẩm tương tự' path={currentPath} />}

@@ -1,8 +1,14 @@
 import { db } from 'lib/firebaseAdmin'
 import admin from 'firebase-admin'
 import crypto from 'crypto'
+import { customAlphabet } from 'nanoid'
+import SendEmail from "../../components/SendEmail/SendEmail"
+import { Resend } from 'resend';
+
 
 const secretKey = process.env.ENCRYPTION_KEY
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 
 function encrypt(text, key) {
   const iv = crypto.randomBytes(16)
@@ -34,6 +40,9 @@ export default async (req, res) => {
     try {
       const data = JSON.parse(req.body)
       const { email, name, surname, phone, address, cart } = data
+      const nanoid = customAlphabet('1234567890abcdef', 10)
+      const uuid = nanoid(5)
+      const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
 
       const keyBuffer = Buffer.from(secretKey, 'hex')
 
@@ -78,9 +87,19 @@ export default async (req, res) => {
           authTag: encryptedCart.authTag,
         },
         dateAdded: admin.firestore.FieldValue.serverTimestamp(),
+        order_id: uuid + "-" + timestamp
       })
 
-      res.status(200).json({ id: newUserDoc.id })
+      if (newUserDoc)
+      {
+        await resend.emails.send({
+          from: 'Girts <girts@email.thaoellen.com>',
+          to: [`${email}`],
+          subject: 'Cảm ơn bạn đã đặt hàng!',
+          react: SendEmail({orderId: `${uuid + "-" + timestamp}` }),
+        });
+        res.status(200).json({ id: uuid + "-" + timestamp })
+      }
     } catch (error) {
       console.log(error)
       res.status(500).json({ error })

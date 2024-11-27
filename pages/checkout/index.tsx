@@ -4,11 +4,17 @@ import { useRouter } from 'next/router'
 import Notification from 'components/Notification'
 import { useState } from 'react'
 import { redirect } from 'next/dist/server/api-utils'
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
+import Link from 'next/link';
 
 const Checkout = () => {
   const router = useRouter()
   const [notification, setNotification] = useState(false)
   const [notificationText, setNotificationText] = useState('')
+
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
   function validatePhoneNumber(phoneNumber) {
     // German phone numbers (country code optional)
@@ -115,9 +121,11 @@ const Checkout = () => {
       cart.forEach((item) => {
         message += `${item.quantity} x ${item.product_id}, `
       })
-     
+
       window.open(
-        `https://m.me/111098168639376/?text=Hey, I am interested in ${cart.length > 1 ? 'these products' : 'this product'}: ${message} Can you please tell me more?`,
+        `https://m.me/111098168639376/?text=Hey, I am interested in ${
+          cart.length > 1 ? 'these products' : 'this product'
+        }: ${message} Can you please tell me more?`,
         '_blank',
       )
     }
@@ -154,12 +162,21 @@ const Checkout = () => {
             <textarea id="address" />
           </div>
 
-          <div className={styles.action}>
-          <button type="submit" className={styles.submit}>
-          Đặt hàng
-          </button>
+          <FormGroup>
+            <FormControlLabel
+              required
+              control={<Checkbox />}
+              label="Tôi đồng ý với các điều khoản và điều kiện"
+            />
+            <Link href="/tos">Điều khoản và điều kiện của chúng tôi có thể được tìm thấy ở đây</Link>
+          </FormGroup>
 
-          <button onClick={contact}>Liên hệ để mua</button>
+          <div className={styles.action}>
+            <button type="submit" className={styles.submit}>
+              Đặt hàng
+            </button>
+
+            <button onClick={contact}>Liên hệ để mua</button>
           </div>
         </form>
       </div>
