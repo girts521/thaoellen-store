@@ -53,6 +53,8 @@ export default function MoreProduct({
             author={product.author}
             product_id={product.product_id}
             excerpt={product.excerpt}
+            sale={product.sale}
+            salePrice={product.salePrice}
             price={product.price}
             path={path}
           />
@@ -68,6 +70,8 @@ export default function MoreProduct({
             author={product.author}
             product_id={product.product_id}
             excerpt={product.excerpt}
+            sale={product.sale}
+            salePrice={product.salePrice}
             price={product.price}
             path={path}
           />
