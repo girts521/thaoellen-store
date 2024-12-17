@@ -93,9 +93,9 @@ const MiniCartProduct = ({product, quantity, setCart}) => {
 
           <div className={styles.productPrice}>
           {product[0].salePrice ?
-            <>Giá: <p>{product[0].salePrice} VND</p></>
+            <>Giá: <p>{product[0].salePrice} 000 VND</p></>
           :
-           <> Giá: <p>{product[0].price} VND</p></>
+           <> Giá: <p>{product[0].price} 000 VND</p></>
           }
           </div>
 

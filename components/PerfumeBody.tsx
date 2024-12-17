@@ -86,11 +86,11 @@ const [notificationText, setNotificationText] = useState('')
       <PortableText value={content} components={myPortableTextComponents} />
       {salePrice ? 
         <>
-          <div className={styles.oldPrice}>Price: {`${price}`}</div>
-          <div className={styles.newPrice}>Price: {`${salePrice}`}</div>
+          <div className={styles.oldPrice}>Giá: {`${price}`} 000</div>
+          <div className={styles.newPrice}>Giá: {`${salePrice}`} 000</div>
         </>
        :
-       <div className={styles.price}>Price: {`${price}`}</div>
+       <div className={styles.price}>Giá: {`${price}`} 000</div>
       }
       <div className={styles.action}>
         <button onClick={addToCart} className={styles.addToCart}>
@@ -104,7 +104,7 @@ const [notificationText, setNotificationText] = useState('')
           {/* Add to cart */}
           Thêm vào giỏ hàng
         </button>
-        <a target='blank' href={`https://m.me/111098168639376/?text=Hey, I am interested in this product: ${title}. Can you please tell me more?`}>
+        <a target='blank' href={`https://m.me/NguyenThiThachThao95/?text=Hey, I am interested in this product: ${title}. Can you please tell me more?`}>
         <button className={styles.contact}>
          
           <Image

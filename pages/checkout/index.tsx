@@ -112,7 +112,7 @@ const Checkout = () => {
     const cart = JSON.parse(localStorage.getItem('cart'))
     if (!cart || cart.length === 0) {
       window.open(
-        `https://m.me/111098168639376/?text=Hey, I am interested in some of your products. Can you please tell me more?`,
+        `https://m.me/NguyenThiThachThao95/?text=Hey, I am interested in some of your products. Can you please tell me more?`,
         '_blank',
       )
       return
@@ -123,7 +123,7 @@ const Checkout = () => {
       })
 
       window.open(
-        `https://m.me/111098168639376/?text=Hey, I am interested in ${
+        `https://m.me/NguyenThiThachThao95/?text=Hey, I am interested in ${
           cart.length > 1 ? 'these products' : 'this product'
         }: ${message} Can you please tell me more?`,
         '_blank',

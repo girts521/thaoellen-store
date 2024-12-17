@@ -40,8 +40,8 @@ export default function ProductPreview({
       {title}
       </h3>
       {excerpt && <p className={styles.excerpt} >{excerpt}</p>}
-      <div  className={`${styles.price} ${sale ? styles.oldSalesPrice : ''}`}>Giá: {`${price}`} VND</div>
-      {sale && salePrice && <div  className={`${styles.price} ${sale ? styles.salesPrice : ''}`}>Giá: {`${salePrice}`} VND</div>}
+      <div  className={`${styles.price} ${sale ? styles.oldSalesPrice : ''}`}>Giá: {`${price}`} 000 VND</div>
+      {sale && salePrice && <div  className={`${styles.price} ${sale ? styles.salesPrice : ''}`}>Giá: {`${salePrice}`} 000 VND</div>}
     </div>
   )
 }
