@@ -104,7 +104,7 @@ const [notificationText, setNotificationText] = useState('')
           {/* Add to cart */}
           Thêm vào giỏ hàng
         </button>
-        <a target='blank' href={`https://m.me/NguyenThiThachThao95/?text=Hey, I am interested in this product: ${title}. Can you please tell me more?`}>
+        <a target='blank' href={`https://m.me/NguyenThiThachThao95/?text=Chào bạn, mình quan tâm đến sản phẩm: ${title}. Bạn có thể cho mình biết thêm thông tin được không?`}>
         <button className={styles.contact}>
          
           <Image
