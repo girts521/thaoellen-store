@@ -15,9 +15,10 @@
     "singleQuote": true
   },
   "dependencies": {
-    "@emotion/react": "^11.13.5",
-    "@emotion/styled": "^11.13.5",
-    "@mui/material": "^6.1.8",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.3.1",
+    "@mui/material": "^6.3.1",
     "@portabletext/react": "3.0.7",
     "@react-email/components": "0.0.12",
     "@rive-app/react-canvas": "^4.5.6",

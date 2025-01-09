@@ -17,6 +17,9 @@ import "slick-carousel/slick/slick-theme.css";
 import ProductPreview from 'components/ProductPreview'
 import dynamic from 'next/dynamic';
 import CookieConsent from "react-cookie-consent";
+import GoogleAuthButton from 'components/GoogleAuthButton'
+import SignOutButton from 'components/GoogleSignOutBtn'
+import {auth} from 'lib/firebase'
 
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
@@ -82,7 +85,6 @@ export default function IndexPage(props: IndexPageProps) {
 
   useEffect(() => {
     setFullHeight(document.documentElement.scrollHeight);
-
   
   }, []);
 

@@ -16,6 +16,7 @@ import { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import type { SharedPageProps } from 'pages/_app'
 
+
 interface PageProps extends SharedPageProps {
   perfume: Post[]
   cosmetics: Post[]

@@ -3,6 +3,9 @@ import Image from 'next/image'
 import styles from './index.module.scss'
 import Minicart from 'components/Minicart/Minicart'
 import { useRouter } from 'next/router'
+// import GoogleAuthButton from 'components/GoogleAuthButton'
+import { googleSignIn } from '../../lib/firebase'
+
 
 const NavBar: React.FC = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
@@ -11,6 +14,8 @@ const NavBar: React.FC = () => {
   const [nuocTitle, setNuocTitle] = useState(null)
   const [phamTitle, setPhamTitle] = useState(null)
   const [hoiTitle, setHoiTitle] = useState(null)
+  const [userImage, setUserImage] = useState('/login.svg')
+  const [signedIn, setSignedIn] = useState(false);
 
   const router = useRouter()
 
@@ -18,6 +23,20 @@ const NavBar: React.FC = () => {
    
     setIsBurgerMenuOpen(!isBurgerMenuOpen)
   }
+
+  const handleSignIn = async () => {
+    try {
+      const signInState = await googleSignIn(); // Await sign-in result
+      if (signInState) {
+        setSignedIn(true); // Update state
+        router.push("/user"); // Redirect
+      } else {
+        router.push("/user");
+      }
+    } catch (error) {
+      console.error("Error during sign-in:", error);
+    }
+  };
 
   const closeMinicart = () => {
   document.querySelector("body").style.overflow = "auto"
@@ -34,6 +53,11 @@ const NavBar: React.FC = () => {
   }, [isBurgerMenuOpen])
 
   useEffect(() => {
+
+    const localUserImage = JSON.parse(localStorage.getItem("userImage"))
+    if (localUserImage)
+      setUserImage(localUserImage);
+
     // Close the burger menu when the screen width is less than a certain threshold (e.g., 768px)
     const handleResize = () => {
       if (window.innerWidth > 1024) {
@@ -138,8 +162,16 @@ const NavBar: React.FC = () => {
         >
           Nước hoa
         </h3>
-
         <div className={styles.imagecontainer}>
+          {/* <GoogleAuthButton /> */}
+          <Image 
+          className={` ${styles.login}`} 
+          src={userImage} 
+          alt='User login'
+          width={100}
+          height={100}
+          onClick={handleSignIn}
+          />
           <Image
             className={styles.mobile}
             onClick={handleBurgerMenuClick}
@@ -175,6 +207,7 @@ const NavBar: React.FC = () => {
 
             {/* <a href="https://www.flaticon.com/free-icons/shopping-bag" title="shopping bag icons">Shopping bag icons created by Abiyoga Pratama - Flaticon</a> */}
           </div>
+          
 
           {/* <Image
           onClick={() => {

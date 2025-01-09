@@ -1,21 +1,22 @@
-import React from 'react';
-import { signOut } from 'firebase/auth';
-import { auth } from 'lib/firebase';
+import React from 'react'
+import { getAuth, signOut } from 'firebase/auth'
+import {auth} from 'lib/firebase'
+
 
 const SignOutButton = () => {
-  const signOutUser = async () => {
-    try {
-      await signOut(auth);
-      console.log('User signed out successfully');
-      // Optionally, redirect or update the UI after sign out
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
-  };
+  const signOutUser = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        console.log("Sign out successful")
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(`Error ${error}`)
+      })
+  }
 
-  return (
-    <button onClick={signOutUser}>Sign Out</button>
-  );
-};
+  return <button onClick={signOutUser}>Sign Out</button>
+}
 
-export default SignOutButton;
+export default SignOutButton

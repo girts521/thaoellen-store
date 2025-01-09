@@ -1,8 +1,9 @@
 import { getApps, initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, getDocs, addDoc, query, where,doc,getDoc } from 'firebase/firestore'
+import { getFirestore, collection, getDocs, addDoc, query, where,doc,getDoc,setDoc } from 'firebase/firestore'
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth'
 import 'firebase/firestore'
+
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -38,14 +39,51 @@ if (auth) {
     if (user) {
       // User is signed in.
       console.log("User is signed in:", user);
+      localStorage.setItem("user", JSON.stringify(user.uid));
+      localStorage.setItem("userImage", JSON.stringify(user.photoURL));
     } else {
       // User is signed out.
       console.log("User is signed out");
+      localStorage.removeItem("user");
+      localStorage.removeItem("userImage");
     }
   });
 }
 
 export { db, auth, provider, fbProvider };
+
+export async function googleSignIn() {
+  if (auth.currentUser)
+    return;
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    const idToken = await user.getIdToken();
+
+    // Check if user exists in Firestore, if not create a new document
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (!userSnap.exists()) {
+      // Create a new user document in Firestore if it doesn't exist
+      await setDoc(userRef, {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        cart: [], // Initialize an empty cart
+        address: {} // Initialize an empty address object
+      });
+    }
+
+    console.log("User data stored in Firestore:", user);
+    return true;
+    // Now, you can use the ID token for backend verification if necessary
+  } catch (error) {
+    console.error("Error during sign-in:", error);
+    return false;
+  }
+};
 
 
 export async function signIn(email, password) {

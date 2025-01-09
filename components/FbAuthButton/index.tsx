@@ -10,7 +10,7 @@ const FbAuthButton = () => {
       console.log('Signed in user:', user);
       // Handle additional tasks after successful sign in, if needed
     } catch (error) {
-      console.error('Error during Google sign in:', error);
+      console.error('Error during FB sign in:', error);
       // Handle errors here
     }
   };
