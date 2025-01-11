@@ -53,7 +53,7 @@ interface UserFormProps {
           {text ? (
             <ListItemText>{text}</ListItemText>
           ) : (
-            <div>No {field.toLowerCase()} saved</div>
+            <ListItemText>No {field.toLowerCase()} saved</ListItemText>
           )}
         </Fade>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
@@ -69,13 +69,13 @@ interface UserFormProps {
         <Stack
           spacing={1}
           direction="column"
-          sx={{ width: '95%', marginLeft: '16px' }}
+          sx={{ width: '95%', marginLeft: '16px', marginTop: '16px' }}
         >
           <TextField
             label="Multiline"
             multiline
             defaultValue={
-                text ? text : `No ${field.toLowerCase()} saved`
+                text ? text : null
             }
             variant="standard"
           />

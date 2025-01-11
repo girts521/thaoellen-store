@@ -25,6 +25,10 @@ const UserPage: React.FC = () => {
   const [dbUser, setDbUser] = useState(null)
   const [editAddress, setEditAddress] = useState(false)
   const [addressState, setAddressState] = useState(true)
+  const [editEmail, setEditEmail] = useState(false)
+  const [emailState, setEmailState] = useState(true)
+  const [editPhone, setEditPhone] = useState(false)
+  const [phoneState, setPhoneState] = useState(true)
 
   const addressRef = useRef(null)
 
@@ -98,7 +102,6 @@ const UserPage: React.FC = () => {
                     width: '100%',
                   }}
                 >
-                  {/* HERE!!! */}
                   <UserForm
                     text={dbUser && dbUser.address ? dbUser.address : null}
                     field="Address"
@@ -110,39 +113,27 @@ const UserPage: React.FC = () => {
                   />
                   <Divider />
 
-                  <MenuItem>
-                    <ListItemIcon>
-                      <EmailIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Email</ListItemText>
-                    {dbUser && dbUser.email && (
-                      <ListItemText>{dbUser.email}</ListItemText>
-                    )}
-                    <Typography
-                      variant="body2"
-                      sx={{ color: 'text.secondary' }}
-                    >
-                      <ArrowForwardIosIcon fontSize="small" />
-                    </Typography>
-                  </MenuItem>
+                  <UserForm
+                    text={dbUser && dbUser.email ? dbUser.email : null}
+                    field="Email"
+                    state={emailState}
+                    edit={editEmail}
+                    setEdit={setEditEmail}
+                    setState={setEmailState}
+                    icon={<EmailIcon fontSize="small" />}
+                  />
 
                   <Divider />
 
-                  <MenuItem>
-                    <ListItemIcon>
-                      <PhoneIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Phone</ListItemText>
-                    {dbUser && dbUser.phone && (
-                      <ListItemText>{dbUser.phone}</ListItemText>
-                    )}
-                    <Typography
-                      variant="body2"
-                      sx={{ color: 'text.secondary' }}
-                    >
-                      <ArrowForwardIosIcon fontSize="small" />
-                    </Typography>
-                  </MenuItem>
+                  <UserForm
+                    text={dbUser && dbUser.phone ? dbUser.phone : null}
+                    field="Phone"
+                    state={phoneState}
+                    edit={editPhone}
+                    setEdit={setEditPhone}
+                    setState={setPhoneState}
+                    icon={<PhoneIcon fontSize="small" />}
+                  />
 
                   <Divider />
 
