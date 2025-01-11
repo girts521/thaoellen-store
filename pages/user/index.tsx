@@ -3,7 +3,7 @@ import SignOutButton from 'components/GoogleSignOutBtn'
 import styles from './index.module.scss'
 import Image from 'next/image'
 import { auth } from 'lib/firebase'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
@@ -18,9 +18,15 @@ import PhoneIcon from '@mui/icons-material/Phone'
 import EmailIcon from '@mui/icons-material/Email'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
 
+import UserForm from 'components/UserForm'
+
 const UserPage: React.FC = () => {
   const [user, setUser] = useState(null)
   const [dbUser, setDbUser] = useState(null)
+  const [editAddress, setEditAddress] = useState(false)
+  const [addressState, setAddressState] = useState(true)
+
+  const addressRef = useRef(null)
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
@@ -73,7 +79,7 @@ const UserPage: React.FC = () => {
                 width: '100vw',
                 // maxWidth: 500,
                 display: 'flex',
-                flexDirection: "column",
+                flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
@@ -92,27 +98,16 @@ const UserPage: React.FC = () => {
                     width: '100%',
                   }}
                 >
-                  <MenuItem
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <ListItemIcon>
-                      <HomeIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Address</ListItemText>
-                    {dbUser && dbUser.address && (
-                      <ListItemText>{dbUser.address}</ListItemText>
-                    )}
-                    <Typography
-                      variant="body2"
-                      sx={{ color: 'text.secondary' }}
-                    >
-                      <ArrowForwardIosIcon fontSize="small" />
-                    </Typography>
-                  </MenuItem>
-
+                  {/* HERE!!! */}
+                  <UserForm
+                    text={dbUser && dbUser.address ? dbUser.address : null}
+                    field="Address"
+                    state={addressState}
+                    edit={editAddress}
+                    setEdit={setEditAddress}
+                    setState={setAddressState}
+                    icon={<HomeIcon fontSize="small" />}
+                  />
                   <Divider />
 
                   <MenuItem>
