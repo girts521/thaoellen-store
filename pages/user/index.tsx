@@ -17,8 +17,10 @@ import Divider from '@mui/material/Divider'
 import PhoneIcon from '@mui/icons-material/Phone'
 import EmailIcon from '@mui/icons-material/Email'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
+import { useRouter } from 'next/router'
 
 import UserForm from 'components/UserForm'
+import Notification from 'components/Notification'
 
 const UserPage: React.FC = () => {
   const [user, setUser] = useState(null)
@@ -30,7 +32,10 @@ const UserPage: React.FC = () => {
   const [editPhone, setEditPhone] = useState(false)
   const [phoneState, setPhoneState] = useState(true)
 
+  const [showNotification, setNotification] = useState(false)
+
   const addressRef = useRef(null)
+  const router = useRouter()
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
@@ -46,13 +51,16 @@ const UserPage: React.FC = () => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log('Fetched user data:', data.user)
             setDbUser(data.user)
             // Update state with zackend user data if needed
           })
           .catch((error) => {
             console.error('Error fetching user data:', error)
+            router.push('/')
           })
+      }
+      else {
+        router.push('/')
       }
     })
     return () => unsubscribe() // Cleanup listener on unmount
@@ -61,6 +69,7 @@ const UserPage: React.FC = () => {
   return (
     <>
       <Layout preview={false} loading={false}>
+        {showNotification && <Notification text={"Rất tiếc, tính năng này vẫn đang trong quá trình hoàn thiện. Hãy kiểm tra lại sau!"} />}
         {user && (
           <>
             <Box
@@ -72,7 +81,11 @@ const UserPage: React.FC = () => {
                 justifyContent: 'center',
               }}
             >
-              <Typography variant="h2" gutterBottom>
+              <Typography variant="h4" gutterBottom 
+              sx={{
+                textAlign: 'center'
+              }}
+              >
                 Welcome {user.displayName}
               </Typography>
             </Box>
@@ -104,7 +117,7 @@ const UserPage: React.FC = () => {
                 >
                   <UserForm
                     text={dbUser && dbUser.address ? dbUser.address : null}
-                    field="Address"
+                    field="Địa chỉ"
                     state={addressState}
                     edit={editAddress}
                     setEdit={setEditAddress}
@@ -127,7 +140,7 @@ const UserPage: React.FC = () => {
 
                   <UserForm
                     text={dbUser && dbUser.phone ? dbUser.phone : null}
-                    field="Phone"
+                    field="Điện thoại"
                     state={phoneState}
                     edit={editPhone}
                     setEdit={setEditPhone}
@@ -137,7 +150,14 @@ const UserPage: React.FC = () => {
 
                   <Divider />
 
-                  <MenuItem>
+                  <MenuItem
+                  onClick={() => {
+                    setNotification(true)
+                    setTimeout(() => {
+                      setNotification(false)
+                    }, 5000)
+                  }}
+                  >
                     <ListItemIcon>
                       <ShoppingCartCheckoutIcon fontSize="small" />
                     </ListItemIcon>

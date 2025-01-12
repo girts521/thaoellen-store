@@ -1,8 +1,23 @@
-import 'tailwindcss/tailwind.css'
-import './Global.css'
+
 
 import { AppProps } from 'next/app'
 import { lazy } from 'react'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { lime, purple } from '@mui/material/colors';
+import CssBaseline from '@mui/material/CssBaseline';
+import 'tailwindcss/tailwind.css'
+import './Global.css'
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: lime[500], // Use lime's 500 shade
+    },
+    secondary: {
+      main: purple[500], // Use purple's 500 shade
+    },
+  },
+});
 
 export interface SharedPageProps {
   draftMode: boolean
@@ -23,7 +38,10 @@ export default function App({
           <Component {...pageProps} />
         </PreviewProvider>
       ) : (
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
         <Component {...pageProps} />
+        </ThemeProvider>
       )}
     </>
   )

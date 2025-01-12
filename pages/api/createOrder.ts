@@ -14,7 +14,7 @@ export default async (req, res) => {
   if (req.method === 'POST') {
     try {
       const data = JSON.parse(req.body)
-      const { email, name, surname, phone, address, cart } = data
+      const { email, name, phone, address, cart } = data
       const nanoid = customAlphabet('1234567890abcdef', 10)
       const uuid = nanoid(5)
       const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
@@ -23,7 +23,6 @@ export default async (req, res) => {
 
       const encryptedEmail = encrypt(email, keyBuffer)
       const encryptedName = encrypt(name, keyBuffer)
-      const encryptedSurname = encrypt(surname, keyBuffer)
       const encryptedPhone = encrypt(phone, keyBuffer)
       const encryptedAddress = encrypt(address, keyBuffer)
       const encryptedCart = encrypt(JSON.stringify(cart), keyBuffer)
@@ -40,11 +39,6 @@ export default async (req, res) => {
           data: encryptedName.encryptedData,
           iv: encryptedName.iv,
           authTag: encryptedName.authTag,
-        },
-        surname: {
-          data: encryptedSurname.encryptedData,
-          iv: encryptedSurname.iv,
-          authTag: encryptedSurname.authTag,
         },
         phone: {
           data: encryptedPhone.encryptedData,

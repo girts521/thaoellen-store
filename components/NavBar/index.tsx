@@ -7,8 +7,6 @@ import { useRouter } from 'next/router'
 import { googleSignIn } from '../../lib/firebase'
 import { auth } from 'lib/firebase'
 
-
-
 const NavBar: React.FC = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [minicart, setMinicart] = useState(false)
@@ -17,33 +15,32 @@ const NavBar: React.FC = () => {
   const [phamTitle, setPhamTitle] = useState(null)
   const [hoiTitle, setHoiTitle] = useState(null)
   const [userImage, setUserImage] = useState('/login.svg')
-  const [signedIn, setSignedIn] = useState(false);
+  const [signedIn, setSignedIn] = useState(false)
 
   const router = useRouter()
 
   const handleBurgerMenuClick = () => {
-   
     setIsBurgerMenuOpen(!isBurgerMenuOpen)
   }
 
   const handleSignIn = async () => {
     try {
-      const signInState = await googleSignIn(); // Await sign-in result
+      const signInState = await googleSignIn() // Await sign-in result
       if (signInState) {
-        setSignedIn(true); // Update state
-        router.push("/user"); // Redirect
+        setSignedIn(true) // Update state
+        router.push('/user') // Redirect
       } else {
-        router.push("/user");
+        router.push('/user')
       }
     } catch (error) {
-      console.error("Error during sign-in:", error);
+      console.error('Error during sign-in:', error)
     }
-  };
+  }
 
   const closeMinicart = () => {
-  document.querySelector("body").style.overflow = "auto"
-    setIsBurgerMenuOpen(false);
-    setMinicart(false);
+    document.querySelector('body').style.overflow = 'auto'
+    setIsBurgerMenuOpen(false)
+    setMinicart(false)
   }
 
   useEffect(() => {
@@ -86,7 +83,9 @@ const NavBar: React.FC = () => {
       ),
     )
     setHoiTitle(
-      Array.from(document.querySelectorAll('h2')).find(el => el.innerText.includes('Trẻ em'))
+      Array.from(document.querySelectorAll('h2')).find((el) =>
+        el.innerText.includes('Trẻ em'),
+      ),
     )
 
     // Attach the event listener to the window's resize event
@@ -114,11 +113,16 @@ const NavBar: React.FC = () => {
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2'))
+                  .find((el) => el.innerHTML.includes('Vitamin &amp; More'))
+                  .scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
-            }           }}
+              Array.from(document.querySelectorAll('h2'))
+                .find((el) => el.innerHTML.includes('Vitamin &amp; More'))
+                .scrollIntoView({ behavior: 'smooth' })
+            }
+          }}
           className={`${styles.desktop} ${styles.h2}`}
         >
           Vitamin & More
@@ -128,11 +132,15 @@ const NavBar: React.FC = () => {
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Phụ nữ')).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2'))
+                  .find((el) => el.innerHTML.includes('Phụ nữ'))
+                  .scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Phụ nữ')).scrollIntoView({ behavior: 'smooth' })
-            }  
+              Array.from(document.querySelectorAll('h2'))
+                .find((el) => el.innerHTML.includes('Phụ nữ'))
+                .scrollIntoView({ behavior: 'smooth' })
+            }
           }}
           className={`${styles.desktop} ${styles.h2}`}
         >
@@ -143,10 +151,14 @@ const NavBar: React.FC = () => {
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Trẻ em')).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2'))
+                  .find((el) => el.innerHTML.includes('Trẻ em'))
+                  .scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Trẻ em')).scrollIntoView({ behavior: 'smooth' })
+              Array.from(document.querySelectorAll('h2'))
+                .find((el) => el.innerHTML.includes('Trẻ em'))
+                .scrollIntoView({ behavior: 'smooth' })
             }
           }}
           className={`${styles.desktop} ${styles.h2}`}
@@ -158,11 +170,15 @@ const NavBar: React.FC = () => {
             if (router.pathname != '/') {
               router.push('/')
               setTimeout(() => {
-                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
+                Array.from(document.querySelectorAll('h2'))
+                  .find((el) => el.innerHTML.includes('Nước hoa'))
+                  .scrollIntoView({ behavior: 'smooth' })
               }, 500)
             } else {
-              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
-            }          
+              Array.from(document.querySelectorAll('h2'))
+                .find((el) => el.innerHTML.includes('Nước hoa'))
+                .scrollIntoView({ behavior: 'smooth' })
+            }
           }}
           className={`${styles.desktop} ${styles.h2}`}
         >
@@ -170,14 +186,6 @@ const NavBar: React.FC = () => {
         </h3>
         <div className={styles.imagecontainer}>
           {/* <GoogleAuthButton /> */}
-          <Image 
-          className={` ${styles.login}`} 
-          src={userImage} 
-          alt='User login'
-          width={100}
-          height={100}
-          onClick={handleSignIn}
-          />
           <Image
             className={styles.mobile}
             onClick={handleBurgerMenuClick}
@@ -186,34 +194,43 @@ const NavBar: React.FC = () => {
             width={35}
             height={45}
           />
-
-          <div
-            style={{ padding: '12px', cursor: 'pointer' }}
-            onClick={() => {
-              if (window.screen.width < 600){
-                document.querySelector("body").style.overflow = "hidden"
-              }
-              setMinicart(true)
-            }}
-            onTouchStart={() => {
-              if (window.screen.width < 600){
-                document.querySelector("body").style.overflow = "hidden"
-              }
-              setMinicart(true)
-            }}
-          >
+          <div className={styles.cartNlogin} >
+            {' '}
             <Image
-              // className={styles.mobile}
-              // onClick={handleBurgerMenuClick}
-              src={'/cart.png'}
-              alt="Open mini-cart"
-              width={35}
-              height={45}
+              className={` ${styles.login}`}
+              src={userImage}
+              alt="User login"
+              width={100}
+              height={100}
+              onClick={handleSignIn}
             />
+            <div
+              style={{ padding: '12px', cursor: 'pointer' }}
+              onClick={() => {
+                if (window.screen.width < 600) {
+                  document.querySelector('body').style.overflow = 'hidden'
+                }
+                setMinicart(true)
+              }}
+              onTouchStart={() => {
+                if (window.screen.width < 600) {
+                  document.querySelector('body').style.overflow = 'hidden'
+                }
+                setMinicart(true)
+              }}
+            >
+              <Image
+                // className={styles.mobile}
+                // onClick={handleBurgerMenuClick}
+                src={'/cart.png'}
+                alt="Open mini-cart"
+                width={35}
+                height={45}
+              />
 
-            {/* <a href="https://www.flaticon.com/free-icons/shopping-bag" title="shopping bag icons">Shopping bag icons created by Abiyoga Pratama - Flaticon</a> */}
+              {/* <a href="https://www.flaticon.com/free-icons/shopping-bag" title="shopping bag icons">Shopping bag icons created by Abiyoga Pratama - Flaticon</a> */}
+            </div>
           </div>
-          
 
           {/* <Image
           onClick={() => {
@@ -223,7 +240,10 @@ const NavBar: React.FC = () => {
           src="/bag.png" alt="shopping menu" width={25} height={25} /> */}
         </div>
         <div className={styles.marquee}>
-          <p>🔥 KHUYẾN MÃI SỐC TẾT NGUYÊN ĐÁN: GIẢM 10% cho đến hết ngày 29/01/2025 🔥</p>
+          <p>
+            🔥 KHUYẾN MÃI SỐC TẾT NGUYÊN ĐÁN: GIẢM 10% cho đến hết ngày
+            29/01/2025 🔥
+          </p>
           {/* <p>🔥 Big Sale: Up to 50% off on selected items! Don't miss out! 🔥</p> */}
         </div>
       </div>
@@ -265,81 +285,97 @@ const NavBar: React.FC = () => {
               <h2
                 className={styles.h1}
                 onClick={() => {
-                  handleBurgerMenuClick();
+                  handleBurgerMenuClick()
                   router.push('/')
                 }}
               >
                 Thach Thao German Store
               </h2>
               <h3
-          onClick={() => {
-            handleBurgerMenuClick();
-            if (router.pathname != '/') {
-              router.push('/')
-              setTimeout(() => {
-                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
-              }, 500)
-            } else {
-              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Vitamin &amp; More")).scrollIntoView({ behavior: 'smooth' })
-            }           }}
-          className={`${styles.h2}`}
-        >
-          Vitamin & More
-        </h3>
-
-        <h3
-          onClick={() => {
-            handleBurgerMenuClick();
-            if (router.pathname != '/') {
-              router.push('/')
-              setTimeout(() => {
-                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Phụ nữ')).scrollIntoView({ behavior: 'smooth' })
-              }, 500)
-            } else {
-              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Phụ nữ')).scrollIntoView({ behavior: 'smooth' })
-            }  
-          }}
-          className={`${styles.h2}`}
-        >
-          Phụ nữ
-        </h3>
-
-        <h3
-          onClick={() => {
-            handleBurgerMenuClick();
-            if (router.pathname != '/') {
-              router.push('/')
-              setTimeout(() => {
-                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Trẻ em")).scrollIntoView({ behavior: 'smooth' })
-              }, 500)
-            } else {
-              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes("Trẻ em")).scrollIntoView({ behavior: 'smooth' })
-            }
-          }}
-          className={`${styles.h2}`}
-        >
-          Trẻ em
-        </h3>
+                onClick={() => {
+                  handleBurgerMenuClick()
+                  if (router.pathname != '/') {
+                    router.push('/')
+                    setTimeout(() => {
+                      Array.from(document.querySelectorAll('h2'))
+                        .find((el) =>
+                          el.innerHTML.includes('Vitamin &amp; More'),
+                        )
+                        .scrollIntoView({ behavior: 'smooth' })
+                    }, 500)
+                  } else {
+                    Array.from(document.querySelectorAll('h2'))
+                      .find((el) => el.innerHTML.includes('Vitamin &amp; More'))
+                      .scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
+                className={`${styles.h2}`}
+              >
+                Vitamin & More
+              </h3>
 
               <h3
-          onClick={() => {
-            handleBurgerMenuClick();
-            if (router.pathname != '/') {
-              router.push('/')
-              setTimeout(() => {
-                Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
-              }, 500)
-            } else {
-              Array.from(document.querySelectorAll('h2')).find(el => el.innerHTML.includes('Nước hoa')).scrollIntoView({ behavior: 'smooth' })
-            }          
-          }}
-          className={`${styles.h2}`}
-        >
-          Nước hoa
-        </h3>
+                onClick={() => {
+                  handleBurgerMenuClick()
+                  if (router.pathname != '/') {
+                    router.push('/')
+                    setTimeout(() => {
+                      Array.from(document.querySelectorAll('h2'))
+                        .find((el) => el.innerHTML.includes('Phụ nữ'))
+                        .scrollIntoView({ behavior: 'smooth' })
+                    }, 500)
+                  } else {
+                    Array.from(document.querySelectorAll('h2'))
+                      .find((el) => el.innerHTML.includes('Phụ nữ'))
+                      .scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
+                className={`${styles.h2}`}
+              >
+                Phụ nữ
+              </h3>
 
+              <h3
+                onClick={() => {
+                  handleBurgerMenuClick()
+                  if (router.pathname != '/') {
+                    router.push('/')
+                    setTimeout(() => {
+                      Array.from(document.querySelectorAll('h2'))
+                        .find((el) => el.innerHTML.includes('Trẻ em'))
+                        .scrollIntoView({ behavior: 'smooth' })
+                    }, 500)
+                  } else {
+                    Array.from(document.querySelectorAll('h2'))
+                      .find((el) => el.innerHTML.includes('Trẻ em'))
+                      .scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
+                className={`${styles.h2}`}
+              >
+                Trẻ em
+              </h3>
 
-
+              <h3
+                onClick={() => {
+                  handleBurgerMenuClick()
+                  if (router.pathname != '/') {
+                    router.push('/')
+                    setTimeout(() => {
+                      Array.from(document.querySelectorAll('h2'))
+                        .find((el) => el.innerHTML.includes('Nước hoa'))
+                        .scrollIntoView({ behavior: 'smooth' })
+                    }, 500)
+                  } else {
+                    Array.from(document.querySelectorAll('h2'))
+                      .find((el) => el.innerHTML.includes('Nước hoa'))
+                      .scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
+                className={`${styles.h2}`}
+              >
+                Nước hoa
+              </h3>
             </div>
           </div>
         )}

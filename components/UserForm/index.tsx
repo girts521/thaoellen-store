@@ -84,12 +84,25 @@ useEffect(() => {
         <ListItemIcon>
           <div>{icon}</div>
         </ListItemIcon>
-        <ListItemText>{field}</ListItemText>
-        <Fade in={state} mountOnEnter unmountOnExit>
+        <ListItemText 
+        sx={{
+          minWidth: '65px'
+        }}
+        >{field}</ListItemText>
+        <Fade in={state} mountOnEnter unmountOnExit >
           {textState ? (
-            <ListItemText>{textState}</ListItemText>
+            <ListItemText
+            sx={{
+              overflow:'hidden',
+              paddingLeft: '16px',
+              paddingRight: '16px',
+              '@media (max-width: 768px)': {
+                display: 'none'
+              },
+            }}
+            >{textState}</ListItemText>
           ) : (
-            <ListItemText>No {field.toLowerCase()} saved</ListItemText>
+            <ListItemText>Không có {field.toLowerCase()} nào được lưu</ListItemText>
           )}
         </Fade>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>

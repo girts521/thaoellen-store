@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { signIn } from 'lib/firebase'
 import axios from 'axios'
@@ -6,49 +6,51 @@ import { GetServerSideProps } from 'next'
 import { admin } from 'lib/firebaseAdmin'
 import Layout from 'components/BlogLayout'
 import styles from './index.module.scss'
+import { auth } from 'lib/firebase'
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    const cookies = context.req.headers.cookie
-    const token = cookies
-      ? cookies
-          .split('; ')
-          .find((c) => c.startsWith('authToken='))
-          .split('=')[1]
-      : null
 
-    if (token) {
-      const decodedToken = await admin.auth().verifyIdToken(token)
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   try {
+//     const cookies = context.req.headers.cookie
+//     const token = cookies
+//       ? cookies
+//           .split('; ')
+//           .find((c) => c.startsWith('authToken='))
+//           .split('=')[1]
+//       : null
 
-      if (decodedToken.uid === process.env.ADMIN_UID || decodedToken.uid === process.env.ADMIN_UID_2) {
-        return {
-          redirect: {
-            destination: '/admin/dashboard',
-            permanent: false,
-          },
-        }
-      } else {
-        return {
-          redirect: {
-            destination: '/',
-            permanent: false,
-          },
-        }
-      }
-    }
-    if (!token) {
-      return { props: {} }
-    }
-  } catch (error) {
-    console.log('Server-side verification failed', error)
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
-}
+//     if (token) {
+//       const decodedToken = await admin.auth().verifyIdToken(token)
+
+//       if (decodedToken.uid === process.env.ADMIN_UID || decodedToken.uid === process.env.ADMIN_UID_2) {
+//         return {
+//           redirect: {
+//             destination: '/admin/dashboard',
+//             permanent: false,
+//           },
+//         }
+//       } else {
+//         return {
+//           redirect: {
+//             destination: '/',
+//             permanent: false,
+//           },
+//         }
+//       }
+//     }
+//     if (!token) {
+//       return { props: {} }
+//     }
+//   } catch (error) {
+//     console.log('Server-side verification failed', error)
+//     return {
+//       redirect: {
+//         destination: '/',
+//         permanent: false,
+//       },
+//     }
+//   }
+// }
 
 export default function Admin() {
   const router = useRouter()
@@ -56,6 +58,32 @@ export default function Admin() {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [errorMsg, setError] = useState<string>(null)
+
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
+      if (currentUser) {
+        const idToken = await currentUser.getIdToken()
+        // Fetch user details from backend
+        fetch('/api/getUserData', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Fetched user data:', data.user)
+            if(data.user && data.user.isAdmin)
+              router.push('/admin/dashboard')
+          })
+          .catch((error) => {
+            console.error('Error fetching user data:', error)
+          })
+      }
+    })
+    return () => unsubscribe() // Cleanup listener on unmount
+  }, [])
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,

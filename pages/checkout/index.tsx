@@ -9,6 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import Link from 'next/link'
 import { auth } from 'lib/firebase'
+import CheckoutForm from 'components/CheckoutForm'
 
 const Checkout = () => {
   const router = useRouter()
@@ -77,9 +78,7 @@ const Checkout = () => {
 
     if (
       !name.value ||
-      !surname.value ||
       !email.value ||
-      !phone.value ||
       !address.value
     ) {
       setNotificationText('Vui lòng điền đầy đủ thông tin!')
@@ -90,7 +89,7 @@ const Checkout = () => {
       return
     }
 
-    if (!validatePhoneNumber(phone.value)) {
+    if (phone.value && !validatePhoneNumber(phone.value)) {
       setNotificationText('Số điện thoại không hợp lệ!')
       setNotification(true)
       setTimeout(() => {
@@ -123,9 +122,8 @@ const Checkout = () => {
       method: 'POST',
       body: JSON.stringify({
         name: name.value,
-        surname: surname.value,
         email: email.value,
-        phone: phone.value,
+        phone: phone.value ? phone.value : '',
         address: address.value,
         cart,
       }),
@@ -173,6 +171,36 @@ const Checkout = () => {
         {notification && <Notification text={notificationText} />}
         <h1 className={styles.heading}>Thanh toán</h1>
         <form onSubmit={onSubmit} action="">
+          <CheckoutForm
+            userName={userName}
+            setUserName={setUserName}
+            userEmail={userEmail}
+            setUserEmail={setUserEmail}
+            userAddress={userAddress}
+            setUserAddress={setUserAddress}
+            userPhone={userPhone}
+            setUserPhone={setUserPhone}
+          />
+          <FormGroup>
+            <FormControlLabel
+              required
+              control={<Checkbox />}
+              label="Tôi đồng ý với các điều khoản và điều kiện"
+            />
+            <Link href="/tos">
+              Điều khoản và điều kiện của chúng tôi có thể được tìm thấy ở đây
+            </Link>
+          </FormGroup>
+
+          <div className={styles.action}>
+            <button type="submit" className={styles.submit}>
+              Đặt hàng
+            </button>
+
+            <button onClick={contact}>Liên hệ để mua</button>
+          </div>
+        </form>
+        {/* <form onSubmit={onSubmit} action="">
           <div className={styles.input}>
             <label htmlFor="name">Tên</label>
             <input
@@ -242,7 +270,7 @@ const Checkout = () => {
 
             <button onClick={contact}>Liên hệ để mua</button>
           </div>
-        </form>
+        </form> */}
       </div>
     </Layout>
   )

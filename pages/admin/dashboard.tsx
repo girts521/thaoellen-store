@@ -8,44 +8,44 @@ import { signOutUser, getOrders } from 'lib/firebase'
 import styles from './dashboard.module.scss'
 // import EmailForm from 'components/EmailForm'
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    const cookies = context.req.headers.cookie
-    const token = cookies
-      ? cookies
-          .split('; ')
-          .find((c) => c.startsWith('authToken='))
-          .split('=')[1]
-      : null
-    // console.log('headers: ', context.req.headers)
-    // console.log('token in dashboard:', token)
-    // console.log('cookies: ', cookies)
-    const decodedToken = await admin.auth().verifyIdToken(token)
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   try {
+//     const cookies = context.req.headers.cookie
+//     const token = cookies
+//       ? cookies
+//           .split('; ')
+//           .find((c) => c.startsWith('authToken='))
+//           .split('=')[1]
+//       : null
+//     // console.log('headers: ', context.req.headers)
+//     // console.log('token in dashboard:', token)
+//     // console.log('cookies: ', cookies)
+//     const decodedToken = await admin.auth().verifyIdToken(token)
 
-    if (
-      decodedToken.uid === process.env.ADMIN_UID ||
-      decodedToken.uid === process.env.ADMIN_UID_2
-    ) {
-      return { props: { token } }
-    } else {
-      return {
-        redirect: {
-          destination: '/',
-          permanent: false,
-        },
-      }
-    }
-  } catch (error) {
-    console.log('Server-side verification failed', error)
-    return {
-      props: {},
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
-}
+//     if (
+//       decodedToken.uid === process.env.ADMIN_UID ||
+//       decodedToken.uid === process.env.ADMIN_UID_2
+//     ) {
+//       return { props: { token } }
+//     } else {
+//       return {
+//         redirect: {
+//           destination: '/',
+//           permanent: false,
+//         },
+//       }
+//     }
+//   } catch (error) {
+//     console.log('Server-side verification failed', error)
+//     return {
+//       props: {},
+//       redirect: {
+//         destination: '/',
+//         permanent: false,
+//       },
+//     }
+//   }
+// }
 
 const Dashboard = ({ token }) => {
   const [orders, setOrders] = useState([])

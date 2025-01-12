@@ -12,6 +12,7 @@ export default async (req, res) => {
 
     try {
       const decodedToken = await admin.auth().verifyIdToken(token)
+      console.log("token:", decodedToken)
 
       if (
         decodedToken.uid === process.env.ADMIN_UID ||
@@ -33,12 +34,12 @@ export default async (req, res) => {
                 order.name.authTag,
                 keyBuffer,
               ),
-              surname: decrypt(
+              surname: order.surname ? decrypt(
                 order.surname.data,
                 order.surname.iv,
                 order.surname.authTag,
                 keyBuffer,
-              ),
+              ) : '',
               phone: decrypt(
                 order.phone.data,
                 order.phone.iv,

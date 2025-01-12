@@ -1,14 +1,21 @@
 import React from 'react'
 import { getAuth, signOut } from 'firebase/auth'
-import {auth} from 'lib/firebase'
+import { auth } from 'lib/firebase'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import { useRouter } from 'next/router'
 
 
 const SignOutButton = () => {
+  const router = useRouter()
+
   const signOutUser = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        console.log("Sign out successful")
+        router.push('/')
+        console.log('Sign out successful')
+        
       })
       .catch((error) => {
         // An error happened.
@@ -16,7 +23,28 @@ const SignOutButton = () => {
       })
   }
 
-  return <button onClick={signOutUser}>Sign Out</button>
+  return (
+    <Box
+    sx={{
+      display:'flex',
+      width: '100%',
+      marginTop: '24px'
+    }}
+    >
+      <Button
+        variant="contained"
+        size='large'
+        // color='primary'
+        onClick={signOutUser}
+        sx={{
+          margin: 'auto',
+          // backgroundColor:'white'
+        }}
+      >
+        Logout
+      </Button>
+    </Box>
+  )
 }
 
 export default SignOutButton
