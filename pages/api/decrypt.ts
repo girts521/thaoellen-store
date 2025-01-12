@@ -1,6 +1,6 @@
 import admin from 'firebase-admin'
-import crypto from 'crypto'
 import { id } from 'date-fns/locale'
+import {decrypt} from 'lib/encryption'
 
 const keyBuffer = Buffer.from(process.env.ENCRYPTION_KEY, 'hex')
 
@@ -17,17 +17,6 @@ export default async (req, res) => {
         decodedToken.uid === process.env.ADMIN_UID ||
         decodedToken.uid === process.env.ADMIN_UID_2
       ) {
-        function decrypt(encryptedData, iv, authTag, keyBuffer) {
-          const decipher = crypto.createDecipheriv(
-            'aes-256-gcm',
-            keyBuffer,
-            Buffer.from(iv, 'hex'),
-          )
-          decipher.setAuthTag(Buffer.from(authTag, 'hex'))
-          let decrypted = decipher.update(encryptedData, 'hex', 'utf8')
-          decrypted += decipher.final('utf8')
-          return decrypted
-        }
 
         try {
           const decryptedOrders = encryptedOrders.orders.map((order) => {

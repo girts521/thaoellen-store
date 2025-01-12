@@ -5,6 +5,8 @@ import Minicart from 'components/Minicart/Minicart'
 import { useRouter } from 'next/router'
 // import GoogleAuthButton from 'components/GoogleAuthButton'
 import { googleSignIn } from '../../lib/firebase'
+import { auth } from 'lib/firebase'
+
 
 
 const NavBar: React.FC = () => {
@@ -45,6 +47,15 @@ const NavBar: React.FC = () => {
   }
 
   useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
+      if (currentUser && currentUser.photoURL) {
+        setUserImage(currentUser.photoURL)
+      }
+    })
+    return () => unsubscribe() // Cleanup listener on unmount
+  }, [])
+
+  useEffect(() => {
     if (isBurgerMenuOpen) {
       document.body.style.overflow = 'hidden'
     } else {
@@ -53,11 +64,6 @@ const NavBar: React.FC = () => {
   }, [isBurgerMenuOpen])
 
   useEffect(() => {
-
-    const localUserImage = JSON.parse(localStorage.getItem("userImage"))
-    if (localUserImage)
-      setUserImage(localUserImage);
-
     // Close the burger menu when the screen width is less than a certain threshold (e.g., 768px)
     const handleResize = () => {
       if (window.innerWidth > 1024) {

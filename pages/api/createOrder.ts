@@ -4,36 +4,11 @@ import crypto from 'crypto'
 import { customAlphabet } from 'nanoid'
 import SendEmail from "../../components/SendEmail/SendEmail"
 import { Resend } from 'resend';
+import {encrypt} from 'lib/encryption'
 
 
 const secretKey = process.env.ENCRYPTION_KEY
 const resend = new Resend(process.env.RESEND_API_KEY);
-
-
-function encrypt(text, key) {
-  const iv = crypto.randomBytes(16)
-  const cipher = crypto.createCipheriv('aes-256-gcm', key, iv)
-  let encrypted = cipher.update(text, 'utf8', 'hex')
-  encrypted += cipher.final('hex')
-  const authTag = cipher.getAuthTag().toString('hex')
-  return {
-    iv: iv.toString('hex'),
-    encryptedData: encrypted,
-    authTag,
-  }
-}
-
-function decrypt(encryptedData, iv, authTag, keyBuffer) {
-  const decipher = crypto.createDecipheriv(
-    'aes-256-gcm',
-    keyBuffer,
-    Buffer.from(iv, 'hex'),
-  )
-  decipher.setAuthTag(Buffer.from(authTag, 'hex'))
-  let decrypted = decipher.update(encryptedData, 'hex', 'utf8')
-  decrypted += decipher.final('utf8')
-  return decrypted
-}
 
 export default async (req, res) => {
   if (req.method === 'POST') {

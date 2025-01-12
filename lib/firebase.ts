@@ -4,7 +4,6 @@ import { getFirestore, collection, getDocs, addDoc, query, where,doc,getDoc,setD
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth'
 import 'firebase/firestore'
 
-
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -39,13 +38,9 @@ if (auth) {
     if (user) {
       // User is signed in.
       console.log("User is signed in:", user);
-      localStorage.setItem("user", JSON.stringify(user.uid));
-      localStorage.setItem("userImage", JSON.stringify(user.photoURL));
     } else {
       // User is signed out.
       console.log("User is signed out");
-      localStorage.removeItem("user");
-      localStorage.removeItem("userImage");
     }
   });
 }
@@ -53,6 +48,7 @@ if (auth) {
 export { db, auth, provider, fbProvider };
 
 export async function googleSignIn() {
+  
   if (auth.currentUser)
     return;
   try {
@@ -72,7 +68,7 @@ export async function googleSignIn() {
         displayName: user.displayName,
         photoURL: user.photoURL,
         cart: [], // Initialize an empty cart
-        address: {} // Initialize an empty address object
+        address: "" // Initialize an empty address object
       });
     }
 

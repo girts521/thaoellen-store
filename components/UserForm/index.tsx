@@ -15,26 +15,66 @@ import Fade from '@mui/material/Fade'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
-import { ReactNode } from 'react';
-
+import { ReactNode, useState, useEffect } from 'react'
+import { auth } from 'lib/firebase'
 
 interface UserFormProps {
-    text: string | null;
-    field: string;
-    state: boolean;
-    edit: boolean;
-    setEdit: React.Dispatch<React.SetStateAction<boolean>>;
-    setState: React.Dispatch<React.SetStateAction<boolean>>;
-    icon: ReactNode; 
+  text: string | null
+  field: string
+  state: boolean
+  edit: boolean
+  setEdit: React.Dispatch<React.SetStateAction<boolean>>
+  setState: React.Dispatch<React.SetStateAction<boolean>>
+  icon: ReactNode
+}
+
+const UserForm: React.FC<UserFormProps> = ({
+  text,
+  field,
+  state,
+  edit,
+  setEdit,
+  setState,
+  icon,
+}) => {
+  const [value, setValue] = useState("")
+  const [textState, setTextState] = useState("")
+
+
+  const saveData = async () => {
+    const idToken = await auth.currentUser.getIdToken()
+    console.log(`token: ${idToken}, field: ${field}, value: ${value}`)
+    const data = {
+      field: field.toLowerCase(),
+        value: value,
+    }
+    fetch('/api/saveUserInfo', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${idToken}`
+      },
+      body: JSON.stringify(data)
+    })
+    setTextState(value)
+    setEdit(!edit)
+    setState(!state)
   }
 
-  const UserForm: React.FC<UserFormProps> = ({ text, field, state, edit, setEdit, setState, icon }) => {
+useEffect(() => {
+  if (text)
+  {
+    setValue(text);
+    setTextState(text)
+  }
+}, [text])
+
   return (
     <>
       <MenuItem
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
+          marginTop: '16px',
         }}
         onClick={() => {
           setEdit(!edit)
@@ -42,16 +82,12 @@ interface UserFormProps {
         }}
       >
         <ListItemIcon>
-        <div>{icon}</div>
+          <div>{icon}</div>
         </ListItemIcon>
         <ListItemText>{field}</ListItemText>
-        <Fade
-          in={state}
-          mountOnEnter
-          unmountOnExit
-        >
-          {text ? (
-            <ListItemText>{text}</ListItemText>
+        <Fade in={state} mountOnEnter unmountOnExit>
+          {textState ? (
+            <ListItemText>{textState}</ListItemText>
           ) : (
             <ListItemText>No {field.toLowerCase()} saved</ListItemText>
           )}
@@ -61,25 +97,28 @@ interface UserFormProps {
         </Typography>
       </MenuItem>
 
-      <Fade
-        in={edit}
-        mountOnEnter
-        unmountOnExit
-      >
+      <Fade in={edit} mountOnEnter unmountOnExit>
         <Stack
           spacing={1}
           direction="column"
-          sx={{ width: '95%', marginLeft: '16px', marginTop: '16px' }}
+          sx={{
+            width: '95%',
+            marginLeft: '16px',
+            marginTop: '16px',
+            marginBottom: '16px',
+          }}
         >
           <TextField
             label="Multiline"
             multiline
-            defaultValue={
-                text ? text : null
-            }
+            // defaultValue={text ? text : null}
+            value={value}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setValue(event.target.value)
+            }}
             variant="standard"
           />
-          <Button variant="text">Save changes</Button>
+          <Button onClick={saveData} variant="text">Save changes</Button>
         </Stack>
       </Fade>
     </>

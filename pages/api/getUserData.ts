@@ -1,7 +1,11 @@
+
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getAuth } from 'firebase-admin/auth';
 import { admin, db } from 'lib/firebaseAdmin'
+import { decrypt } from 'lib/encryption';
 
+
+const keyBuffer = Buffer.from(process.env.ENCRYPTION_KEY, 'hex')
 
 export default async (req, res) => {
   try {
@@ -21,6 +25,12 @@ export default async (req, res) => {
     }
 
     const userData = userDoc.data()
+    if (userData.address && typeof userData.address != 'string')
+      userData.address = decrypt(userData.address.encryptedData, userData.address.iv, userData.address.authTag, keyBuffer)
+    if (userData.phone && typeof userData.phone != 'string')
+      userData.phone = decrypt(userData.phone.encryptedData, userData.phone.iv, userData.phone.authTag, keyBuffer)
+    if (userData.email && typeof userData.email != 'string')
+      userData.email = decrypt(userData.email.encryptedData, userData.email.iv, userData.email.authTag, keyBuffer)
     return res.status(200).json({ user: userData });
   } catch (error) {
     console.error('Error verifying token or fetching user data:', error)
