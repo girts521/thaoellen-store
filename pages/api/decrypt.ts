@@ -1,6 +1,6 @@
-import admin from 'firebase-admin'
 import { id } from 'date-fns/locale'
 import {decrypt} from 'lib/encryption'
+import { admin, db } from 'lib/firebaseAdmin'
 
 const keyBuffer = Buffer.from(process.env.ENCRYPTION_KEY, 'hex')
 
@@ -8,16 +8,18 @@ export default async (req, res) => {
   if (req.method === 'POST') {
     const token = req.headers.authorization?.replace('Bearer ', '')
     const encryptedOrders = req.body
-    console.log('encryptedOrders: ', encryptedOrders)
 
     try {
       const decodedToken = await admin.auth().verifyIdToken(token)
-      console.log("token:", decodedToken)
 
-      if (
-        decodedToken.uid === process.env.ADMIN_UID ||
-        decodedToken.uid === process.env.ADMIN_UID_2
-      ) {
+      const userDocRef = db.collection('users').doc(decodedToken.uid);
+      const userDoc = await userDocRef.get();
+  
+      if (!userDoc) {
+        return res.status(404).json({ error: 'User not found' })
+      }
+      const userData = userDoc.data()
+      if (userData.isAdmin) {
 
         try {
           const decryptedOrders = encryptedOrders.orders.map((order) => {
@@ -69,6 +71,7 @@ export default async (req, res) => {
         }
       }
     } catch (error) {
+      console.log("The error here:")
       console.log(error)
       res.status(401).send('Unauthorized')
     }

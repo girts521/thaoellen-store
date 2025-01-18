@@ -118,6 +118,7 @@ const UserPage: React.FC = () => {
                   <UserForm
                     text={dbUser && dbUser.address ? dbUser.address : null}
                     field="Địa chỉ"
+                    enField="address"
                     state={addressState}
                     edit={editAddress}
                     setEdit={setEditAddress}
@@ -129,6 +130,7 @@ const UserPage: React.FC = () => {
                   <UserForm
                     text={dbUser && dbUser.email ? dbUser.email : null}
                     field="Email"
+                    enField="email"
                     state={emailState}
                     edit={editEmail}
                     setEdit={setEditEmail}
@@ -141,6 +143,7 @@ const UserPage: React.FC = () => {
                   <UserForm
                     text={dbUser && dbUser.phone ? dbUser.phone : null}
                     field="Điện thoại"
+                    enField="phone"
                     state={phoneState}
                     edit={editPhone}
                     setEdit={setEditPhone}

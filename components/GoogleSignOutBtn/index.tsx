@@ -38,7 +38,9 @@ const SignOutButton = () => {
         onClick={signOutUser}
         sx={{
           margin: 'auto',
-          // backgroundColor:'white'
+          backgroundColor:'#dbdbe7 !important',
+          border: '1px solid #474574',
+        color: '#474574'
         }}
       >
         Logout

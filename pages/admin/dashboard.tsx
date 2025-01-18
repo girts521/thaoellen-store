@@ -6,6 +6,7 @@ import axios from 'axios'
 import { signOutUser, getOrders } from 'lib/firebase'
 
 import styles from './dashboard.module.scss'
+import { auth } from 'lib/firebase'
 // import EmailForm from 'components/EmailForm'
 
 // export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -62,25 +63,28 @@ const Dashboard = ({ token }) => {
   }, [])
 
   useEffect(() => {
-    console.log('orders: ', orders)
-    // fetch post decrypt
-
-    fetch('/api/decrypt', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ orders }),
+    const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
+      if (currentUser) {
+        const idToken = await currentUser.getIdToken()
+        fetch('/api/decrypt', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ orders }),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            setDecryptedOrders(res)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
     })
-      .then((res) => res.json())
-      .then((res) => {
-        setDecryptedOrders(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [orders, token])
+    return () => unsubscribe() // Cleanup listener on unmount
+  }, [orders])
 
   const convertDate = (date) => {
     const milliseconds = date.seconds * 1000 + date.nanoseconds / 1000000

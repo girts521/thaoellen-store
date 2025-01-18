@@ -21,6 +21,7 @@ import { auth } from 'lib/firebase'
 interface UserFormProps {
   text: string | null
   field: string
+  enField: string
   state: boolean
   edit: boolean
   setEdit: React.Dispatch<React.SetStateAction<boolean>>
@@ -31,6 +32,7 @@ interface UserFormProps {
 const UserForm: React.FC<UserFormProps> = ({
   text,
   field,
+  enField,
   state,
   edit,
   setEdit,
@@ -45,7 +47,7 @@ const UserForm: React.FC<UserFormProps> = ({
     const idToken = await auth.currentUser.getIdToken()
     console.log(`token: ${idToken}, field: ${field}, value: ${value}`)
     const data = {
-      field: field.toLowerCase(),
+      field: enField.toLowerCase(),
         value: value,
     }
     fetch('/api/saveUserInfo', {
