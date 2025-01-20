@@ -31,6 +31,8 @@ const UserPage: React.FC = () => {
   const [emailState, setEmailState] = useState(true)
   const [editPhone, setEditPhone] = useState(false)
   const [phoneState, setPhoneState] = useState(true)
+  const [facebookState, setFacebookState] = useState(true)
+  const [editFacebook, setEditFacebook] = useState(false)
 
   const [showNotification, setNotification] = useState(false)
 
@@ -52,14 +54,14 @@ const UserPage: React.FC = () => {
           .then((response) => response.json())
           .then((data) => {
             setDbUser(data.user)
+            console.log(data.user)
             // Update state with zackend user data if needed
           })
           .catch((error) => {
             console.error('Error fetching user data:', error)
             router.push('/')
           })
-      }
-      else {
+      } else {
         router.push('/')
       }
     })
@@ -69,7 +71,13 @@ const UserPage: React.FC = () => {
   return (
     <>
       <Layout preview={false} loading={false}>
-        {showNotification && <Notification text={"Rất tiếc, tính năng này vẫn đang trong quá trình hoàn thiện. Hãy kiểm tra lại sau!"} />}
+        {showNotification && (
+          <Notification
+            text={
+              'Rất tiếc, tính năng này vẫn đang trong quá trình hoàn thiện. Hãy kiểm tra lại sau!'
+            }
+          />
+        )}
         {user && (
           <>
             <Box
@@ -81,10 +89,12 @@ const UserPage: React.FC = () => {
                 justifyContent: 'center',
               }}
             >
-              <Typography variant="h4" gutterBottom 
-              sx={{
-                textAlign: 'center'
-              }}
+              <Typography
+                variant="h4"
+                gutterBottom
+                sx={{
+                  textAlign: 'center',
+                }}
               >
                 Welcome {user.displayName}
               </Typography>
@@ -153,13 +163,24 @@ const UserPage: React.FC = () => {
 
                   <Divider />
 
+                  <UserForm
+                    text={dbUser && dbUser.facebook ? dbUser.facebook : null}
+                    field="Facebook"
+                    enField="facebook"
+                    state={facebookState}
+                    edit={editFacebook}
+                    setEdit={setEditFacebook}
+                    setState={setFacebookState}
+                    icon={<PhoneIcon fontSize="small" />}
+                  />
+                  <Divider />
                   <MenuItem
-                  onClick={() => {
-                    setNotification(true)
-                    setTimeout(() => {
-                      setNotification(false)
-                    }, 5000)
-                  }}
+                    onClick={() => {
+                      setNotification(true)
+                      setTimeout(() => {
+                        setNotification(false)
+                      }, 5000)
+                    }}
                   >
                     <ListItemIcon>
                       <ShoppingCartCheckoutIcon fontSize="small" />

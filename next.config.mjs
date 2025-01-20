@@ -5,6 +5,7 @@ const config = {
       { hostname: 'cdn.sanity.io' },
       { hostname: 'source.unsplash.com' },
       { hostname: 'lh3.googleusercontent.com'},
+      { hostname: 'graph.facebook.com'},
     ],
   },
   typescript: {

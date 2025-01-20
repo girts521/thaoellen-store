@@ -10,7 +10,7 @@ if (!secretKey) {
 }
 
 // Validate allowed fields
-const ALLOWED_FIELDS = ['address', 'phone', 'email'];
+const ALLOWED_FIELDS = ['name','address', 'phone', 'email', 'facebook'];
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
     const body =JSON.parse(req.body)
     const {field, value} = body
-
+    console.log("field and value: ", field, value)
     // Validate payload
     if (!field || !value || typeof value !== 'string') {
       return res.status(400).json({ error: 'Invalid payload' });

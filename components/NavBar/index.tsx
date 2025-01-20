@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import styles from './index.module.scss'
 import Minicart from 'components/Minicart/Minicart'
+import LoginModal from 'components/LoginModal'
 import { useRouter } from 'next/router'
 // import GoogleAuthButton from 'components/GoogleAuthButton'
-import { googleSignIn } from '../../lib/firebase'
+import { googleSignIn, facebookSignIn } from '../../lib/firebase'
 import { auth } from 'lib/firebase'
 
 const NavBar: React.FC = () => {
@@ -16,6 +17,7 @@ const NavBar: React.FC = () => {
   const [hoiTitle, setHoiTitle] = useState(null)
   const [userImage, setUserImage] = useState('/login.svg')
   const [signedIn, setSignedIn] = useState(false)
+  const [openLogin, setOpenLogin] = useState(false)
 
   const router = useRouter()
 
@@ -24,17 +26,10 @@ const NavBar: React.FC = () => {
   }
 
   const handleSignIn = async () => {
-    try {
-      const signInState = await googleSignIn() // Await sign-in result
-      if (signInState) {
-        setSignedIn(true) // Update state
-        router.push('/user') // Redirect
-      } else {
-        router.push('/user')
-      }
-    } catch (error) {
-      console.error('Error during sign-in:', error)
-    }
+    if (auth && auth.currentUser)
+      router.push('/user')
+    else
+      setOpenLogin(true)
   }
 
   const closeMinicart = () => {
@@ -204,6 +199,11 @@ const NavBar: React.FC = () => {
               height={100}
               onClick={handleSignIn}
             />
+
+
+            <LoginModal open={openLogin} setOpen={setOpenLogin}/>
+
+
             <div
               style={{ padding: '12px', cursor: 'pointer' }}
               onClick={() => {

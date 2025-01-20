@@ -40,7 +40,14 @@
         font-weight: 400;
         line-height: normal;
         margin-bottom: 45px;
+
+        a {
+            cursor: pointer;
+            text-decoration: underline;
+         }
     }
+
+
 
     button {
         display: flex;

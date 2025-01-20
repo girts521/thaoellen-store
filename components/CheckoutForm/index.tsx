@@ -22,7 +22,9 @@ export default function CheckoutForm({
   userAddress,
   setUserAddress,
   userPhone,
-  setUserPhone
+  setUserPhone,
+  userFacebook,
+  setUserFacebook
 }) {
   return (
     <Grid container spacing={3}>
@@ -78,6 +80,24 @@ export default function CheckoutForm({
             setUserPhone(event.target.value)
           }}
           value={userPhone}
+        />
+      </FormGrid>
+
+      <FormGrid size={{ xs: 12, md: 6 }}>
+        <FormLabel htmlFor="facebook">
+          Facebook link
+        </FormLabel>
+        <OutlinedInput
+          id="facebook"
+          name="facebook"
+          type="url"
+          placeholder="https://www.facebook.com/milu.milunguyen"
+          autoComplete="phone"
+          size="small"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setUserFacebook(event.target.value)
+          }}
+          value={userFacebook}
         />
       </FormGrid>
 

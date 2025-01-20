@@ -14,7 +14,7 @@ export default async (req, res) => {
   if (req.method === 'POST') {
     try {
       const data = JSON.parse(req.body)
-      const { email, name, phone, address, cart } = data
+      const { email, name, phone, address, cart, facebook } = data
       const nanoid = customAlphabet('1234567890abcdef', 10)
       const uuid = nanoid(5)
       const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
@@ -25,6 +25,7 @@ export default async (req, res) => {
       const encryptedName = encrypt(name, keyBuffer)
       const encryptedPhone = encrypt(phone, keyBuffer)
       const encryptedAddress = encrypt(address, keyBuffer)
+      const encryptedFacebook = encrypt(facebook, keyBuffer)
       const encryptedCart = encrypt(JSON.stringify(cart), keyBuffer)
 
       const orderCollection = db.collection('orders')
@@ -54,6 +55,11 @@ export default async (req, res) => {
           data: encryptedCart.encryptedData,
           iv: encryptedCart.iv,
           authTag: encryptedCart.authTag,
+        },
+        facebook: {
+          data: encryptedFacebook.encryptedData,
+          iv: encryptedFacebook.iv,
+          authTag: encryptedFacebook.authTag,
         },
         dateAdded: admin.firestore.FieldValue.serverTimestamp(),
         order_id: uuid + "-" + timestamp

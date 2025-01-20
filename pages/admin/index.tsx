@@ -76,9 +76,12 @@ export default function Admin() {
             console.log('Fetched user data:', data.user)
             if(data.user && data.user.isAdmin)
               router.push('/admin/dashboard')
+            else
+              router.push('/')
           })
           .catch((error) => {
             console.error('Error fetching user data:', error)
+            router.push('/')
           })
       }
     })

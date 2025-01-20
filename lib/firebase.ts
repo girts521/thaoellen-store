@@ -81,6 +81,35 @@ export async function googleSignIn() {
   }
 };
 
+export async function facebookSignIn() {
+  if (auth.currentUser) {
+    return;
+  }
+  try {
+    const provider = new FacebookAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    const idToken = await user.getIdToken();
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+    if (!userSnap.exists()) {
+      await setDoc(userRef, {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        cart: [],
+        address: ""
+      });
+    }
+    console.log("User data stored in Firestore:", user);
+    return true;
+  } catch (error) {
+    console.error("Error during sign-in:", error);
+    return false;
+  }
+}
+
 
 export async function signIn(email, password) {
   try {

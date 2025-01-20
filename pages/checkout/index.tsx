@@ -20,6 +20,8 @@ const Checkout = () => {
   const [userEmail, setUserEmail] = useState('')
   const [userAddress, setUserAddress] = useState('')
   const [userPhone, setUserPhone] = useState('')
+  const [userFacebook, setUserFacebook] = useState('')
+  const [updateInfo, setUpdateInfo] = useState(true)
 
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
@@ -53,6 +55,7 @@ const Checkout = () => {
     if (dbUser && dbUser.address) setUserAddress(dbUser.address)
     if (dbUser && dbUser.phone) setUserPhone(dbUser.phone)
     if (dbUser && dbUser.email) setUserEmail(dbUser.email)
+    if (dbUser && dbUser.facebook && dbUser.facebook.length) setUserFacebook(dbUser.facebook)
   }, [dbUser])
 
   function validatePhoneNumber(phoneNumber) {
@@ -74,7 +77,7 @@ const Checkout = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    const { name, surname, email, phone, address } = e.target
+    const { name, surname, email, phone, address, facebook } = e.target
 
     if (
       !name.value ||
@@ -116,7 +119,24 @@ const Checkout = () => {
       }, 5000)
       return
     }
-
+    if (dbUser && auth.currentUser && updateInfo)
+    {
+      [
+        {field: 'name', value: name.value},
+        {field: 'email', value: email.value},
+        {field: 'phone', value: phone.value ? phone.value : ''},
+        {field: 'address', value: address.value},
+        {field: 'facebook', value: facebook.value ? facebook.value : ''},
+      ].forEach((data) => {
+        fetch('/api/saveUserInfo', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${auth.currentUser.accessToken}`
+          },
+          body: JSON.stringify(data)
+        })
+      })
+    }
     //send data to /api/createOrder as POST request
     fetch('/api/createOrder', {
       method: 'POST',
@@ -125,6 +145,7 @@ const Checkout = () => {
         email: email.value,
         phone: phone.value ? phone.value : '',
         address: address.value,
+        facebook: facebook.value ? facebook.value : '',
         cart,
       }),
     })
@@ -180,6 +201,8 @@ const Checkout = () => {
             setUserAddress={setUserAddress}
             userPhone={userPhone}
             setUserPhone={setUserPhone}
+            userFacebook={userFacebook}
+            setUserFacebook={setUserFacebook}
           />
           <FormGroup>
             <FormControlLabel
@@ -190,6 +213,16 @@ const Checkout = () => {
             <Link href="/tos">
               Điều khoản và điều kiện của chúng tôi có thể được tìm thấy ở đây
             </Link>
+           {dbUser && (
+             <FormControlLabel
+             checked={updateInfo}
+             control={<Checkbox />}
+             onClick={() => {
+              setUpdateInfo(!updateInfo)
+             }}
+             label="Lưu thông tin này vào hồ sơ của tôi"
+           />
+           )}
           </FormGroup>
 
           <div className={styles.action}>

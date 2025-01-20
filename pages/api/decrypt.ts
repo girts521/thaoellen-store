@@ -23,6 +23,7 @@ export default async (req, res) => {
 
         try {
           const decryptedOrders = encryptedOrders.orders.map((order) => {
+           console.log("order: ", order)
             return {
               email: decrypt(
                 order.email.data,
@@ -54,6 +55,12 @@ export default async (req, res) => {
                 order.address.authTag,
                 keyBuffer,
               ),
+              facebook: order.facebook ? decrypt(
+                order.facebook.data,
+                order.facebook.iv,
+                order.facebook.authTag,
+                keyBuffer,
+              ) : '',
               cart: decrypt(
                 order.cart.data,
                 order.cart.iv,
@@ -61,7 +68,7 @@ export default async (req, res) => {
                 keyBuffer,
                 ),
               dateAdded: order.dateAdded,
-              id: order.id,
+              id: order.order_id,
             }
           })
           res.status(200).json(decryptedOrders)

@@ -31,6 +31,10 @@ export default async (req, res) => {
       userData.phone = decrypt(userData.phone.encryptedData, userData.phone.iv, userData.phone.authTag, keyBuffer)
     if (userData.email && typeof userData.email != 'string')
       userData.email = decrypt(userData.email.encryptedData, userData.email.iv, userData.email.authTag, keyBuffer)
+    if (userData.name && typeof userData.name != 'string')
+      userData.name = decrypt(userData.name.encryptedData, userData.name.iv, userData.name.authTag, keyBuffer)
+    if (userData.facebook && typeof userData.facebook != 'string')
+      userData.facebook = decrypt(userData.facebook.encryptedData, userData.facebook.iv, userData.facebook.authTag, keyBuffer)
     return res.status(200).json({ user: userData });
   } catch (error) {
     console.error('Error verifying token or fetching user data:', error)
