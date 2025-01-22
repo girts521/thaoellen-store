@@ -107,7 +107,7 @@ const LoginModal = ({ open, setOpen }) => {
               </ListItemText>
             </MenuItem>
           </Paper>
-          <Paper
+          {/* <Paper
             sx={{
               width: 320,
               maxWidth: '100%',
@@ -125,7 +125,7 @@ const LoginModal = ({ open, setOpen }) => {
               Đăng nhập bằng Facebook
               </ListItemText>
             </MenuItem>
-          </Paper>
+          </Paper> */}
         </MenuList>
       </Box>
     </Modal>
