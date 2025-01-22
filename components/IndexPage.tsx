@@ -157,7 +157,7 @@ export default function IndexPage(props: IndexPageProps) {
                 5 năm kinh nghiệm kinh doanh thực phẩm chức năng nội địa Đức.
               </ListItem>
               <Typography variant="subtitle1" gutterBottom sx={{margin:'auto', textAlign:'center', marginTop:'7px'}}>
-              Thông tin thêm về Thạch thảo xem <Link href={'/'} underline="always" sx={{color: 'inherit'}}>tại đây</Link>
+              Thông tin thêm về Thạch thảo xem <Link href={'https://www.facebook.com/milu.milunguyen'} underline="always" sx={{color: 'red', }}>tại đây</Link>
               </Typography>
             </List>
           </Box>
