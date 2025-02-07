@@ -239,10 +239,9 @@ const NavBar: React.FC = () => {
           }}
           src="/bag.png" alt="shopping menu" width={25} height={25} /> */}
         </div>
-        <div className={styles.marquee}>
-          <p>🔥 KHUYẾN MÃI SỐC TẾT NGUYÊN ĐÁN: GIẢM 10% cho đến hết ngày 29/01/2025 🔥</p>
-          {/* <p>🔥 Big Sale: Up to 50% off on selected items! Don't miss out! 🔥</p> */}
-        </div>
+        {/* <div className={styles.marquee}> */}
+          {/* <p>🔥 KHUYẾN MÃI SỐC TẾT NGUYÊN ĐÁN: GIẢM 10% cho đến hết ngày 29/01/2025 🔥</p> */}
+        {/* </div> */}
       </div>
 
       {minicart && <Minicart close={closeMinicart} />}
